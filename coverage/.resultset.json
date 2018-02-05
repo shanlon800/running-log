@@ -22,19 +22,19 @@
         null
       ],
       "/Users/seanhanlon/Dropbox/challenges/breakable-toy/running-log/app/controllers/application_controller.rb": [
-        0,
+        1,
         null,
         null,
-        0,
-        0
+        1,
+        null
       ],
       "/Users/seanhanlon/Dropbox/challenges/breakable-toy/running-log/app/controllers/homes_controller.rb": [
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        null,
+        null
       ]
     },
-    "timestamp": 1517849533
+    "timestamp": 1517849982
   }
 }
