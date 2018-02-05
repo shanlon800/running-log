@@ -7,7 +7,7 @@ RSpec.describe Api::V1::WorkoutsController, type: :controller do
   let!(:workout_one) {Workout.create!(user_id: user_one.id, distance: 5, time: '35', notes: "felt pretty good today", workout_date: "Feb 1 2018")}
   let!(:workout_two) {Workout.create!(user_id: user_one.id, distance: 3.5, time: "22", notes: "felt really fast today", workout_date: "Feb 2 2018")}
   let!(:workout_three) {Workout.create!(user_id: user_one.id, distance: 2, time: "18", notes: "felt really tired today", workout_date: "Feb 3 2018")}
-  let!(:team_one) {Team.create!(team_name: 'Boston Running Club', coach_id: user_two.id)}
+  let!(:team_one) {Team.create!(team_name: 'Boston Running Club')}
   let!(:membership_one) {Membership.create(user_id: user_one.id, team_id: team_one.id)}
   let!(:membership_two) {Membership.create(user_id: user_two.id, team_id: team_one.id)}
 
@@ -28,6 +28,8 @@ RSpec.describe Api::V1::WorkoutsController, type: :controller do
       expect(returned_json['workouts'].length).to eq 3
       expect(returned_json['workouts'][0]['time']).to eq workout_one.time
       expect(returned_json['workouts'][0]['distance']).to eq workout_one.distance
+
+      expect(returned_json['teams'][0]['team_name']).to eq team_one.team_name
     end
   end
   describe "GET#index" do
