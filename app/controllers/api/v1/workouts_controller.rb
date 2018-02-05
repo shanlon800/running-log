@@ -11,7 +11,7 @@ class Api::V1::WorkoutsController < ApplicationController
       render json: {current_user: nil, message: "Please sign in.", status: 401}
     end
   end
-  
+
   # def authorize_user
   #   if !user_signed_in?
   #     raise ActionController::RoutingError.new("Not Found")
