@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Membership, type: :model do
+describe Membership do
   it { should belong_to :user }
   it { should belong_to :team }
 

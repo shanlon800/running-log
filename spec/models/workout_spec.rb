@@ -12,4 +12,6 @@ RSpec.describe Workout, type: :model do
   it { should_not have_valid(:date).when(nil,"") }
 
   it { should_not have_valid(:distance).when(-1)}
+
+  it {should belong_to :user}
 end

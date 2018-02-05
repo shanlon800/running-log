@@ -15,5 +15,6 @@ RSpec.describe User, type: :model do
 
   it { should have_many :memberships }
   it { should have_many :teams }
+  it { should have_many :workouts }
 
 end
