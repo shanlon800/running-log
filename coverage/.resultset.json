@@ -1,0 +1,37 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/seanhanlon/Dropbox/challenges/breakable-toy/running-log/app/models/user.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/Users/seanhanlon/Dropbox/challenges/breakable-toy/running-log/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/seanhanlon/Dropbox/challenges/breakable-toy/running-log/app/controllers/application_controller.rb": [
+        0,
+        null,
+        null,
+        0,
+        0
+      ],
+      "/Users/seanhanlon/Dropbox/challenges/breakable-toy/running-log/app/controllers/homes_controller.rb": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "timestamp": 1517848535
+  }
+}
