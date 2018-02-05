@@ -1,4 +1,4 @@
-[![Build Status](https://codeship.com/projects/d2d82e70-eca2-0135-6c23-1ea4b672d33f/status?branch=master)
+[![Build Status](https://codeship.com/projects/d4c5e550-ecdb-0135-7954-3244ec35664b/status?branch=master)
 [![Code Climate](https://codeclimate.com/github/shanlon800/running-log/badges/gpa.svg)](https://codeclimate.com/github/shanlon800/running-log)
 [![Coverage Status](https://coveralls.io/repos/github/shanlon800/running-log/badge.svg?branch=master)](https://coveralls.io/github/shanlon800/running-log?branch=master)
 
