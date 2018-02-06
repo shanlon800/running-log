@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import WorkoutDetailTile from '../components/WorkoutDetailTile'
 
 class WorkoutsIndexContainer extends Component {
   constructor(props) {
@@ -6,7 +7,8 @@ class WorkoutsIndexContainer extends Component {
     this.state = {
       currentUser: null,
       workouts: [],
-      teams: []
+      teams: [],
+      currentWeek: []
     }
   }
 
@@ -26,19 +28,35 @@ class WorkoutsIndexContainer extends Component {
         let newCurrentUser = body.current_user
         let newWorkouts = body.workouts
         let newTeams = body.teams
+        let newWeek = body.current_week
         this.setState({
           currentUser: newCurrentUser,
           workouts: newWorkouts,
-          teams: newTeams
+          teams: newTeams,
+          currentWeek: newWeek
         })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
   render() {
-    debugger
+    let currentWeek = this.state.currentWeek.map(workout => {
+      return(
+        <WorkoutDetailTile
+          distance={workout.distance}
+          time={workout.time}
+          notes={workout.notes}
+          date={workout.workout_date}
+          key={workout.id}
+          id={workout.id}
+        />
+      )
+    })
     return(
-      <h1>Workouts Index Container</h1>
+      <div>
+        <h1>Workouts Index Container</h1>
+        {currentWeek}
+      </div>
     )
   }
 }
