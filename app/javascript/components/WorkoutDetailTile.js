@@ -6,9 +6,9 @@ const WorkoutDetailTile = props => {
   return(
     <div>
       <h4>{date}</h4>
-      <p>Distance: {props.distance} Miles</p>
-      <p>Time: {props.time} Minutes</p>
-      <p>Notes: {props.notes}</p>
+      <p id="distance">Distance: {props.distance} Miles</p>
+      <p id="time">Time: {props.time} Minutes</p>
+      <p id="notes">Notes: {props.notes}</p>
     </div>
   )
 }
