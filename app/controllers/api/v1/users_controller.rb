@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:destroy]
+  # skip_before_action :verify_authenticity_token, only: [:destroy]
+
 
   def index
     if current_user
