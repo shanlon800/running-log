@@ -11,10 +11,4 @@ class Api::V1::UsersController < ApplicationController
       render json: {current_user: nil, message: "Please sign in.", status: 401}
     end
   end
-
-  def show
-    user = User.find(params[:id])
-    workouts = user.workouts
-    render json: {user: user, workouts: workouts}
-  end
 end
