@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180205193923) do
+ActiveRecord::Schema.define(version: 20180206182206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180205193923) do
     t.string "team_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "coach_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,11 +55,11 @@ ActiveRecord::Schema.define(version: 20180205193923) do
     t.bigint "user_id", null: false
     t.string "run_type", default: "Run", null: false
     t.integer "distance", null: false
-    t.string "time", null: false
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "workout_date", null: false
+    t.integer "time", null: false
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 

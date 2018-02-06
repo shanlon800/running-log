@@ -11,7 +11,6 @@ const NavBar = props => {
         <Link to='/teams'>Team View</Link>
         {signIn}
         {signUp}
-        {signOut}
       </div>
       <div className="content">
         { props.children }
