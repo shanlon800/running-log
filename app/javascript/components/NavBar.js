@@ -6,9 +6,9 @@ const NavBar = props => {
     <div>
       <div className="navbar">
         <Link to='/'>Dashboard</Link>
+        <Link to='/teams'>Team View</Link>
       </div>
       <div className="content">
-        <h1 className="page-title">Running Log</h1>
         { props.children }
       </div>
     </div>
