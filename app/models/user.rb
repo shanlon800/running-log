@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :teams,
     through: :memberships
-  has_many :teams, foreign_key: :coach_id
+  # has_many :teams, foreign_key: :coach_id
 
   validates :first_name, presence: true
   validates :last_name, presence: true

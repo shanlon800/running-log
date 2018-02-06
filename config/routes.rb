@@ -5,7 +5,15 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :workouts, only: [:index]
+      # resources :workouts
+
+      resources :users
+
+      resources :teams do
+        resources :users do
+          resources :workouts
+        end
+      end
     end
   end
 end

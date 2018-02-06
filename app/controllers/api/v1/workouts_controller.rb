@@ -1,20 +1,17 @@
 class Api::V1::WorkoutsController < ApplicationController
+  before_action :authorize_user
   # skip_before_action :verify_authenticity_token, only: [:destroy]
 
   def index
-    if current_user
-      @current_user = current_user
-      @workouts = Workout.where(user_id: @current_user.id)
-      @teams = @current_user.teams
-      render json: {current_user: @current_user, workouts: @workouts, teams: @teams}
-    else
-      render json: {current_user: nil, message: "Please sign in.", status: 401}
-    end
+    team = Team.find(params[:team_id])
+    user = User.find(params[:user_id])
+    workouts = Workout.where(user_id: user.id)
+    render json: {team: team, user: user, workouts: workouts}
   end
 
-  # def authorize_user
-  #   if !user_signed_in?
-  #     raise ActionController::RoutingError.new("Not Found")
-  #   end
-  # end
+  def authorize_user
+    if !user_signed_in?
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
 end
