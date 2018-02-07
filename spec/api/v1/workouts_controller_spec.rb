@@ -34,19 +34,7 @@ RSpec.describe Api::V1::WorkoutsController, type: :controller do
   end
   describe "GET#index" do
     it 'if no user is signed out, it should return an error message' do
-
-      # get :index, params: { user_id: user_one.id, team_id: team_one.id }
       expect{ get :index, params: {user_id: user_one.id, team_id: team_one.id} }.to raise_error(ActionController::RoutingError)
-      #
-      # returned_json = JSON.parse(response.body)
-      #
-      # expect(response.content_type).to eq('application/json')
-      # expect(returned_json.length).to eq 3
-      #
-      # expect(returned_json["current_user"]).to eq nil
-      # expect(returned_json["message"]).to eq "Please sign in."
-      # expect(returned_json["status"]).to eq 401
-      #
     end
   end
 
