@@ -8,7 +8,6 @@ const NavBar = props => {
     <div>
       <div className="navbar">
         <Link to='/'>Dashboard</Link>
-        <Link to='/teams'>Team View</Link>
         {signIn}
         {signUp}
       </div>

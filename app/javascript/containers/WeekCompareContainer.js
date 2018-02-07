@@ -9,9 +9,21 @@ class WeekCompareContainer extends Component {
     }
   }
 
+  calculatePace(miles, min) {
+    let secondsPerMile = (min * 60) / miles
+    let minPace = Math.floor(secondsPerMile / 60)
+    let secPace = secondsPerMile % 60
+    if (secPace === 0){
+      return `${minPace}:00`
+    } else {
+      return `${minPace}:${secPace}`
+    }
+  }
 
   render() {
     let workouts = this.props.week.map(workout => {
+      let pace = this.calculatePace(workout.distance, workout.time)
+
       return(
         <WorkoutCompareTile
           distance={workout.distance}
@@ -20,6 +32,7 @@ class WeekCompareContainer extends Component {
           date={workout.workout_date}
           key={workout.id}
           id={workout.id}
+          pace={pace}
         />
       )
     })

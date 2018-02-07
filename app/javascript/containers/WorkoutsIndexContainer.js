@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import WorkoutDetailTile from '../components/WorkoutDetailTile'
+import { Link } from 'react-router'
 
 class WorkoutsIndexContainer extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class WorkoutsIndexContainer extends Component {
       teams: [],
       currentWeek: []
     }
+    this.calculatePace = this.calculatePace.bind(this)
   }
 
   componentWillMount() {
@@ -39,8 +41,25 @@ class WorkoutsIndexContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
+    calculatePace(miles, min) {
+      let secondsPerMile = (min * 60) / miles
+      let minPace = Math.floor(secondsPerMile / 60)
+      let secPace = secondsPerMile % 60
+      if (secPace === 0){
+        return `${minPace}:00`
+      } else {
+        return `${minPace}:${secPace}`
+      }
+    }
+
   render() {
+    let teams = this.state.teams.map(team => {
+      return(
+        <Link to={`/teams/${team.id}`}><span>{team.team_name}</span></Link>
+      )
+    })
     let currentWeek = this.state.currentWeek.map(workout => {
+      let pace = this.calculatePace(workout.distance, workout.time)
       return(
         <WorkoutDetailTile
           distance={workout.distance}
@@ -49,6 +68,7 @@ class WorkoutsIndexContainer extends Component {
           date={workout.workout_date}
           key={workout.id}
           id={workout.id}
+          pace={pace}
         />
       )
     })
@@ -56,6 +76,7 @@ class WorkoutsIndexContainer extends Component {
       <div>
         <h1>Workouts Index Container</h1>
         {currentWeek}
+        {teams}
       </div>
     )
   }
