@@ -12,7 +12,7 @@ class WorkoutsIndexContainer extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch('/api/v1/users', { credentials: 'same-origin' })
       .then(response => {
         if (response.ok) {
