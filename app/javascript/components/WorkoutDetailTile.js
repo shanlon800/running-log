@@ -8,6 +8,7 @@ const WorkoutDetailTile = props => {
       <h4>{date}</h4>
       <p id="distance">Distance: {props.distance} Miles</p>
       <p id="time">Time: {props.time} Minutes</p>
+      <p id="pace">Pace: {props.pace}/mi</p>
       <p id="notes">Notes: {props.notes}</p>
     </div>
   )
