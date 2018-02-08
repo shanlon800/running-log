@@ -22,6 +22,7 @@ class WorkoutsIndexContainer extends Component {
     this.toggleEditForm = this.toggleEditForm.bind(this)
     this.toggleNewForm = this.toggleNewForm.bind(this)
     this.editWorkout = this.editWorkout.bind(this)
+    this.deleteWorkout = this.deleteWorkout.bind(this)
   }
 
 
@@ -53,6 +54,28 @@ class WorkoutsIndexContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  deleteWorkout(id) {
+    fetch(`/api/v1/workouts/${id}`, {
+      credentials: 'same-origin',
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        currentWeek: body
+      })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
 
   editWorkout(formPayload) {
     let id = formPayload.id
@@ -186,6 +209,7 @@ class WorkoutsIndexContainer extends Component {
     let currentWeek = this.state.currentWeek.map(workout => {
       let pace = this.calculatePace(workout.distance, workout.time)
       let handleClick = () => this.toggleEditForm(workout, event)
+      let handleDelete = () => {this.deleteWorkout(workout.id)}
       // <button id="edit" onClick={this.toggleEditForm} key={workout.id + 100} value={workout.id}>Edit</button>
       return(
         <div key={workout.id + 200}>
@@ -197,7 +221,10 @@ class WorkoutsIndexContainer extends Component {
             key={workout.id}
             id={workout.id}
             pace={pace}
+            currentUser={this.state.currentUser}
             toggleEditForm={handleClick}
+            handleDelete={handleDelete}
+            creator={workout.user_id}
           />
         </div>
       )
