@@ -48,6 +48,11 @@ RSpec.describe Api::V1::WorkoutsController, type: :controller do
       post(:create, params: post_json)
       expect(Workout.where(user_id: user_one.id).count).to eq(prev_count + 1)
     end
+
+    it 'will not create if not signed in and give an error' do
+      expect{ get :create }.to raise_error(ActionController::RoutingError)
+
+    end
   end
 
   describe 'PATCH#update' do
@@ -62,6 +67,37 @@ RSpec.describe Api::V1::WorkoutsController, type: :controller do
       expect(returned_json['time']).to eq(36)
       expect(returned_json['distance']).to eq(5)
       expect(returned_json['notes']).to eq('felt pretty good today')
+    end
+  end
+
+  describe "Post#destroy" do
+    it 'deletes a workout' do
+      sign_in(user_one, :scope => :user)
+
+
+      workouts = Workout.where(user_id: user_one.id)
+      prev_count = workouts.count
+
+      delete :destroy, params: {id: workout_three.id}
+      expect(Workout.where(user_id: user_one.id).count).to eq(prev_count - 1)
+    end
+
+    it 'will not allow workout to be deleted if signed in on another account' do
+      sign_in(user_two, :scope => :user)
+      workouts = Workout.where(user_id: user_one.id)
+      prev_count = workouts.count
+
+      delete :destroy, params: {id: workout_three.id}
+      expect(Workout.where(user_id: user_one.id).count).to eq(prev_count)
+
+      returned_json = JSON.parse(response.body)
+      expect(response.status).to eq 401
+      expect(response.content_type).to eq("application/json")
+      expect(returned_json["errors"]).to eq "Access Denied"
+    end
+
+    it 'will not allow workout to be deleted if not signed in' do
+      expect{delete :destroy, params: {id: workout_three.id}}.to raise_error(ActionController::RoutingError)
     end
   end
 
