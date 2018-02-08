@@ -37,7 +37,7 @@ RSpec.describe Api::V1::WorkoutsController, type: :controller do
   #     expect{ get :index, params: {user_id: user_one.id, team_id: team_one.id} }.to raise_error(ActionController::RoutingError)
   #   end
   # end
-# added this
+
   describe "Post#create" do
     it 'creates a new workout' do
       sign_in(user_one, :scope => :user)

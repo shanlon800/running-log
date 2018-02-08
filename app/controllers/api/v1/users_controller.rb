@@ -10,7 +10,17 @@ class Api::V1::UsersController < ApplicationController
 
       @current_week_start = Date.today.beginning_of_week
       @current_week_end = Date.today.at_end_of_week
-      @current_week = calculateWeek(0).order(:workout_date)
+      @current_week_all_users = calculateWeek(0).order(:workout_date)
+
+
+      workouts_selected = []
+      @current_week_all_users.each do |workout|
+        if workout.user_id == @current_user.id
+          workouts_selected << workout
+        end
+      end
+
+      @current_week = workouts_selected
       @one_back = calculateWeek(1)
       @two_back = calculateWeek(2)
       @three_back = calculateWeek(3)
@@ -34,7 +44,5 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def calculateWeek(weeksBack)
-    Workout.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (weeksBack * 7)), (@current_week_end - (weeksBack * 7)))
-  end
+
 end
