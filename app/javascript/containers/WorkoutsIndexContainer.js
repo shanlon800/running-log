@@ -21,6 +21,7 @@ class WorkoutsIndexContainer extends Component {
     this.addNewWorkout = this.addNewWorkout.bind(this)
     this.toggleEditForm = this.toggleEditForm.bind(this)
     this.toggleNewForm = this.toggleNewForm.bind(this)
+    this.editWorkout = this.editWorkout.bind(this)
   }
 
 
@@ -72,7 +73,6 @@ class WorkoutsIndexContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      console.log(body)
       let updatedWorkouts = this.state.currentWeek.filter(workout => {
         return workout.id !== body.id
       })
