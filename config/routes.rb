@@ -9,10 +9,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       # resources :workouts
 
-      resources :users
-      resources :workouts, only: [:create, :update]
+      resources :users, only: [:index]
+      resources :workouts, only: [:create, :update, :destroy]
 
-      resources :teams do
+      resources :teams, only: [:show] do
         resources :users do
           resources :workouts
         end
