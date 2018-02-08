@@ -23,6 +23,7 @@ class WorkoutsIndexContainer extends Component {
     this.toggleNewForm = this.toggleNewForm.bind(this)
     this.editWorkout = this.editWorkout.bind(this)
     this.deleteWorkout = this.deleteWorkout.bind(this)
+    this.closeEditForm = this.closeEditForm.bind(this)
   }
 
 
@@ -163,6 +164,17 @@ class WorkoutsIndexContainer extends Component {
       }
     }
 
+    closeEditForm(event) {
+      event.preventDefault()
+      let showForm = this.state.showEditForm
+      if (showForm === true) {
+        this.setState({
+          showEditForm: false,
+          selectedWorkout: null
+         })
+      }
+    }
+
     toggleNewForm(event) {
       event.preventDefault()
       let newShowForm = this.state.showNewForm
@@ -185,6 +197,7 @@ class WorkoutsIndexContainer extends Component {
             closeForm={this.toggleEditForm}
             selectedWorkout={this.state.selectedWorkout}
             currentUser={this.state.currentUser}
+            closeEditForm={this.closeEditForm}
           />
       }  else {
         editForm = ''
@@ -196,6 +209,7 @@ class WorkoutsIndexContainer extends Component {
           <WorkoutFormContainer
             currentUser={this.state.currentUser}
             addNewWorkout={this.addNewWorkout}
+            toggleNewForm={this.toggleNewForm}
           />
         } else {
           newForm = ''
@@ -212,7 +226,7 @@ class WorkoutsIndexContainer extends Component {
       let handleDelete = () => {this.deleteWorkout(workout.id)}
       // <button id="edit" onClick={this.toggleEditForm} key={workout.id + 100} value={workout.id}>Edit</button>
       return(
-        <div key={workout.id + 200}>
+        <div key={workout.id +1000} className="workout-tile">
           <WorkoutDetailTile
             distance={workout.distance}
             time={workout.time}
@@ -231,9 +245,11 @@ class WorkoutsIndexContainer extends Component {
     })
     return(
       <div>
-        <h1>Workouts Index Container</h1>
+        <h1 id="current-week-header">Current Week</h1>
         {currentWeek}
-        {teams}
+        <div id="team-list">
+          {teams}
+        </div>
         <div>
           <button id="new" onClick={this.toggleNewForm}>Add A Workout</button>
         </div>
