@@ -11,30 +11,57 @@ RSpec.describe Api::V1::WorkoutsController, type: :controller do
   let!(:membership_one) {Membership.create(user_id: user_one.id, team_id: team_one.id)}
   let!(:membership_two) {Membership.create(user_id: user_two.id, team_id: team_one.id)}
 
-  describe 'GET#index' do
-    it 'should return the selected team, the selected user, and the list of their workouts.' do
+  # describe 'GET#index' do
+  #   it 'should return the selected team, the selected user, and the list of their workouts.' do
+  #     sign_in(user_one, :scope => :user)
+  #     get :index, params: { user_id: user_one.id, team_id: team_one.id }
+  #
+  #     returned_json = JSON.parse(response.body)
+  #     expect(response.status).to eq 200
+  #
+  #     expect(response.content_type).to eq('application/json')
+  #     expect(returned_json.length).to eq 3
+  #     expect(returned_json['team']['team_name']).to eq team_one.team_name
+  #
+  #     expect(returned_json['user']['first_name']).to eq user_one.first_name
+  #     expect(returned_json['user']['last_name']).to eq user_one.last_name
+  #
+  #     expect(returned_json['workouts'].length).to eq 3
+  #     expect(returned_json['workouts'][0]['time']).to eq workout_one.time
+  #     expect(returned_json['workouts'][0]['distance']).to eq workout_one.distance
+  #
+  #   end
+  # end
+  # describe "GET#index" do
+  #   it 'if no user is signed out, it should return an error message' do
+  #     expect{ get :index, params: {user_id: user_one.id, team_id: team_one.id} }.to raise_error(ActionController::RoutingError)
+  #   end
+  # end
+# added this
+  describe "Post#create" do
+    it 'creates a new workout' do
       sign_in(user_one, :scope => :user)
-      get :index, params: { user_id: user_one.id, team_id: team_one.id }
+
+      post_json = {workout:{user_id: user_one.id, distance: 6, time: '42', notes: "Easy 6 miles", workout_date: "Feb 4 2018"}}
+      workouts = Workout.where(user_id: user_one.id)
+      prev_count = workouts.count
+      post(:create, params: post_json)
+      expect(Workout.where(user_id: user_one.id).count).to eq(prev_count + 1)
+    end
+  end
+
+  describe 'PATCH#update' do
+    it 'updates the workout and returns its information' do
+      sign_in(user_one, :scope => :user)
+      new_time = {time: 36}
+      patch(:update, params: {id: workout_one.id, workout: new_time})
 
       returned_json = JSON.parse(response.body)
       expect(response.status).to eq 200
-
-      expect(response.content_type).to eq('application/json')
-      expect(returned_json.length).to eq 3
-      expect(returned_json['team']['team_name']).to eq team_one.team_name
-
-      expect(returned_json['user']['first_name']).to eq user_one.first_name
-      expect(returned_json['user']['last_name']).to eq user_one.last_name
-
-      expect(returned_json['workouts'].length).to eq 3
-      expect(returned_json['workouts'][0]['time']).to eq workout_one.time
-      expect(returned_json['workouts'][0]['distance']).to eq workout_one.distance
-
-    end
-  end
-  describe "GET#index" do
-    it 'if no user is signed out, it should return an error message' do
-      expect{ get :index, params: {user_id: user_one.id, team_id: team_one.id} }.to raise_error(ActionController::RoutingError)
+      expect(response.content_type).to eq("application/json")
+      expect(returned_json['time']).to eq(36)
+      expect(returned_json['distance']).to eq(5)
+      expect(returned_json['notes']).to eq('felt pretty good today')
     end
   end
 

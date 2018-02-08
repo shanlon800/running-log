@@ -2,12 +2,6 @@ class Api::V1::WorkoutsController < ApplicationController
   before_action :authorize_user
   skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
 
-  def index
-    team = Team.find(params[:team_id])
-    user = User.find(params[:user_id])
-    workouts = Workout.where(user_id: user.id)
-    render json: {team: team, user: user, workouts: workouts}
-  end
 
   def create
     workout = Workout.new(workout_params)
