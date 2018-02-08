@@ -10,7 +10,6 @@ const WorkoutDetailTile = props => {
       <p id="time">Time: {props.time} Minutes</p>
       <p id="pace">Pace: {props.pace}/mi</p>
       <p id="notes">Notes: {props.notes}</p>
-      <button id="edit" onClick={props.toggleEditForm} value={props.id}>Edit</button>
     </div>
   )
 }
