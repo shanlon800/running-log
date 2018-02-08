@@ -5,6 +5,8 @@ describe('WorkoutDetailTile', () => {
   distance,
   time,
   notes,
+  currentUser,
+  creator,
   wrapper;
 
   beforeEach(() => {
@@ -15,6 +17,8 @@ describe('WorkoutDetailTile', () => {
         distance={4}
         time={30}
         notes="Today was a great run"
+        currentUser={1}
+        creator={1}
       />
     );
   });
