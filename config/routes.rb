@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       # resources :workouts
 
       resources :users
+      resources :workouts, only: [:create, :update]
 
       resources :teams do
         resources :users do
