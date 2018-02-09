@@ -105,34 +105,40 @@ class WorkoutEditContainer extends Component {
 
   render() {
     return(
-      <form id='new-workout-form' onSubmit={this.handleSubmit}>
-        <h3>Edit a Workout</h3>
-        <FormField
-          content={this.state.workoutDate}
-          label='Workout Date'
-          name='workout-date'
-          handleChange={this.handleDateChange}
-        />
-        <FormField
-          content={this.state.workoutDistance}
-          label='Workout Distance'
-          name='workout-distance'
-          handleChange={this.handleDistanceChange}
-        />
-        <FormField
-          content={this.state.workoutTime}
-          label='Workout Time'
-          name='workout-time'
-          handleChange={this.handleTimeChange}
-        />
-        <FormField
-          content={this.state.workoutNotes}
-          label='Workout Notes'
-          name='workout-notes'
-          handleChange={this.handleNotesChange}
-        />
-        <input className="button" type="submit" value="Submit" onClick={this.handleSubmit}/>
-      </form>
+      <div className="form-container">
+        <div className="workout-form">
+          <form id='new-workout-form callout' onSubmit={this.handleSubmit}>
+            <h3>Edit a Workout</h3>
+            <FormField
+              content={this.state.workoutDate}
+              label='Workout Date'
+              name='workout-date'
+              handleChange={this.handleDateChange}
+            />
+            <FormField
+              content={this.state.workoutDistance}
+              label='Workout Distance'
+              name='workout-distance'
+              handleChange={this.handleDistanceChange}
+            />
+            <FormField
+              content={this.state.workoutTime}
+              label='Workout Time'
+              name='workout-time'
+              handleChange={this.handleTimeChange}
+            />
+            <FormField
+              content={this.state.workoutNotes}
+              label='Workout Notes'
+              name='workout-notes'
+              handleChange={this.handleNotesChange}
+            />
+            <input className="button" type="submit" value="Submit" onClick={this.handleSubmit}/>
+            <button className="button" onClick={this.props.closeEditForm}>Cancel</button>
+          </form>
+        </div>
+        <div className="form-sheet"></div>
+      </div>
     )
   }
 }
