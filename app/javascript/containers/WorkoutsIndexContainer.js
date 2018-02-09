@@ -243,15 +243,15 @@ class WorkoutsIndexContainer extends Component {
     })
     return(
       <div>
-          <h1 id="current-week-header">Current Week</h1>
+        <h1 id="current-week-header">Current Week</h1>
+        <div>
+        <button id="new" onClick={this.toggleNewForm}>Add A Workout</button>
+        </div>
         <div className="container">
           {currentWeek}
         </div>
         <div id="team-list">
           {teams}
-        </div>
-        <div>
-          <button id="new" onClick={this.toggleNewForm}>Add A Workout</button>
         </div>
         {editForm}
         {newForm}
