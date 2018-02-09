@@ -14,18 +14,22 @@ const WorkoutDetailTile = props => {
   }
 
   return(
-    <div className="current-week-tile">
-      <h4 className="date-header">{date}</h4>
-      <div className="workout-text">
-        <p id="distance">Distance: {props.distance} Miles</p>
-        <p id="time">Time: {props.time} Minutes</p>
-        <p id="pace">Pace: {props.pace}/mi</p>
-        <p id="notes">Notes: {props.notes}</p>
-        <p>User: {props.creator}</p>
-        {deleteButton}
-        {editButton}
+      <div className="run-card">
+        <div className="run-card__wrapper">
+          <div className="run-card__header">
+            <h4 className="date-header">{date}</h4>
+          </div>
+          <div className="run-card__body">
+            <p id="distance">Distance: {props.distance} Miles</p>
+            <p id="time">Time: {props.time} Minutes</p>
+            <p id="pace">Pace: {props.pace}/mi</p>
+            <p id="notes">Notes: {props.notes}</p>
+            <p>User: {props.creator}</p>
+            {deleteButton}
+            {editButton}
+          </div>
+        </div>
       </div>
-    </div>
   )
 }
 

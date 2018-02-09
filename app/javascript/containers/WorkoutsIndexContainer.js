@@ -226,7 +226,6 @@ class WorkoutsIndexContainer extends Component {
       let handleDelete = () => {this.deleteWorkout(workout.id)}
       // <button id="edit" onClick={this.toggleEditForm} key={workout.id + 100} value={workout.id}>Edit</button>
       return(
-        <div key={workout.id +1000} className="workout-tile">
           <WorkoutDetailTile
             distance={workout.distance}
             time={workout.time}
@@ -240,13 +239,14 @@ class WorkoutsIndexContainer extends Component {
             handleDelete={handleDelete}
             creator={workout.user_id}
           />
-        </div>
       )
     })
     return(
       <div>
-        <h1 id="current-week-header">Current Week</h1>
-        {currentWeek}
+          <h1 id="current-week-header">Current Week</h1>
+        <div className="container">
+          {currentWeek}
+        </div>
         <div id="team-list">
           {teams}
         </div>
