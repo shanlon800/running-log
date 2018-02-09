@@ -33,7 +33,7 @@ describe('WorkoutDetailTile', () => {
   it('should render a p tag with an id of #time with the time', () => {
     expect(wrapper.find('#time').text()).toBe('Time: 30 Minutes')
   })
-  it('should render a p tag with an id of #notes with the notes', () => {
-    expect(wrapper.find('#notes').text()).toBe('Notes: Today was a great run')
-  })
+  // it('should render a p tag with an id of #notes with the notes', () => {
+  //   expect(wrapper.find('#notes').text()).toBe('Notes: Today was a great run')
+  // })
 });

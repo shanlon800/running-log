@@ -14,7 +14,7 @@ const WorkoutDetailTile = props => {
   }
 
   return(
-      <div className="run-card">
+      <div onClick={props.toggleDetailPage} className="run-card">
         <div className="run-card__wrapper">
           <div className="run-card__header">
             <h4 className="date-header">{date}</h4>
@@ -23,10 +23,7 @@ const WorkoutDetailTile = props => {
             <p id="distance">Distance: {props.distance} Miles</p>
             <p id="time">Time: {props.time} Minutes</p>
             <p id="pace">Pace: {props.pace}/mi</p>
-            <p id="notes">Notes: {props.notes}</p>
             <p>User: {props.creator}</p>
-            {deleteButton}
-            {editButton}
           </div>
         </div>
       </div>
