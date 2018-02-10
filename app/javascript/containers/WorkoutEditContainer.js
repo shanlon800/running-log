@@ -80,7 +80,7 @@ class WorkoutEditContainer extends Component {
   }
 
   validateDistance(){
-    if(this.state.workoutDistance === 0) {
+    if(this.state.workoutDistance === '') {
       return['Please enter a distance']
     } else {
       return []
@@ -104,11 +104,15 @@ class WorkoutEditContainer extends Component {
   }
 
   render() {
+    let errorMessage = this.state.errors.map(error => {
+      return(<div key={error}> {error} </div>)
+    })
     return(
       <div className="form-container">
         <div className="workout-form">
           <form id='new-workout-form callout' onSubmit={this.handleSubmit}>
             <h3>Edit a Workout</h3>
+            <span className="errors">{errorMessage}</span>
             <FormField
               content={this.state.workoutDate}
               label='Workout Date'
