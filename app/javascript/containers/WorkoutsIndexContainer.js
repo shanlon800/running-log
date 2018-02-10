@@ -51,7 +51,6 @@ class WorkoutsIndexContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      let newWorkout = this.state.currentWeek.concat(body)
       this.setState({
         currentWeek: body,
         showNewForm: false
