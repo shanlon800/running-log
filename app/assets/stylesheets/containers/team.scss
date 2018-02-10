@@ -1,0 +1,44 @@
+
+.team-container{
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  // flex-direction: column;
+  flex-direction: row;
+}
+
+.team-user{
+  outline: solid white;
+}
+.team-user-header__text {
+  color: white;
+  text-align: center;
+}
+
+.workout-compare-card {
+  background: white;
+  box-shadow: 1px 1px 1px rgba(0,0,0, 0.5);
+  border-radius: 3px;
+  flex: 0 0 8.5%;
+  margin: 0.6rem;
+}
+
+.workout-compare-card__distance {
+  text-align: center;
+}
+
+.workout-compare-card__date {
+  text-align: center;
+}
+
+.team-user-header__image {
+  height: 7rem;
+  width: 7rem;
+  border-radius: 100%;
+  border: solid white;
+}
+
+.team-user-header {
+  flex: 0 0 10%;
+}

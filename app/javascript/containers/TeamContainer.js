@@ -34,11 +34,18 @@ class TeamContainer extends Component {
     }
 
   render() {
+    let profilePicture
     let users = this.state.users.map(user => {
+      if (user.user.profile_photo != null) {
+        profilePicture = user.user.profile_photo.url
+      } else {
+        profilePicture = ''
+      }
       return(
         <TeamUserContainer
           user={user}
           key={user.user.id}
+          profilePicture={profilePicture}
         />
       )
     })

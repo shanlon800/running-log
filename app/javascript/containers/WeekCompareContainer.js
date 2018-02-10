@@ -12,7 +12,7 @@ class WeekCompareContainer extends Component {
   calculatePace(miles, min) {
     let secondsPerMile = (min * 60) / miles
     let minPace = Math.floor(secondsPerMile / 60)
-    let secPace = secondsPerMile % 60
+    let secPace = Math.floor(secondsPerMile % 60)
     if (secPace === 0){
       return `${minPace}:00`
     } else {
