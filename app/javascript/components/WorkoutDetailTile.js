@@ -12,9 +12,8 @@ const WorkoutDetailTile = props => {
     let deleteButton = ""
     let editButton = ""
   }
-
   return(
-      <div onClick={props.toggleDetailPage} className="run-card">
+      <div onClick={props.toggleDetailPage} className="run-card" id={props.selectedStyle}>
         <div className="run-card__wrapper">
           <div className="run-card__header">
             <h4 className="date-header">{date}</h4>

@@ -288,7 +288,12 @@ class WorkoutsIndexContainer extends Component {
       // let handleClick = () => this.toggleEditForm(workout, event)
       // let handleDelete = () => {this.deleteWorkout(workout.id)}
       let toggleDetailPage = () => this.toggleDetailPage(workout)
+      let selectedStyle;
       // <button id="edit" onClick={this.toggleEditForm} key={workout.id + 100} value={workout.id}>Edit</button>
+      if (this.state.detailPage !== null && this.state.detailPage.id === workout.id){
+        selectedStyle = "selected"
+      }
+
       return(
           <WorkoutDetailTile
             distance={workout.distance}
@@ -301,6 +306,7 @@ class WorkoutsIndexContainer extends Component {
             currentUser={this.state.currentUser}
             creator={workout.user_id}
             toggleDetailPage={toggleDetailPage}
+            selectedStyle={selectedStyle}
           />
       )
     })
