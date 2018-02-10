@@ -11,7 +11,7 @@ class TeamUserContainer extends Component {
   calculatePace(miles, min) {
     let secondsPerMile = (min * 60) / miles
     let minPace = Math.floor(secondsPerMile / 60)
-    let secPace = secondsPerMile % 60
+    let secPace = Math.floor(secondsPerMile % 60)
     if (secPace === 0){
       return `${minPace}:00`
     } else {
@@ -36,9 +36,14 @@ class TeamUserContainer extends Component {
       )
     })
     return(
-      <div>
-      <h3>{this.props.user.user.first_name} {this.props.user.user.last_name}</h3>
-        {workouts}
+      <div className="team-user">
+        <div className='team-container'>
+          <div className='team-user-header'>
+            <h3 className="team-user-header__text">{this.props.user.user.first_name} {this.props.user.user.last_name}</h3>
+            <img className='team-user-header__image' src={this.props.profilePicture}alt={this.props.user.user.last_name}/>
+          </div>
+          {workouts}
+        </div>
       </div>
     )
   }
