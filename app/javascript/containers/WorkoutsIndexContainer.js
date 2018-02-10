@@ -53,7 +53,7 @@ class WorkoutsIndexContainer extends Component {
     .then(body => {
       let newWorkout = this.state.currentWeek.concat(body)
       this.setState({
-        currentWeek: newWorkout,
+        currentWeek: body,
         showNewForm: false
       })
     })
