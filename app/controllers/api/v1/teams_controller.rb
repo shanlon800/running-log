@@ -14,13 +14,19 @@ class Api::V1::TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @users = @team.users
 
+    if @team.goal == nil
+      @goal = 0
+    else
+      @goal = @team.goal
+    end
+
     @user_workouts = []
     @users.each do |user|
       workout_collection = {user: user, workouts: user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start), (@current_week_end)).order(:workout_date)}
       @user_workouts << workout_collection
     end
 
-    render json: {team: @team, users: @user_workouts}
+    render json: {team: @team, goal: @goal.team_goal, users: @user_workouts}
   end
 
   def authorize_user

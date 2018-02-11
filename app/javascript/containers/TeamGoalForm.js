@@ -9,11 +9,18 @@ class TeamGoalForm extends Component {
       errors: []
     }
     this.handleGoalChange = this.handleGoalChange.bind(this);
+    this.validateGoal = this.validateGoal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearErrors = this.clearErrors.bind(this);
   }
+
+  clearErrors() {
+    this.setState({errors: []})
+  }
+
   handleGoalChange(event) {
     let newGoal = event.target.value
     this.setState({goal: newGoal})
-    console.log(this.state.goal)
   }
 
   handleSubmit(event) {
@@ -23,6 +30,7 @@ class TeamGoalForm extends Component {
     if (errors.length === 0) {
       let formPayload = {
         team_goal: parseInt(this.state.goal, 10),
+        team_id: this.props.teamId
       }
       this.props.addNewGoal(formPayload)
     } else {
@@ -48,6 +56,7 @@ class TeamGoalForm extends Component {
           name='team-goal'
           handleChange={this.handleGoalChange}
         />
+        <input className="button" type="submit" value="Submit" onClick={this.handleSubmit}/>
       </form>
     )
   }

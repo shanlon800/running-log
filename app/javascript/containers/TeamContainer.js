@@ -8,8 +8,9 @@ class TeamContainer extends Component {
     this.state = {
       team: [],
       users: [],
-      teamGoal: 40
+      teamGoal: ''
     }
+    this.addNewGoal = this.addNewGoal.bind(this);
   }
 
   componentWillMount() {
@@ -27,16 +28,18 @@ class TeamContainer extends Component {
       .then(body => {
         let newTeam = body.team
         let newUsers = body.users
+        let newGoal = body.goal
         this.setState({
           team: newTeam,
-          users: newUsers
+          users: newUsers,
+          teamGoal: newGoal
         })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
     addNewGoal(formPayload) {
-      fetch('/api/v1/teams', {
+      fetch('/api/v1/goals', {
         credentials: 'same-origin',
         method: 'POST',
         body: JSON.stringify(formPayload),
@@ -80,7 +83,12 @@ class TeamContainer extends Component {
     return(
       <div>
         <h1>Team Container</h1>
-        <TeamGoalForm />
+        <p>Team Goal: {this.state.teamGoal}</p>
+        <TeamGoalForm
+          teamGoal={this.state.teamGoal}
+          addNewGoal={this.addNewGoal}
+          teamId={this.state.team.id}
+        />
         {users}
       </div>
     )
