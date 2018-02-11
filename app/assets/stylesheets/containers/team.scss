@@ -42,3 +42,18 @@
 .team-user-header {
   flex: 0 0 10%;
 }
+
+.workout-compare-chart {
+  border-radius: 3px;
+  flex: 0 0 15%;
+  margin: 0.6rem;
+}
+
+.workout-compare-chart__header{
+  text-align: center;
+  color: white;
+}
+
+.workout-compare-chart__header-text{
+  color: white;
+}

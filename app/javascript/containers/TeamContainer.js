@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import TeamUserContainer from './TeamUserContainer'
+import TeamUserContainer from './TeamUserContainer';
+import TeamGoalForm from './TeamGoalForm';
 
 class TeamContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       team: [],
-      users: []
+      users: [],
+      teamGoal: 40
     }
   }
 
@@ -33,6 +35,31 @@ class TeamContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
+    addNewGoal(formPayload) {
+      fetch('/api/v1/teams', {
+        credentials: 'same-origin',
+        method: 'POST',
+        body: JSON.stringify(formPayload),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({
+          teamGoal: body
+        })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
+
   render() {
     let profilePicture
     let users = this.state.users.map(user => {
@@ -46,12 +73,14 @@ class TeamContainer extends Component {
           user={user}
           key={user.user.id}
           profilePicture={profilePicture}
+          teamGoal={this.state.teamGoal}
         />
       )
     })
     return(
       <div>
         <h1>Team Container</h1>
+        <TeamGoalForm />
         {users}
       </div>
     )
