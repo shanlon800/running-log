@@ -1,4 +1,5 @@
 class Team < ApplicationRecord
+  has_one :goal
   has_many :memberships
   has_many :users,
     through: :memberships

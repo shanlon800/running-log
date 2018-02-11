@@ -9,10 +9,10 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
   let!(:workout_two) {Workout.create!(user_id: user_two.id, distance: 3.5, time: "22", notes: "felt really fast today", workout_date: Date.today)}
   let!(:workout_three) {Workout.create!(user_id: user_three.id, distance: 2, time: "18", notes: "felt really tired today", workout_date: Date.today)}
   let!(:team_one) {Team.create!(team_name: 'Boston Running Club')}
-  let!(:membership_one) {Membership.create(user_id: user_one.id, team_id: team_one.id)}
-  let!(:membership_two) {Membership.create(user_id: user_two.id, team_id: team_one.id)}
-  let!(:membership_three) {Membership.create(user_id: user_three.id, team_id: team_one.id)}
-
+  let!(:membership_one) {Membership.create!(user_id: user_one.id, team_id: team_one.id)}
+  let!(:membership_two) {Membership.create!(user_id: user_two.id, team_id: team_one.id)}
+  let!(:membership_three) {Membership.create!(user_id: user_three.id, team_id: team_one.id)}
+  let!(:goal_one) {Goal.create!(team_id: team_one.id, team_goal: 40)}
   describe 'GET#show' do
     it 'should return the team information and a list of users with their workouts' do
       sign_in(user_one, :scope => :user)
@@ -21,7 +21,7 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
       returned_json = JSON.parse(response.body)
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
-      expect(returned_json.length).to eq 2
+      expect(returned_json.length).to eq 3
 
       expect(returned_json['team']['team_name']).to eq team_one.team_name
 
@@ -42,6 +42,7 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
       expect(returned_json['users'][2]['user']['last_name']).to eq user_three.last_name
       expect(returned_json['users'][2]['workouts'][0]['distance']).to eq workout_three.distance
       expect(returned_json['users'][2]['workouts'][0]['time']).to eq workout_three.time
+      expect(returned_json['goal']).to eq goal_one.team_goal
     end
   end
 

@@ -1,14 +1,17 @@
 import React from 'react';
 import moment from 'moment';
 
+
 const WorkoutCompareTile = props => {
-  let date = moment(props.date).format("ddd MM/DD/YY")
+  let weekday = moment(props.date).format("ddd")
+  let date = moment(props.date).format("M/DD")
 
 
   return(
     <div className='workout-compare-card'>
       <div className='workout-compare-card__date'>
-        <h4>{date}</h4>
+      <h4>{weekday}</h4>
+      {date}
       </div>
       <div className="workout-compare-card__distance">
         <h1 id="distance">{props.distance}</h1>
