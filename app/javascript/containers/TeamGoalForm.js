@@ -49,7 +49,6 @@ class TeamGoalForm extends Component {
   render() {
     return(
       <form>
-        <h1>FORM!!!</h1>
         <FormField
           content={this.state.workoutDate}
           label='Team Goal'
