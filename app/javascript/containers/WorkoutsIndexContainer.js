@@ -30,6 +30,7 @@ class WorkoutsIndexContainer extends Component {
     this.deleteWorkout = this.deleteWorkout.bind(this)
     this.closeEditForm = this.closeEditForm.bind(this)
     this.toggleDetailPage = this.toggleDetailPage.bind(this)
+    this.addMembership = this.addMembership.bind(this)
   }
 
 
@@ -56,6 +57,31 @@ class WorkoutsIndexContainer extends Component {
       this.setState({
         currentWeek: body,
         showNewForm: false
+      })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  addMembership(formPayload) {
+    fetch('/api/v1/memberships', {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(formPayload),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        belongTeams: body
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -328,6 +354,8 @@ class WorkoutsIndexContainer extends Component {
           <div>
             <NewTeamFormContainer
               allTeams={this.state.allTeams}
+              currentUser={this.state.currentUser}
+              addMembership={this.addMembership}
             />
           </div>
         </div>

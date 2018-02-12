@@ -3,7 +3,9 @@ import React from 'react';
 const DropdownTile = (props) => {
 
   allTeams = this.props.allTeams.map(team => {
-     <option value={team.team_name}>{team.team_name}</option>
+    return(
+      <option value={team.team_name}>{team.team_name}</option>
+    )
   })
   return(
     <select>
