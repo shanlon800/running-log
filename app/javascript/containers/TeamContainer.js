@@ -79,17 +79,6 @@ class TeamContainer extends Component {
     }
 
   render() {
-    let goalForm;
-    if (this.state.showGoalForm === true) {
-      goalForm =
-      <TeamGoalForm
-        teamGoal={this.state.teamGoal}
-        addNewGoal={this.addNewGoal}
-        teamId={this.state.team.id}
-      />
-    } else {
-      goalForm = ''
-    }
     let profilePicture
     let users = this.state.users.map(user => {
       if (user.user.profile_photo != null) {
@@ -106,15 +95,30 @@ class TeamContainer extends Component {
         />
       )
     })
-    return(
-      <div>
-        <h1 id="team-header">{this.state.team.team_name} Home Page</h1>
-        <p>Team Goal: {this.state.teamGoal}</p>
-        <button onClick={this.toggleGoalForm}>Set Your Team Goal</button>
-        {goalForm}
-        {users}
-      </div>
-    )
+    if (this.state.showGoalForm === true) {
+      return(
+        <div>
+          <h1 id="team-header">{this.state.team.team_name} Home Page</h1>
+          <p>Team Goal: {this.state.teamGoal}</p>
+          <button onClick={this.toggleGoalForm}>Set Your Team Goal</button>
+          <TeamGoalForm
+            teamGoal={this.state.teamGoal}
+            addNewGoal={this.addNewGoal}
+            teamId={this.state.team.id}
+          />
+          {users}
+        </div>
+      )
+    } else {
+      return(
+          <div>
+          <h1 id="team-header">{this.state.team.team_name} Home Page</h1>
+          <p>Team Goal: {this.state.teamGoal}</p>
+          <button onClick={this.toggleGoalForm}>Set Your Team Goal</button>
+          {users}
+        </div>
+      )
+    }
   }
 }
 
