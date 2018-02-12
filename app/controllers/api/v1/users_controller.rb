@@ -4,6 +4,7 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     if current_user
+      @all_teams = Team.all
       @current_user = current_user
       @workouts = Workout.where(user_id: @current_user.id)
       @teams = @current_user.teams
@@ -30,7 +31,8 @@ class Api::V1::UsersController < ApplicationController
       render json: {
         current_user: @current_user,
         workouts: @workouts,
-        teams: @teams,
+        belong_to_teams: @teams,
+        all_teams: @all_teams,
         current_week: @current_week,
         past_weeks:{
           one_week_back: @one_back,
