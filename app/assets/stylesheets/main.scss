@@ -3,12 +3,20 @@
 @import 'containers/team';
 
 body {
-  background-color: #3f3f3f;
+  background-color: #e0e0e0;
   margin: auto !important;
   width: 90%;
   font-family: 'Roboto', sans-serif;
 }
 
-
+.week-container{
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  // flex-direction: column;
+  flex-direction: row;
+}
 
 // Form styling below
+// dark grey color: #3f3f3f

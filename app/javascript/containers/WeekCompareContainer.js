@@ -37,7 +37,7 @@ class WeekCompareContainer extends Component {
       )
     })
     return(
-      <div>
+      <div className="week-container">
         <h2>{this.props.title}</h2>
         {workouts}
       </div>
