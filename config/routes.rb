@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # resources :workouts
+      resources :memberships, only: [:create]
       resources :goals, only: [:create]
       resources :users, only: [:index]
       resources :workouts, only: [:create, :update, :destroy]

@@ -5,8 +5,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   let!(:user_one) {User.create!(first_name: "John", last_name: "Smith", email: "jsmith1@aol.com", password: 'password1')}
   let!(:user_two) {User.create!(first_name: "Jane", last_name: "Smith", email: "jsmith2@aol.com", password: 'password2')}
   let!(:workout_one) {Workout.create!(user_id: user_one.id, distance: 5, time: '35', notes: "felt pretty good today", workout_date: Date.today)}
-  let!(:workout_two) {Workout.create!(user_id: user_one.id, distance: 3.5, time: "22", notes: "felt really fast today", workout_date: Date.today - 8)}
-  let!(:workout_three) {Workout.create!(user_id: user_one.id, distance: 2, time: "18", notes: "felt really tired today", workout_date: Date.today - 15)}
+  let!(:workout_two) {Workout.create!(user_id: user_one.id, distance: 3.5, time: "22", notes: "felt really fast today", workout_date: Date.today - 7)}
+  let!(:workout_three) {Workout.create!(user_id: user_one.id, distance: 2, time: "18", notes: "felt really tired today", workout_date: Date.today - 14)}
   let!(:team_one) {Team.create!(team_name: 'Boston Running Club')}
   let!(:membership_one) {Membership.create(user_id: user_one.id, team_id: team_one.id)}
   let!(:membership_two) {Membership.create(user_id: user_two.id, team_id: team_one.id)}
@@ -20,7 +20,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response.status).to eq 200
 
       expect(response.content_type).to eq('application/json')
-      expect(returned_json.length).to eq 5
+      expect(returned_json.length).to eq 6
       expect(returned_json['current_user']['email']).to eq user_one.email
       expect(returned_json['current_user']['first_name']).to eq user_one.first_name
       expect(returned_json['current_user']['last_name']).to eq user_one.last_name
@@ -28,8 +28,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(returned_json['workouts'].length).to eq 3
       expect(returned_json['workouts'][0]['time']).to eq workout_one.time
       expect(returned_json['workouts'][0]['distance']).to eq workout_one.distance
-
-      expect(returned_json['teams'][0]['team_name']).to eq team_one.team_name
+      expect(returned_json['belong_to_teams'][0]['team_name']).to eq team_one.team_name
     end
   end
 
@@ -42,7 +41,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response.status).to eq 200
 
       expect(response.content_type).to eq('application/json')
-      expect(returned_json.length).to eq 5
+      expect(returned_json.length).to eq 6
       expect(returned_json['current_user']['email']).to eq user_one.email
       expect(returned_json['current_user']['first_name']).to eq user_one.first_name
       expect(returned_json['current_user']['last_name']).to eq user_one.last_name

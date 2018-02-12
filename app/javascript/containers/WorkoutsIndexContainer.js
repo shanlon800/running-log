@@ -5,6 +5,7 @@ import WorkoutDetailTile from '../components/WorkoutDetailTile'
 import WorkoutFormContainer from './WorkoutFormContainer'
 import WorkoutEditContainer from './WorkoutEditContainer'
 import WorkoutDescriptionTile from '../components/WorkoutDescriptionTile'
+import NewTeamFormContainer from './NewTeamFormContainer'
 
 class WorkoutsIndexContainer extends Component {
   constructor(props) {
@@ -12,13 +13,14 @@ class WorkoutsIndexContainer extends Component {
     this.state = {
       currentUser: null,
       workouts: [],
-      teams: [],
+      belongTeams: [],
       currentWeek: [],
       showEditForm: false,
       showNewForm: false,
       selectedWorkout: null,
       detailPage: null,
-      showDetails: false
+      showDetails: false,
+      allTeams: []
     }
     this.calculatePace = this.calculatePace.bind(this)
     this.addNewWorkout = this.addNewWorkout.bind(this)
@@ -28,6 +30,7 @@ class WorkoutsIndexContainer extends Component {
     this.deleteWorkout = this.deleteWorkout.bind(this)
     this.closeEditForm = this.closeEditForm.bind(this)
     this.toggleDetailPage = this.toggleDetailPage.bind(this)
+    this.addMembership = this.addMembership.bind(this)
   }
 
 
@@ -54,6 +57,31 @@ class WorkoutsIndexContainer extends Component {
       this.setState({
         currentWeek: body,
         showNewForm: false
+      })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  addMembership(formPayload) {
+    fetch('/api/v1/memberships', {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(formPayload),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        belongTeams: body
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -131,13 +159,15 @@ class WorkoutsIndexContainer extends Component {
       .then(body => {
         let newCurrentUser = body.current_user
         let newWorkouts = body.workouts
-        let newTeams = body.teams
+        let newTeams = body.belong_to_teams
         let newWeek = body.current_week
+        let allTeams = body.all_teams
         this.setState({
           currentUser: newCurrentUser,
           workouts: newWorkouts,
-          teams: newTeams,
-          currentWeek: newWeek
+          belongTeams: newTeams,
+          currentWeek: newWeek,
+          allTeams: allTeams
         })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -278,18 +308,15 @@ class WorkoutsIndexContainer extends Component {
           newForm = ''
         }
 
-    let teams = this.state.teams.map(team => {
+    let belongTeams = this.state.belongTeams.map(team => {
       return(
         <Link to={`/teams/${team.id}`} key={`${team.id}`}><span>{team.team_name}</span></Link>
       )
     })
     let currentWeek = this.state.currentWeek.map(workout => {
       let pace = this.calculatePace(workout.distance, workout.time)
-      // let handleClick = () => this.toggleEditForm(workout, event)
-      // let handleDelete = () => {this.deleteWorkout(workout.id)}
       let toggleDetailPage = () => this.toggleDetailPage(workout)
       let selectedStyle;
-      // <button id="edit" onClick={this.toggleEditForm} key={workout.id + 100} value={workout.id}>Edit</button>
       if (this.state.detailPage !== null && this.state.detailPage.id === workout.id){
         selectedStyle = "selected"
       }
@@ -323,10 +350,15 @@ class WorkoutsIndexContainer extends Component {
           {detailsTile}
         </div>
         <div id="team-list">
-          {teams}
+          {belongTeams}
+          <div>
+            <NewTeamFormContainer
+              allTeams={this.state.allTeams}
+              currentUser={this.state.currentUser}
+              addMembership={this.addMembership}
+            />
+          </div>
         </div>
-        {editForm}
-        {newForm}
       </div>
     )
   }

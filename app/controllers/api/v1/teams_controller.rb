@@ -1,5 +1,5 @@
 class Api::V1::TeamsController < ApplicationController
-  # before_action :authorize_user
+  before_action :authorize_user
   # skip_before_action :verify_authenticity_token, only: [:destroy, :show]
   # def index
   #   @team = Team.find(params[:id])
