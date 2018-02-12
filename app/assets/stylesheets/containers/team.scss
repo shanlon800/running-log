@@ -6,10 +6,11 @@
   flex-wrap: wrap;
   // flex-direction: column;
   flex-direction: row;
+  height: auto;
 }
 
 .team-user{
-  outline: solid white;
+  background-color: #3f3f3f;
 }
 .team-user-header__text {
   color: white;
@@ -56,4 +57,8 @@
 
 .workout-compare-chart__header-text{
   color: white;
+}
+
+#team-header{
+  text-align: center;
 }

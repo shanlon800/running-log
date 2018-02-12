@@ -8,9 +8,11 @@ class TeamContainer extends Component {
     this.state = {
       team: [],
       users: [],
-      teamGoal: ''
+      teamGoal: '',
+      showTeamGoal: false
     }
     this.addNewGoal = this.addNewGoal.bind(this);
+    this.toggleGoalForm = this.toggleGoalForm.bind(this);
   }
 
   componentWillMount() {
@@ -57,10 +59,23 @@ class TeamContainer extends Component {
       .then(response => response.json())
       .then(body => {
         this.setState({
-          teamGoal: body
+          teamGoal: body,
+          showGoalForm: false
         })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
+
+    toggleGoalForm(event) {
+      event.preventDefault()
+      let newGoalForm = this.state.showGoalForm
+
+      if (newGoalForm === true) {
+        this.setState({ showGoalForm: false })
+      }
+      else {
+        this.setState({ showGoalForm: true })
+      }
     }
 
   render() {
@@ -80,18 +95,30 @@ class TeamContainer extends Component {
         />
       )
     })
-    return(
-      <div>
-        <h1>Team Container</h1>
-        <p>Team Goal: {this.state.teamGoal}</p>
-        <TeamGoalForm
-          teamGoal={this.state.teamGoal}
-          addNewGoal={this.addNewGoal}
-          teamId={this.state.team.id}
-        />
-        {users}
-      </div>
-    )
+    if (this.state.showGoalForm === true) {
+      return(
+        <div>
+          <h1 id="team-header">{this.state.team.team_name} Home Page</h1>
+          <p>Team Goal: {this.state.teamGoal}</p>
+          <button onClick={this.toggleGoalForm}>Set Your Team Goal</button>
+          <TeamGoalForm
+            teamGoal={this.state.teamGoal}
+            addNewGoal={this.addNewGoal}
+            teamId={this.state.team.id}
+          />
+          {users}
+        </div>
+      )
+    } else {
+      return(
+          <div>
+          <h1 id="team-header">{this.state.team.team_name} Home Page</h1>
+          <p>Team Goal: {this.state.teamGoal}</p>
+          <button onClick={this.toggleGoalForm}>Set Your Team Goal</button>
+          {users}
+        </div>
+      )
+    }
   }
 }
 
