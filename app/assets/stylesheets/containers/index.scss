@@ -34,11 +34,17 @@
   box-sizing: border-box;
 }
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  // max-width: 1200px;
+  // margin-left: 5%;
+  // margin-right: 3.5%;
+  // margin-top: 2%;
+  margin-bottom: 3%;
+  // padding-bottom: 3%;
+  // margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+
 }
 @media all and (min-width: 768px) and (max-width: 959px){
   .container {
@@ -52,10 +58,11 @@
 }
 .run-card {
   background: white;
-  box-shadow: 1px 1px 1px rgba(0,0,0, 0.5);
-  border-radius: 3px;
-  flex: 0 0 12%;
-  margin: 0.8rem;
+  // box-shadow: 1px 1px 1px rgba(0,0,0, 0.5);
+  // border-radius: 3px;
+  flex: 0 0 14.28%;
+  outline: .02rem solid black;
+  position:relative;
   cursor: pointer;
 }
 @media all and (min-width: 768px) and (max-width: 959px){
@@ -64,15 +71,205 @@
   }
 }
 .run-card__header {
-  background: #76937E;
+  background: white;
+  height: 2rem;
   overflow: auto;
-  padding: .5rem;
+  padding-bottom: 0;
+  // padding: .5rem;
   color: #fff;
+  text-align: center;
+  border-bottom: .02rem solid black;
 }
 .run-card__body {
   padding: .5rem;
+  text-align: center;
 }
 
 #selected {
-  outline: solid red;
+  background-color: #E5E3E3;
+    padding: 2px;
+    border: 1px solid black;
+    box-shadow:  1px 1px black,
+     2px 2px black,
+     3px 3px black,
+     4px 4px black,
+     5px 5px black;
+}
+
+//This is the top row of data
+
+#join-team{
+  background-color: #F8F8F8;
+  border-radius: .4rem;
+  margin-bottom: 4%;
+  padding-left: 5%;
+}
+#random-box{
+  height: 100%;
+  background-color: #F8F8F8;
+  border-radius: .4rem;
+  padding-left: 5%;
+}
+#top-row-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+#team-list{
+  border-radius: .4rem;
+  margin-bottom: 4%;
+  margin-top: 4%;
+  width: 47.5%;
+  margin-left: 2.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-list-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 80%;
+  margin-left: 5%;
+}
+
+.current-goal{
+  text-align: right;
+  flex: auto;
+  color: #262E3A;
+}
+
+#teams-label{
+  color: #9EA3A6;
+}
+
+.team-names{
+  color: #9EA3A6;
+}
+
+#current-runner{
+  color: #9EA3A6;
+  margin-left: 5%;
+}
+ #user-profile {
+   color: #9EA3A6;
+   background-color: #F8F8F8;
+   border-radius: .4rem;
+   margin-bottom: 4%;
+   margin-top: 4%;
+   width: 47.5%;
+   margin-right: 2.5%;
+   padding-bottom: 5%;
+ }
+
+ .current-runner__image{
+
+   height: 100%;
+   width: 100%;
+ }
+ .image-wrap{
+   margin: 0 3% 3% 3%;
+   padding: 2%;
+   background-color: #F1F1F1;
+   border-radius: .4rem;
+   max-height: 25rem;
+   overflow: hidden;
+   max-width: 15rem;
+ }
+#bio-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.bio-info{
+  flex:inline;
+  margin-left: 5%;
+}
+
+.bio-header{
+  text-align: center;
+}
+.bio-text{
+  text-align: center;
+}
+
+#year-to-date{
+  text-align: center;
+}
+#stats-text {
+  margin-bottom: 5%;
+  padding-bottom: 5%;
+}
+.indiv-stats-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 80%;
+  margin-left: 5%;
+}
+
+.stat-number{
+  text-align: right;
+  flex: auto;
+  color: #262E3A;
+}
+
+.stat-header{
+  flex: auto;
+}
+// This is for the boxes containing the dates
+
+
+#current-week-dashboard-header {
+  color: #9ea3a6;
+  padding-top: 2%;
+}
+#current-month {
+  text-align: center;
+  background-color: #F74747;
+  // background-color: #D3503A;
+  outline: .02rem solid black;
+}
+
+#month-text{
+  padding: 0;
+  margin: 0;
+}
+#index-page-current-week{
+  background-color: #F8F8F8;
+  opacity: .88;
+  padding: 0 5% 5% 5%;
+  border-radius: .4rem;
+}
+
+#distance{
+  font-size: 5rem;
+}
+
+.date-header{
+  padding: 0;
+  margin: 0;
+}
+
+// workout details onclick info is below here
+
+.description-container {
+  margin-top: 1%;
+  width: 40%;
+  background-color: #F8F8F8;
+  border-radius: .4rem;
+  padding-left: 5%;
+  padding-top: 3%;
+}
+.description-card__wrapper{
+  width: 100%;
+}
+
+.description-card__header {
+  text-align: center;
+}
+
+#workout-details-header{
+  color: #9EA3A6;
+  text-align: left;
 }

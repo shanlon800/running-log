@@ -85,12 +85,12 @@ class NewTeamFormContainer extends Component {
       )
     })
     let joinTeam;
-    let newTeamButton = <button id="new" onClick={this.props.toggleNewTeamForm}>Create a New Team</button>
-    let chooseButton = <button id="new" onClick={this.props.toggleChooseTeam}>Join Existing Team</button>
+    let newTeamButton = <button onClick={this.props.toggleNewTeamForm}>Create a New Team</button>
+    let chooseButton = <button onClick={this.props.toggleChooseTeam}>Join Existing Team</button>
 
     if (this.props.showChooseTeam === true) {
       newTeamButton = ''
-      chooseButton = <button id="new" onClick={this.props.toggleChooseTeam}>Cancel</button>
+      chooseButton = <button onClick={this.props.toggleChooseTeam}>Cancel</button>
       joinTeam =
         <form onSubmit={this.handleSubmit}>
         <h5>Join a Team</h5>
@@ -106,7 +106,7 @@ class NewTeamFormContainer extends Component {
     let newTeam;
     if (this.props.showNewTeam === true) {
       chooseButton = ''
-      newTeamButton = <button id="new" onClick={this.props.toggleNewTeamForm}>Cancel</button>
+      newTeamButton = <button onClick={this.props.toggleNewTeamForm}>Cancel</button>
       newTeam =
         <div>
           <FormField
@@ -122,11 +122,13 @@ class NewTeamFormContainer extends Component {
       newTeam = ''
     }
     return(
-      <div>
-        {chooseButton}
-        {newTeamButton}
-        {joinTeam}
-        {newTeam}
+      <div id="new-team-forms">
+        <div id="join-team-button-collection">
+          {chooseButton}
+          {newTeamButton}
+        </div>
+          {joinTeam}
+          {newTeam}
       </div>
     )
   }
