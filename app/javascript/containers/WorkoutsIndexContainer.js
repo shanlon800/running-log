@@ -17,6 +17,8 @@ class WorkoutsIndexContainer extends Component {
       currentWeek: [],
       showEditForm: false,
       showNewForm: false,
+      showChooseTeam: false,
+      showNewTeam: false,
       selectedWorkout: null,
       detailPage: null,
       showDetails: false,
@@ -31,6 +33,9 @@ class WorkoutsIndexContainer extends Component {
     this.closeEditForm = this.closeEditForm.bind(this)
     this.toggleDetailPage = this.toggleDetailPage.bind(this)
     this.addMembership = this.addMembership.bind(this)
+    this.addTeam = this.addTeam.bind(this)
+    this.toggleChooseTeam = this.toggleChooseTeam.bind(this)
+    this.toggleNewTeamForm = this.toggleNewTeamForm.bind(this)
   }
 
 
@@ -81,7 +86,33 @@ class WorkoutsIndexContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        belongTeams: body
+        belongTeams: body.belong_to_teams
+      })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  addTeam(formPayload) {
+    fetch('/api/v1/teams', {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(formPayload),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        belongTeams: body.belong_to_teams,
+        allTeams: body.all_teams
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -253,6 +284,30 @@ class WorkoutsIndexContainer extends Component {
       }
     }
 
+    toggleChooseTeam(event) {
+      event.preventDefault()
+      let newChooseTeam = this.state.showChooseTeam
+
+      if (newChooseTeam === true) {
+        this.setState({ showChooseTeam: false })
+      }
+      else {
+        this.setState({ showChooseTeam: true })
+      }
+    }
+
+    toggleNewTeamForm(event) {
+      event.preventDefault()
+      let newTeamForm = this.state.showNewTeam
+
+      if (newTeamForm === true) {
+        this.setState({ showNewTeam: false })
+      }
+      else {
+        this.setState({ showNewTeam: true })
+      }
+    }
+
   render() {
     let detailsTile;
     let handleDelete;
@@ -310,7 +365,7 @@ class WorkoutsIndexContainer extends Component {
 
     let belongTeams = this.state.belongTeams.map(team => {
       return(
-        <Link to={`/teams/${team.id}`} key={`${team.id}`}><span>{team.team_name}</span></Link>
+        <Link to={`/teams/${team.id}`} key={`${team.id}`}><span> {team.team_name}  | </span></Link>
       )
     })
     let currentWeek = this.state.currentWeek.map(workout => {
@@ -349,6 +404,8 @@ class WorkoutsIndexContainer extends Component {
         <div className="description-container">
           {detailsTile}
         </div>
+        {newForm}
+        {editForm}
         <div id="team-list">
           {belongTeams}
           <div>
@@ -356,6 +413,11 @@ class WorkoutsIndexContainer extends Component {
               allTeams={this.state.allTeams}
               currentUser={this.state.currentUser}
               addMembership={this.addMembership}
+              addTeam={this.addTeam}
+              toggleChooseTeam={this.toggleChooseTeam}
+              toggleNewTeamForm={this.toggleNewTeamForm}
+              showNewTeam={this.state.showNewTeam}
+              showChooseTeam={this.state.showChooseTeam}
             />
           </div>
         </div>

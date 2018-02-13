@@ -1,6 +1,6 @@
 class Api::V1::TeamsController < ApplicationController
   before_action :authorize_user
-  # skip_before_action :verify_authenticity_token, only: [:destroy, :show]
+  skip_before_action :verify_authenticity_token, only: [:destroy, :show, :create]
   # def index
   #   @team = Team.find(params[:id])
   #   @users = @team.users
@@ -29,6 +29,25 @@ class Api::V1::TeamsController < ApplicationController
     render json: {team: @team, goal: @goal.team_goal, users: @user_workouts}
   end
 
+  def create
+    team = Team.new(team_params)
+    if team.save
+      Membership.create(user_id: current_user.id, team_id: team.id)
+      Goal.create(team_id: team.id, team_goal: 0)
+      user = User.find(current_user.id)
+      render json: { belong_to_teams: user.teams, all_teams: Team.all }
+    else
+      render json: { error: team.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def team_params
+    params.require(:team).permit(
+      :team_name
+    )
+  end
   def authorize_user
     if !user_signed_in?
       raise ActionController::RoutingError.new("Not Found")

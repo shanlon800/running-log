@@ -1,12 +1,12 @@
 class Api::V1::MembershipsController < ApplicationController
-  # skip_before_action :verify_authenticity_token, only: [:create]
+  skip_before_action :verify_authenticity_token, only: [:create]
   before_action :authorize_user
 
   def create
     membership = Membership.new(membership_params)
     if membership.save
       user = User.find(membership.user_id)
-      render json: user.teams
+      render json: { belong_to_teams: user.teams, all_teams: Team.all }
     else
       render json: { error: membership.errors.full_messages }, status: :unprocessable_entity
      end

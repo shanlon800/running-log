@@ -8,6 +8,7 @@ const FormField = (props) => {
         type='text'
         value={props.content}
         onChange={props.handleChange}
+        placeholder={props.message}
       />
     </label>
   );
