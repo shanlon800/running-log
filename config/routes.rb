@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index]
       resources :workouts, only: [:create, :update, :destroy]
 
-      resources :teams, only: [:show] do
+      resources :teams, only: [:show, :create] do
         resources :users do
           resources :workouts
         end

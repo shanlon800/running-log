@@ -51,4 +51,29 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
       expect{ get :show, params: {id: team_one.id} }.to raise_error(ActionController::RoutingError)
     end
   end
+
+
+  describe "Post#create" do
+    it 'creates a new team' do
+      sign_in(user_one, :scope => :user)
+
+      teams = Team.all
+      prev_count = teams.count
+
+      post_json = {team:{team_name: "Boston Athletic Association"}}
+
+      post(:create, params: post_json)
+
+      returned_json = JSON.parse(response.body)
+      expect(Team.all.count).to eq(prev_count + 1)
+      expect(returned_json['belong_to_teams'].count).to eq 2
+
+    end
+
+    it 'will not create if not signed in and give an error' do
+      expect{ get :create }.to raise_error(ActionController::RoutingError)
+
+    end
+  end
+
 end
