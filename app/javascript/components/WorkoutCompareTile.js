@@ -10,14 +10,12 @@ const WorkoutCompareTile = props => {
   return(
     <div className='workout-compare-card'>
       <div className='workout-compare-card__date'>
-      <h4>{weekday}</h4>
-      {date}
+        <div>{weekday}</div>
       </div>
       <div className="workout-compare-card__distance">
-        <h1 id="distance">{props.distance}</h1>
+        <h2 id="distance">{props.distance}</h2>
         <p>Miles</p>
       </div>
-
     </div>
   )
 }
