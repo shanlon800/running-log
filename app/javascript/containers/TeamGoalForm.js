@@ -51,9 +51,10 @@ class TeamGoalForm extends Component {
       <form>
         <FormField
           content={this.state.workoutDate}
-          label='Team Goal'
+          label='New Team Goal'
           name='team-goal'
           handleChange={this.handleGoalChange}
+          message='Enter in Miles'
         />
         <input className="button" type="submit" value="Submit" onClick={this.handleSubmit}/>
       </form>
