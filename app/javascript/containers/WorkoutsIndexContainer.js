@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
 
-import WorkoutDetailTile from '../components/WorkoutDetailTile'
-import WorkoutFormContainer from './WorkoutFormContainer'
-import WorkoutEditContainer from './WorkoutEditContainer'
-import WorkoutDescriptionTile from '../components/WorkoutDescriptionTile'
-import NewTeamFormContainer from './NewTeamFormContainer'
+import WorkoutDetailTile from '../components/WorkoutDetailTile';
+import WorkoutFormContainer from './WorkoutFormContainer';
+import WorkoutEditContainer from './WorkoutEditContainer';
+import WorkoutDescriptionTile from '../components/WorkoutDescriptionTile';
+import NewTeamFormContainer from './NewTeamFormContainer';
+import WeekComparisonChartContainer from './WeekComparisonChartContainer';
 
 class WorkoutsIndexContainer extends Component {
   constructor(props) {
@@ -22,7 +23,13 @@ class WorkoutsIndexContainer extends Component {
       selectedWorkout: null,
       detailPage: null,
       showDetails: false,
-      allTeams: []
+      allTeams: [],
+      chartSelected: '0',
+      chartData: [],
+      oneBack: [],
+      twoBack: [],
+      threeBack: [],
+      fourBack: [],
     }
     this.calculatePace = this.calculatePace.bind(this)
     this.addNewWorkout = this.addNewWorkout.bind(this)
@@ -36,6 +43,7 @@ class WorkoutsIndexContainer extends Component {
     this.addTeam = this.addTeam.bind(this)
     this.toggleChooseTeam = this.toggleChooseTeam.bind(this)
     this.toggleNewTeamForm = this.toggleNewTeamForm.bind(this)
+    this.handleChartSelector = this.handleChartSelector.bind(this)
   }
 
 
@@ -188,17 +196,17 @@ class WorkoutsIndexContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        let newCurrentUser = body.current_user
-        let newWorkouts = body.workouts
-        let newTeams = body.belong_to_teams
-        let newWeek = body.current_week
-        let allTeams = body.all_teams
         this.setState({
-          currentUser: newCurrentUser,
-          workouts: newWorkouts,
-          belongTeams: newTeams,
-          currentWeek: newWeek,
-          allTeams: allTeams
+          currentUser: body.current_user,
+          workouts: body.workouts,
+          belongTeams: body.belong_to_teams,
+          currentWeek: body.current_week,
+          oneBack: body.past_weeks.one_week_back,
+          twoBack: body.past_weeks.two_week_back,
+          threeBack: body.past_weeks.three_week_back,
+          fourBack: body.past_weeks.four_week_back,
+          allTeams: body.all_teams,
+          chartData: body.current_week
         })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -308,6 +316,23 @@ class WorkoutsIndexContainer extends Component {
       }
     }
 
+    handleChartSelector(event) {
+      event.preventDefault()
+
+      if (event.target.value === '0') {
+        this.setState({chartData: this.state.currentWeek})
+      } else if (event.target.value === '1') {
+        this.setState({chartData: this.state.oneBack})
+      } else if (event.target.value == '2') {
+        this.setState({chartData: this.state.twoBack})
+      } else if (event.target.value == '3') {
+        this.setState({chartData: this.state.threeBack})
+      } else if (event.target.value == '4') {
+        this.setState({chartData: this.state.fourBack})
+      }
+
+    }
+
   render() {
     let detailsTile;
     let handleDelete;
@@ -380,8 +405,8 @@ class WorkoutsIndexContainer extends Component {
 
     let belongTeams = this.state.belongTeams.map(team => {
       return(
-        <div className="team-list-wrapper">
-          <div><Link className="team-names" to={`/teams/${team.id}`} key={`${team.id}`}>{team.team_name}</Link></div>
+        <div className="team-list-wrapper" key={`${team.id}`}>
+          <div><Link className="team-names" to={`/teams/${team.id}`} >{team.team_name}</Link></div>
           <div className="current-goal">Current Goal: 50</div>
         </div>
       )
@@ -486,6 +511,20 @@ class WorkoutsIndexContainer extends Component {
         {editForm}
         <div>
           <button id="new" onClick={this.toggleNewForm}>Add A Workout</button>
+        </div>
+        <div id='week-compare-dashboard-tile'>
+          <div id="google-charts-wrapper">
+            <WeekComparisonChartContainer
+              weekRendered={this.state.chartData}
+            />
+            <div id="button-compare-week">
+              <button value='0' onClick={this.handleChartSelector}>Current Week</button>
+              <button value='1' onClick={this.handleChartSelector}>1 Week Ago</button>
+              <button value='2' onClick={this.handleChartSelector}>2 Weeks Ago</button>
+              <button value='3' onClick={this.handleChartSelector}>3 Weeks Ago</button>
+              <button value='4' onClick={this.handleChartSelector}>4 Weeks Ago</button>
+            </div>
+          </div>
         </div>
       </div>
     )
