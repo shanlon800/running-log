@@ -1,12 +1,14 @@
 @import 'containers/index';
 @import 'containers/form';
 @import 'containers/team';
+@import 'containers/workout_forms';
+@import 'containers/team_forms';
 
 body {
-  background-color: #e0e0e0;
+  background-color: #DFDFDF;
   margin: auto !important;
   width: 90%;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto';
 }
 
 .week-container{

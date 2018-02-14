@@ -3,6 +3,7 @@ import moment from 'moment';
 
 const WorkoutDetailTile = props => {
   let date = moment(props.date).format("MMM DD, YYYY")
+  let dayOfWeek = moment(props.date).format("dddd")
   let deleteButton;
   let editButton;
   if (props.creator === props.currentUser.id) {
@@ -16,13 +17,11 @@ const WorkoutDetailTile = props => {
       <div onClick={props.toggleDetailPage} className="run-card" id={props.selectedStyle}>
         <div className="run-card__wrapper">
           <div className="run-card__header">
-            <h4 className="date-header">{date}</h4>
+            <h4 className="date-header">{dayOfWeek}</h4>
           </div>
           <div className="run-card__body">
-            <p id="distance">Distance: {props.distance} Miles</p>
-            <p id="time">Time: {props.time} Minutes</p>
-            <p id="pace">Pace: {props.pace}/mi</p>
-            <p>User: {props.creator}</p>
+            <h1 id="distance">{props.distance}</h1>
+            <h7>Miles</h7>
           </div>
         </div>
       </div>

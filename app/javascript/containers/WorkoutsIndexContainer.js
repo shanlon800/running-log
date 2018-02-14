@@ -312,6 +312,21 @@ class WorkoutsIndexContainer extends Component {
     let detailsTile;
     let handleDelete;
     let handleEdit;
+    let imageUrl;
+    let imageAlt;
+    let currentUserName;
+    let email;
+
+    if (this.state.currentUser != null){
+      imageUrl = this.state.currentUser.profile_photo.url
+      imageAlt = this.state.currentUser.last_name
+      currentUserName = `${this.state.currentUser.first_name} ${this.state.currentUser.last_name}`
+      email = this.state.currentUser.email
+    } else {
+      imageUrl = ''
+      imageAlt = ''
+    }
+
       if(this.state.showDetails === true) {
         if (this.state.detailPage !== null) {
           handleDelete = () => this.deleteWorkout(this.state.detailPage.id)
@@ -365,7 +380,10 @@ class WorkoutsIndexContainer extends Component {
 
     let belongTeams = this.state.belongTeams.map(team => {
       return(
-        <Link to={`/teams/${team.id}`} key={`${team.id}`}><span> {team.team_name}  | </span></Link>
+        <div className="team-list-wrapper">
+          <div><Link className="team-names" to={`/teams/${team.id}`} key={`${team.id}`}>{team.team_name}</Link></div>
+          <div className="current-goal">Current Goal: 50</div>
+        </div>
       )
     })
     let currentWeek = this.state.currentWeek.map(workout => {
@@ -394,32 +412,80 @@ class WorkoutsIndexContainer extends Component {
     })
     return(
       <div>
-        <h1 id="current-week-header">Current Week</h1>
-        <div>
-        <button id="new" onClick={this.toggleNewForm}>Add A Workout</button>
+        <div id="top-row-container">
+          <div id ="user-profile">
+            <h3 id="current-runner">Current Runner</h3>
+            <div id="bio-wrapper">
+              <div className="image-wrap" id="wrapper">
+                <img className='current-runner__image' src={imageUrl}alt={imageAlt}/>
+              </div>
+              <div className="bio-info">
+                <h2 className="bio-header">{currentUserName}</h2>
+                <p className="bio-text">{email}</p>
+                <p className="bio-text">Kingston, JA</p>
+              </div>
+            </div>
+            <div id="stats text">
+            <div id='year-to-date'>Year To Date</div>
+              <div id="stats-container">
+                <div className="indiv-stats-container">
+                  <div className="stat-header">Miles:</div>
+                  <div className="stat-number">123</div>
+                </div>
+
+                <div className="indiv-stats-container">
+                  <div className="stat-header">Avg Pace:</div>
+                  <div className="stat-number">7:23/mi</div>
+                </div>
+
+                <div className="indiv-stats-container">
+                  <div className="stat-header">Days Run in a Row:</div>
+                  <div className="stat-number">22</div>
+                </div>
+                <div className="indiv-stats-container">
+                  <div className="stat-header">Total Calories Burned:</div>
+                  <div className="stat-number">16605</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div id="team-list">
+            <div id="join-team">
+              <h3 id="teams-label">My Teams</h3>
+              {belongTeams}
+              <div>
+                <NewTeamFormContainer
+                allTeams={this.state.allTeams}
+                currentUser={this.state.currentUser}
+                addMembership={this.addMembership}
+                addTeam={this.addTeam}
+                toggleChooseTeam={this.toggleChooseTeam}
+                toggleNewTeamForm={this.toggleNewTeamForm}
+                showNewTeam={this.state.showNewTeam}
+                showChooseTeam={this.state.showChooseTeam}
+                />
+              </div>
+            </div>
+            <div id="random-box">
+            </div>
+          </div>
+
         </div>
-        <div className="container">
-          {currentWeek}
+        <div id="index-page-current-week">
+          <h3 id="current-week-dashboard-header">Current Week 2/12 - 2/18</h3>
+          <div id="current-month">
+            <h1 id="month-text">February</h1>
+          </div>
+          <div className="container">
+            {currentWeek}
+          </div>
         </div>
-        <div className="description-container">
           {detailsTile}
-        </div>
         {newForm}
         {editForm}
-        <div id="team-list">
-          {belongTeams}
-          <div>
-            <NewTeamFormContainer
-              allTeams={this.state.allTeams}
-              currentUser={this.state.currentUser}
-              addMembership={this.addMembership}
-              addTeam={this.addTeam}
-              toggleChooseTeam={this.toggleChooseTeam}
-              toggleNewTeamForm={this.toggleNewTeamForm}
-              showNewTeam={this.state.showNewTeam}
-              showChooseTeam={this.state.showChooseTeam}
-            />
-          </div>
+        <div>
+          <button id="new" onClick={this.toggleNewForm}>Add A Workout</button>
         </div>
       </div>
     )

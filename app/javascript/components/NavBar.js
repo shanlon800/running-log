@@ -7,9 +7,6 @@ const NavBar = props => {
   return(
     <div>
       <div className="navbar">
-        <Link to='/'>Dashboard</Link>
-        {signIn}
-        {signUp}
       </div>
       <div className="content">
         { props.children }

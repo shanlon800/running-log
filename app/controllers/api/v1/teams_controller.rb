@@ -19,7 +19,7 @@ class Api::V1::TeamsController < ApplicationController
     else
       @goal = @team.goal
     end
-
+    
     @user_workouts = []
     @users.each do |user|
       workout_collection = {user: user, workouts: user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start), (@current_week_end)).order(:workout_date)}

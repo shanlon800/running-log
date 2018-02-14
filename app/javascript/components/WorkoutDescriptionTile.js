@@ -13,17 +13,17 @@ const WorkoutDescriptionTile = props => {
     let editButton = ""
   }
   return(
-    <div onClick={props.toggleDetailPage} className="run-card">
-      <div className="run-card__wrapper">
-        <div className="run-card__header">
-          <h4 className="date-header">{date}</h4>
+    <div onClick={props.toggleDetailPage} className="description-container">
+      <div className="description-card__wrapper">
+        <div className="description-card__header">
+          <h3 className="description-date">{date}</h3>
+          <h4 id="workout-details-header">Workout Details</h4>
         </div>
-        <div className="run-card__body">
-          <p id="distance">Distance: {props.distance} Miles</p>
-          <p id="time">Time: {props.time} Minutes</p>
-          <p id="pace">Pace: {props.pace}/mi</p>
-          <p id="notes">Notes: {props.notes}</p>
-          <p>User: {props.creator}</p>
+        <div className="description-card__body">
+          <p id="description-distance">Distance: {props.distance} Miles</p>
+          <p id="description-time">Time: {props.time} Minutes</p>
+          <p id="description-pace">Pace: {props.pace}/mi</p>
+          <p id="description-notes">Notes: {props.notes}</p>
           {deleteButton}
           {editButton}
         </div>
