@@ -13,6 +13,15 @@ class Api::V1::UsersController < ApplicationController
       @current_week_end = Date.today.at_end_of_week
       @current_week_all_users = calculateWeek(0).order(:workout_date)
 
+      year_to_date_workouts = @workouts.where("workout_date >= ? AND workout_date <= ?", Date.today.beginning_of_year, Date.today)
+      miles_to_date = 0
+      minutes_to_date = 0
+
+      year_to_date_workouts.each do |workout|
+        miles_to_date += workout.distance
+        minutes_to_date += workout.time
+      end
+
 
       workouts_selected = []
       @current_week_all_users.each do |workout|
@@ -21,11 +30,12 @@ class Api::V1::UsersController < ApplicationController
         end
       end
 
+
       @current_week = workouts_selected
-      @one_back = calculateWeek(1)
-      @two_back = calculateWeek(2)
-      @three_back = calculateWeek(3)
-      @four_back = calculateWeek(4)
+      @one_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (7)), (@current_week_end - (7)))
+      @two_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (14)), (@current_week_end - (14)))
+      @three_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (21)), (@current_week_end - (21)))
+      @four_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (28)), (@current_week_end - (28)))
 
 
       render json: {
@@ -34,6 +44,8 @@ class Api::V1::UsersController < ApplicationController
         belong_to_teams: @teams,
         all_teams: @all_teams,
         current_week: @current_week,
+        year_to_date_miles: miles_to_date,
+        year_to_date_minutes: minutes_to_date,
         past_weeks:{
           one_week_back: @one_back,
           two_week_back: @two_back,
