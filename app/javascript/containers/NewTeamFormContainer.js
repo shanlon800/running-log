@@ -85,8 +85,8 @@ class NewTeamFormContainer extends Component {
       )
     })
     let joinTeam;
-    let newTeamButton = <button onClick={this.props.toggleNewTeamForm}>Create a New Team</button>
-    let chooseButton = <button onClick={this.props.toggleChooseTeam}>Join Existing Team</button>
+    let newTeamButton = <button className="new-team-button" onClick={this.props.toggleNewTeamForm}>Create a New Team</button>
+    let chooseButton = <button className="choose-existing-team" onClick={this.props.toggleChooseTeam}>Join Existing Team</button>
 
     if (this.props.showChooseTeam === true) {
       newTeamButton = ''
