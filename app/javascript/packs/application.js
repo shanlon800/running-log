@@ -13,16 +13,16 @@ import PropTypes from 'prop-types'
 import App from '../App'
 
 
-// let element = document.getElementById('app')
-// if(element){
-//   ReactDOM.render(
-//     <App/>,
-//     element
-//   );
-// }
+let element = document.getElementById('app')
+if(element){
+  ReactDOM.render(
+    <App/>,
+    element
+  );
+}
 
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
+// ReactDOM.render(
+//   <App />,
+//   document.getElementById('app')
+// );

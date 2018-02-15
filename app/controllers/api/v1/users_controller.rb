@@ -17,8 +17,11 @@ class Api::V1::UsersController < ApplicationController
         minutes_to_date += workout.time
       end
 
-      year_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_year, Date.today, miles_to_date, minutes_to_date)
-
+      if User.find(current_user.id).workouts.length > 0
+        year_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_year, Date.today, miles_to_date, minutes_to_date)
+      else
+        year_to_date_pace = "N/A"
+      end
 
       @current_week_workouts = Workout.current_week_workouts(current_user)
       @one_week_back_workouts = Workout.prior_week_workouts(1, current_user)
@@ -35,8 +38,11 @@ class Api::V1::UsersController < ApplicationController
         total_minutes_week += workout.time
       end
 
-      week_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_week, Date.today.at_end_of_week, total_miles_week, total_minutes_week)
-
+      if User.find(current_user.id).workouts.length > 0
+        week_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_week, Date.today.at_end_of_week, total_miles_week, total_minutes_week)
+      else
+        week_to_date_pace = 'N/A'
+      end
 
       date_from = Date.today.beginning_of_year
       date_to = Date.today
