@@ -26,7 +26,16 @@ class Api::V1::WorkoutsController < ApplicationController
     workout = Workout.find(params[:id])
     workout.update_attributes(workout_params)
     if workout.save
-      render json: workout
+      @current_week_start = Date.today.beginning_of_week
+      @current_week_end = Date.today.at_end_of_week
+      current_week_all_users = calculateWeek(0).order(:workout_date)
+      workouts_selected = []
+      current_week_all_users.each do |workout|
+        if workout.user_id == @current_user.id
+          workouts_selected << workout
+        end
+      end
+      render json: workouts_selected
     else
       render json: { error: review.errors.full_messages }, status: :unprocessable_entity
     end

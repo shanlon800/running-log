@@ -109,7 +109,7 @@ class WorkoutEditContainer extends Component {
     })
     return(
       <div className="form-container">
-        <div className="workout-form">
+        <div className="editing-form">
           <form id='new-workout-form callout' onSubmit={this.handleSubmit}>
             <h3>Edit a Workout</h3>
             <span className="errors">{errorMessage}</span>

@@ -16,7 +16,7 @@ class TeamContainer extends Component {
   }
 
   componentWillMount() {
-    fetch('/api/v1/teams/1', { credentials: 'same-origin' })
+    fetch(`/api/v1/teams/${this.props.params.id}`, { credentials: 'same-origin' })
       .then(response => {
         if (response.ok) {
           return response;

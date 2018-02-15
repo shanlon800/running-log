@@ -69,7 +69,8 @@ class WorkoutsIndexContainer extends Component {
     .then(body => {
       this.setState({
         currentWeek: body,
-        showNewForm: false
+        showNewForm: false,
+        chartData: body
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -170,12 +171,12 @@ class WorkoutsIndexContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      let updatedWorkouts = this.state.currentWeek.filter(workout => {
-        return workout.id !== body.id
-      })
-      updatedWorkouts = updatedWorkouts.concat(body)
+      // let updatedWorkouts = this.state.currentWeek.filter(workout => {
+      //   return workout.id !== body.id
+      // })
+      // updatedWorkouts = updatedWorkouts.concat(body)
       this.setState({
-        currentWeek: updatedWorkouts,
+        currentWeek: body,
         showEditForm: false,
         selectedWorkout: null
       })
@@ -447,7 +448,7 @@ class WorkoutsIndexContainer extends Component {
               <div className="bio-info">
                 <h2 className="bio-header">{currentUserName}</h2>
                 <p className="bio-text">{email}</p>
-                <p className="bio-text">Kingston, JA</p>
+                <p className="bio-text">Boston, MA</p>
               </div>
             </div>
             <div id="stats text">
