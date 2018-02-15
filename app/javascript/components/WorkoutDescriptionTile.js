@@ -6,8 +6,8 @@ const WorkoutDescriptionTile = props => {
   let deleteButton;
   let editButton;
   if (props.creator === props.currentUser.id) {
-    deleteButton = <button onClick={props.handleDelete} className='alert'>Delete</button>
-    editButton = <button id="edit" onClick={props.toggleEditForm} value={props.id}>Edit</button>
+    deleteButton = <button id='delete-workout-button' onClick={props.handleDelete}>Delete</button>
+    editButton = <button id="edit-workout-button" onClick={props.toggleEditForm} value={props.id}>Edit</button>
   } else {
     let deleteButton = ""
     let editButton = ""

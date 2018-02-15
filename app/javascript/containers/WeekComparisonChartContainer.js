@@ -9,13 +9,15 @@ class WeekComparisonChartContainer extends Component {
       weekRendered: [],
       options: {
         legend: 'true',
-        title : 'Weekly Mileage',
+        // title : 'Weekly Mileage',
         vAxes: {
           0: {title: 'Miles'},
           1: {title: 'Avg Pace/Mi', gridlines: {color: 'none'}, minValue:[4,0,0]}
         },
         backgroundColor: { fill:'transparent' },
         seriesType: 'bars',
+        chartArea:{bottom: "75", top: "100"},
+        colors: ["#709CC1", "#D3503A"],
         series: {1: {type: 'line', targetAxisIndex:1}}
       }
     }
@@ -65,7 +67,7 @@ class WeekComparisonChartContainer extends Component {
         options={this.state.options}
         graph_id="ComboChart1"
         width="90%"
-        height="33rem"
+        height="30rem"
         legend_toggle
       />
     )

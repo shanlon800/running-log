@@ -506,24 +506,25 @@ class WorkoutsIndexContainer extends Component {
           <div className="container">
             {currentWeek}
           </div>
+          <button id="add-a-workout" onClick={this.toggleNewForm}>Add A Workout</button>
         </div>
           {detailsTile}
         {newForm}
         {editForm}
         <div>
-          <button id="new" onClick={this.toggleNewForm}>Add A Workout</button>
         </div>
         <div id='week-compare-dashboard-tile'>
+        <h3 id="chart-dashboard-header">Weekly Mileage & Pace</h3>
           <div id="google-charts-wrapper">
             <WeekComparisonChartContainer
               weekRendered={this.state.chartData}
             />
             <div id="button-compare-week">
-              <button value='0' onClick={this.handleChartSelector}>Current Week</button>
-              <button value='1' onClick={this.handleChartSelector}>1 Week Ago</button>
-              <button value='2' onClick={this.handleChartSelector}>2 Weeks Ago</button>
-              <button value='3' onClick={this.handleChartSelector}>3 Weeks Ago</button>
-              <button value='4' onClick={this.handleChartSelector}>4 Weeks Ago</button>
+              <button value='0' onClick={this.handleChartSelector} className="unselected-week-comparsion-button">Current Week</button>
+              <button value='1' onClick={this.handleChartSelector} className="unselected-week-comparsion-button">1 Week Ago</button>
+              <button value='2' onClick={this.handleChartSelector} className="unselected-week-comparsion-button">2 Weeks Ago</button>
+              <button value='3' onClick={this.handleChartSelector} className="unselected-week-comparsion-button">3 Weeks Ago</button>
+              <button value='4' onClick={this.handleChartSelector} className="unselected-week-comparsion-button">4 Weeks Ago</button>
             </div>
           </div>
         </div>
