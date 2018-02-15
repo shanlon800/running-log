@@ -28,23 +28,21 @@ class Workout < ApplicationRecord
     self.dated_workouts(workout_scope, start_date, end_date)
   end
 
-  def self.calculate_pace(start_date, end_date, miles, minutes)
+  def self.calculate_pace(user, start_date, end_date, miles, minutes)
     workout_scope = self.where(user: user)
     self.dated_workouts(workout_scope, start_date, end_date)
 
     secondsPerMile = (minutes * 60) / miles
+    minPace = (secondsPerMile / 60).floor
+    secPace = (secondsPerMile % 60).floor
+
+    if secPace == 0
+      return "#{minPace}:00"
+    else
+      return "#{minPace}:#{secPace}"
+    end
   end
 
-  # calculatePace(miles, min) {
-  #   let secondsPerMile = (min * 60) / miles
-  #   let minPace = Math.floor(secondsPerMile / 60)
-  #   let secPace = Math.floor(secondsPerMile % 60)
-  #   if (secPace === 0){
-  #     return `${minPace}:00`
-  #   } else {
-  #     return `${minPace}:${secPace}`
-  #   }
-  # }
 
 
   def self.dated_workouts(workout_scope, start_date, end_date)

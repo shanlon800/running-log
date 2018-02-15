@@ -30,6 +30,8 @@ class WorkoutsIndexContainer extends Component {
       twoBack: [],
       threeBack: [],
       fourBack: [],
+      currentWeekStats:'',
+      yearToDateStats: ''
     }
     this.calculatePace = this.calculatePace.bind(this)
     this.addNewWorkout = this.addNewWorkout.bind(this)
@@ -207,7 +209,9 @@ class WorkoutsIndexContainer extends Component {
           threeBack: body.past_weeks.three_week_back,
           fourBack: body.past_weeks.four_week_back,
           allTeams: body.all_teams,
-          chartData: body.current_week
+          chartData: body.current_week,
+          yearToDateStats: body.year_to_date_index_statistics,
+          currentWeekStats:body.current_week_index_statistics
         })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -456,17 +460,17 @@ class WorkoutsIndexContainer extends Component {
               <div id="stats-container">
                 <div className="indiv-stats-container">
                   <div className="stat-header">Miles:</div>
-                  <div className="stat-number">123</div>
+                  <div className="stat-number">{this.state.yearToDateStats.total_miles_year_to_date}</div>
                 </div>
 
                 <div className="indiv-stats-container">
                   <div className="stat-header">Avg Pace:</div>
-                  <div className="stat-number">7:23/mi</div>
+                  <div className="stat-number">{this.state.yearToDateStats.year_to_date_avg_pace}/mi</div>
                 </div>
 
                 <div className="indiv-stats-container">
                   <div className="stat-header">Days Run in a Row:</div>
-                  <div className="stat-number">22</div>
+                  <div className="stat-number">{this.state.yearToDateStats.days_run_in_row}</div>
                 </div>
                 <div className="indiv-stats-container">
                   <div className="stat-header">Total Calories Burned:</div>
