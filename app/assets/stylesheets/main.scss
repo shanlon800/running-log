@@ -8,8 +8,30 @@ body {
   background-color: #DFDFDF;
   margin: auto !important;
   width: 90%;
-  font-family: 'Roboto';
+  font-family: 'Bitter', serif;
 }
+
+p, h1, h2, h3, h4, h5, h6, h7{
+  font-family: 'Bitter', serif;
+}
+
+button{
+  font-family: 'Bitter', serif;
+}
+// h1{
+//   font-family: 'BioRhyme Expanded', serif;
+// }
+//
+// h2 {
+//   font-family: 'BioRhyme Expanded', serif;
+// }
+// h3 {
+//   font-family: 'BioRhyme Expanded', serif;
+// }
+// h4 {
+//   font-family: 'BioRhyme Expanded', serif;
+// }
+
 
 .week-container{
   max-width: 1200px;

@@ -66,9 +66,9 @@ class WorkoutEditContainer extends Component {
     errors = errors.concat(this.validateDistance())
     if (errors.length === 0) {
       let formPayload = {
-        distance: parseInt(this.state.workoutDistance, 10),
+        distance: parseFloat(this.state.workoutDistance),
         workout_date: this.state.workoutDate,
-        time: parseInt(this.state.workoutTime, 10),
+        time: parseFloat(this.state.workoutTime),
         notes: this.state.workoutNotes,
         user_id: this.props.currentUser.id,
         id: this.props.selectedWorkout.id
