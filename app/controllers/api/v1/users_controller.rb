@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
       @all_teams = Team.all
       @teams = @current_user.teams
       year_to_date_workouts = Workout.year_to_date_workouts(current_user)
-
+      @workouts = Workout.all
       # maybe move to models?
       miles_to_date = 0
       minutes_to_date = 0
