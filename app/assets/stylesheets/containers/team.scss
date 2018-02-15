@@ -1,33 +1,166 @@
 // TeamContainer
-.team-header{
-    background-color: #F8F8F8;
-    border-radius: .4rem;
-    text-align: center;
-    margin-top: 3%;
-    // display: flex;
-    // flex-wrap: wrap;
-    // flex-direction: row;
-}
+// .team-header{
+//     // text-align: center;
+//     // margin-top: 3%;
+//     // display: flex;
+//     // flex-wrap: wrap;
+//     // flex-direction: column;
+// }
 
 .team-members{
   margin-top: 1%;
 }
 
-.header-text{
-  flex: 0 0 60%;
+.team-header-container{
+  border-radius: .4rem;
+  margin-top: 3%;
+  padding-top: 3.5rem;
+  text-align: center;
+  height: 15rem;
+  background-position: center;
+  background-image:
+    url("https://s3.amazonaws.com/running-log-development-43432/uploads/user/profile_photo/30/202_volumefour_book_v7_review_8_1600_800_80_1.jpg");
 }
-.goal-creation-text{
-  flex: 0 0 10%;
+
+
+.team-title-text{
+  margin: auto;
+}
+#team-header-text{
+  color: #F8F8F8;
 }
 
 .team-goal-form{
-  padding: 2%;
-  width: 40%;
-  margin: 2% auto 0 auto;
+  width: 20rem;
+  height: 10rem;
+  padding: 2rem;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 10rem;
+  bottom: 0;
   background-color: #F8F8F8;
   border-radius: .4rem;
+  box-shadow: 0px 1px 2px gray;
+  padding: 10px 20px 0px 20px;
+  z-index: 2;
+  overflow: hidden;
+  text-align: center;
 }
 
+.team-goal-form-field{
+  width: 40%;
+  margin: auto;
+}
+// .header-text{
+//   flex: 0 0 58%;
+//   background-color: #F8F8F8;
+//   border-radius: .4rem;
+// }
+// .goal-creation-text{
+//   flex: 0 0 40%;
+//   background-color: #F8F8F8;
+//   border-radius: .4rem;
+// }
+
+// .team-goal-form{
+//   // padding: 2%;
+//   // width: 40%;
+//   // margin: 2% auto 0 auto;
+//   margin-left: 3rem;
+//   background-color: #F8F8F8;
+//   border-radius: .4rem;
+// }
+
+// .team-top-row{
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+// }
+
+// .team-goal-container{
+//   // flex: 0 0 40%;
+//   // margin-left: 2rem;
+//   // background-color: #F8F8F8;
+//   // border-radius: .4rem;
+// }
+
+// buttons
+.current-team-goal-button{
+  font-weight: bold;
+  background-color: #F74747;
+  color: #F8F8F8;
+  height: 2rem;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: .8rem;
+  border-radius: .2rem;
+  margin-left: 4rem;
+}
+
+.set-team-goal-button{
+  font-weight: bold;
+  background-color: #F74747;
+  color: #F8F8F8;
+  height: 2rem;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: .8rem;
+  border-radius: .2rem;
+}
+
+.new-goal-form-button-submit{
+  font-weight: bold;
+  background-color: #F74747;
+  color: #F8F8F8;
+  height: 2rem;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: .8rem;
+  border-radius: .2rem;
+  margin-right: .5rem;
+}
+
+.new-goal-form-button-cancel{
+  font-weight: bold;
+  background-color: #F74747;
+  color: #F8F8F8;
+  height: 2rem;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: .8rem;
+  border-radius: .2rem;
+  // margin-left: .2rem;
+}
+
+.current-team-goal-button:hover{
+  background-color: #347FB4;
+}
+
+.current-team-goal-button:focus{
+  background-color: #347FB4;
+  outline: 0;
+}
+
+.new-goal-form-button-cancel:hover{
+  background-color: #347FB4;
+}
+
+.new-goal-form-button-cancel:focus{
+  background-color: #347FB4;
+  outline: 0;
+}
+
+.new-goal-form-button-submit:hover{
+  background-color: #347FB4;
+}
+
+.new-goal-form-button-submit:focus{
+  background-color: #347FB4;
+  outline: 0;
+}
 // TeamUserContainer
 
 .team-member-container{

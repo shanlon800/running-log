@@ -1,0 +1,77 @@
+#splash-page{
+  background-color: #F8F8F8;
+  border-radius: .4rem;
+  margin: 3%;
+  padding: 2%;
+}
+
+#splash-page-image{
+  height: 35rem;
+  background-image:
+    url('https://s3.amazonaws.com/running-log-development-43432/uploads/user/profile_photo/31/sc-health-1023-fitness-road-running-20131023.jpg');
+  background-position: center;
+}
+
+#splash-header{
+  text-align: center;
+  padding-top: 5%;
+}
+
+#splash-buttons{
+  margin-left: 40%;
+  padding-top: 8%;
+}
+
+#splash-sign-up-button{
+  font-weight: bold;
+  background-color: #347FB4;
+  color: white;
+  height: 2rem;
+  width: 10rem;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: .8rem;
+  border-radius: .2rem;
+  a {
+    color:white ;
+  }
+  a:visited {
+      color:white ;
+  }
+  a:hover {
+      color:white ;
+  }
+  a:focus {
+      color: white;
+  }
+  a:active {
+      color: white;
+  }
+}
+
+#splash-sign-in-button{
+  font-weight: bold;
+  background-color: #347FB4;
+  color: white;
+  height: 2rem;
+  width: 10rem;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: .8rem;
+  border-radius: .2rem;
+  a {
+    color:white ;
+  }
+  a:visited {
+      color:white ;
+  }
+  a:hover {
+      color:white ;
+  }
+  a:focus {
+      color: white;
+  }
+  a:active {
+      color: white;
+  }
+}

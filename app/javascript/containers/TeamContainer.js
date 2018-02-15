@@ -98,39 +98,50 @@ class TeamContainer extends Component {
     if (this.state.showGoalForm === true) {
       return(
         <div>
-          <div className="team-header">
-            <h1 className="team-header">{this.state.team.team_name}</h1>
-            <p>Current Team Goal: {this.state.teamGoal}</p>
-            <button onClick={this.toggleGoalForm}>Cancel</button>
-          </div>
-            <div className='team-goal-form'>
-              <TeamGoalForm
-              teamGoal={this.state.teamGoal}
-              addNewGoal={this.addNewGoal}
-              teamId={this.state.team.id}
-              />
+
+            <div className="team-header-container">
+              <div className='team-title-text'>
+                <h1 className="team-header-text">{this.state.team.team_name}</h1>
+              </div>
+              <div className='team-goal-container'>
+                <p>Current Team Goal: {this.state.teamGoal}</p>
+                <button className='current-team-goal-button' onClick={this.toggleGoalForm}>Cancel</button>
+              </div>
+                  <div className='team-goal-form'>
+                    <TeamGoalForm
+                    teamGoal={this.state.teamGoal}
+                    addNewGoal={this.addNewGoal}
+                    teamId={this.state.team.id}
+                    toggleGoalForm={this.toggleGoalForm}
+                    />
+              </div>
+              <div className='form-sheet'></div>
             </div>
+
           <div className="team-members">
             {users}
           </div>
         </div>
       )
+
     } else {
       return(
-          <div>
-          <div className="team-header">
-            <div className='header-text'>
-              <h1 id="team-header">{this.state.team.team_name}</h1>
+        <div>
+          <div className="team-header-container">
+            <div className='team-title-text'>
+              <h1 id="team-header-text">{this.state.team.team_name}</h1>
             </div>
-            <div className='goal-creation-text'>
-              <h4>Current Team Goal: {this.state.teamGoal}</h4>
-              <button onClick={this.toggleGoalForm}>Set Your Team Goal</button>
+            <div className='team-goal-container'>
+              <h4 id="team-header-text">Current Team Goal: {this.state.teamGoal}</h4>
+              <button className='set-team-goal-button' onClick={this.toggleGoalForm}>Set Your Team Goal</button>
             </div>
           </div>
+
+
           <div className="team-members">
             {users}
           </div>
-        </div>
+      </div>
       )
     }
   }

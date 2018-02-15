@@ -35,6 +35,7 @@ class TeamGoalForm extends Component {
       this.props.addNewGoal(formPayload)
     } else {
       this.setState({errors: errors})
+      this.toggleGoalForm
     }
   }
 
@@ -49,14 +50,17 @@ class TeamGoalForm extends Component {
   render() {
     return(
       <form>
-        <FormField
-          content={this.state.workoutDate}
-          label='New Team Goal'
-          name='team-goal'
-          handleChange={this.handleGoalChange}
-          message='Enter in Miles'
-        />
-        <input className="button" type="submit" value="Submit" onClick={this.handleSubmit}/>
+        <h3>New Goal</h3>
+        <div className="team-goal-form-field">
+          <FormField
+            content={this.state.workoutDate}
+            name='team-goal'
+            handleChange={this.handleGoalChange}
+            message='Enter in Miles'
+          />
+        </div>
+        <button className='new-goal-form-button-submit' type="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>
+        <button className='new-goal-form-button-cancel' onClick={this.props.toggleGoalForm}>Cancel</button>
       </form>
     )
   }
