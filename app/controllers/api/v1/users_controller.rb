@@ -32,10 +32,10 @@ class Api::V1::UsersController < ApplicationController
 
 
       @current_week = workouts_selected
-      @one_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (7)), (@current_week_end - (7)))
-      @two_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (14)), (@current_week_end - (14)))
-      @three_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (21)), (@current_week_end - (21)))
-      @four_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (28)), (@current_week_end - (28)))
+      @one_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (7)), (@current_week_end - (7))).order(:workout_date)
+      @two_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (14)), (@current_week_end - (14))).order(:workout_date)
+      @three_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (21)), (@current_week_end - (21))).order(:workout_date)
+      @four_back = @current_user.workouts.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (28)), (@current_week_end - (28))).order(:workout_date)
 
 
       render json: {
