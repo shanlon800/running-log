@@ -22,8 +22,8 @@ class User < ApplicationRecord
      user.password = Devise.friendly_token[0,20]
      user_array = auth.info.name.split(' ')
      user.first_name= user_array[0]
+     user.remote_profile_photo_url = auth.info.image.gsub('http://', 'https://')
      user.last_name = user_array[1]
-     user.profile_photo = auth.info.image.gsub('http://', 'https://')
     end
   end
 end
