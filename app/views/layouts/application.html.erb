@@ -15,20 +15,18 @@
 </head>
 <body>
 
-  <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">RunningLog</a></h1>
-      </li>
+  <nav class="navigation-bar-top-page">
+    <ul class="website-title">
+        <h3><a href="/">RunningLog <i class="far fa-calendar-alt" id="calendar-nav-bar"></i></a></h3>
     </ul>
 
-    <section class="top-bar-section">
-      <ul class="right">
+    <section class="devise-sign-in">
+      <ul class="sign-in-commands">
         <%- if current_user -%>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
         <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <%= link_to 'Sign Up', new_user_registration_path %>
+          <%= link_to 'Sign In', new_user_session_path %>
         <%- end -%>
       </ul>
     </section>
