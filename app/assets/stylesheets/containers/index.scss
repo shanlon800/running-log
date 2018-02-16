@@ -110,6 +110,61 @@
   border-radius: .4rem;
   padding-left: 5%;
 }
+
+#current-week-statistics-header{
+  color: #9EA3A6;
+}
+
+
+#increasing-green{
+  color: green;
+  font-size: 1.5em;
+}
+
+#increasing-green-text{
+  color: green;
+}
+#decreasing-green{
+  color: green;
+  font-size: 1.5em;
+}
+
+#decreasing-green-text{
+  color: green;
+}
+
+#increasing-red{
+  color: red;
+  font-size: 1.5em;
+}
+
+#increasing-red-text{
+  color: red;
+}
+
+#decreasing-red{
+  color: red;
+  font-size: 1.5em;
+}
+
+#decreasing-red-text{
+  color: red;
+}
+
+table {
+  border: none;
+  background-color: #F8F8F8;
+  line-height: 0.5rem;
+}
+#total-miles{
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+#ytd-stats{
+  color:#9EA3A6;
+}
+
 #top-row-container{
   display: flex;
   flex-wrap: wrap;
@@ -369,7 +424,24 @@
   padding: 0.3rem;
   font-size: .8rem;
   border-radius: .2rem;
-  margin-left: 4rem;
+  margin-left: 2rem;
+}
+
+.new-team-button:hover{
+  background-color: #E7E7E7;
+}
+
+.new-team-button:focus{
+  background-color: #F74747;
+  outline: 0;
+}
+.choose-existing-team:hover{
+  background-color: #E7E7E7;
+}
+
+.choose-existing-team:focus{
+  background-color: #F74747;
+  outline: 0;
 }
 
 .choose-existing-team{
@@ -381,9 +453,29 @@
   padding: 0.3rem;
   font-size: .8rem;
   border-radius: .2rem;
-  margin-right: 4rem;
+  margin-left: 4rem;
 }
 
+#new-team-cancel-button{
+  font-weight: bold;
+  background-color: #F74747;
+  color: #F8F8F8;
+  height: 2rem;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: .8rem;
+  border-radius: .2rem;
+}
+
+#new-team-cancel:hover{
+  background-color: #E7E7E7;
+  outline: 0;
+}
+
+#new-team-cancel:focus{
+  background-color: #F74747;
+  outline: 0;
+}
 #join-team-button-collection{
 
 }

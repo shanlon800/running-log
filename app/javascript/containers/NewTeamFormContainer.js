@@ -90,7 +90,7 @@ class NewTeamFormContainer extends Component {
 
     if (this.props.showChooseTeam === true) {
       newTeamButton = ''
-      chooseButton = <button onClick={this.props.toggleChooseTeam}>Cancel</button>
+      chooseButton = <button id='new-team-cancel-button' onClick={this.props.toggleChooseTeam}>Cancel</button>
       joinTeam =
         <form onSubmit={this.handleSubmit}>
         <h5>Join a Team</h5>
@@ -106,7 +106,7 @@ class NewTeamFormContainer extends Component {
     let newTeam;
     if (this.props.showNewTeam === true) {
       chooseButton = ''
-      newTeamButton = <button onClick={this.props.toggleNewTeamForm}>Cancel</button>
+      newTeamButton = <button id='new-team-cancel-button' onClick={this.props.toggleNewTeamForm}>Cancel</button>
       newTeam =
         <div>
           <FormField
