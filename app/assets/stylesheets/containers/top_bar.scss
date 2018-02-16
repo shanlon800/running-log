@@ -1,0 +1,45 @@
+.navigation-bar-top-page{
+  // outline: solid black;
+  display: flex;
+  // flex-wrap: wrap;
+  flex-direction: row;
+  padding-right: 5%;
+  background-color: #F8F8F8;
+}
+
+
+.devise-sign-in a {
+  margin: 1%;
+  color:#262E3A;
+}
+
+.devise-sign-in a:hover{
+  background-color: #E7E7E7;
+}
+.devise-sign-in{
+  // outline: solid red;
+  text-align: right;
+  flex: 0 0 50%;
+  padding-top: 2%;
+  padding-right: -3%;
+}
+
+.website-title{
+  // outline: solid blue;
+  flex: 0 0 50%;
+  margin-bottom: 0;
+  padding-top: 1%;
+}
+
+.website-title a{
+  color: #262E3A
+}
+
+.website-title a:hover{
+  background-color: #E7E7E7;
+}
+
+
+#calendar-nav-bar{
+  color: #9EA3A6;
+}
