@@ -31,7 +31,8 @@ class WorkoutsIndexContainer extends Component {
       threeBack: [],
       fourBack: [],
       currentWeekStats:'',
-      yearToDateStats: ''
+      yearToDateStats: '',
+      displayCollection:[]
     }
     this.calculatePace = this.calculatePace.bind(this)
     this.addNewWorkout = this.addNewWorkout.bind(this)
@@ -46,6 +47,7 @@ class WorkoutsIndexContainer extends Component {
     this.toggleChooseTeam = this.toggleChooseTeam.bind(this)
     this.toggleNewTeamForm = this.toggleNewTeamForm.bind(this)
     this.handleChartSelector = this.handleChartSelector.bind(this)
+    this.handleMultipleDates = this.handleMultipleDates.bind(this)
   }
 
 
@@ -258,8 +260,29 @@ class WorkoutsIndexContainer extends Component {
       }
     }
 
+    handleMultipleDates(selectedWorkout, weeksWorkouts){
+      let leftCard;
+      let rightCard;
+      let displayCollection = []
+      this.state.currentWeek.forEach(function (workout, index){
+        if (workout.id === selectedWorkout.id && index === 0) {
+          rightCard = weeksWorkouts[index + 1]
+          displayCollection.push(selectedWorkout, rightCard)
+        } else if (workout.id === selectedWorkout.id && index === 6) {
+          leftCard = weeksWorkouts[index - 1]
+          displayCollection.push(leftCard, selectedWorkout)
+        } else if (workout.id === selectedWorkout.id){
+          leftCard = weeksWorkouts[index - 1]
+          rightCard = weeksWorkouts[index + 1]
+          displayCollection.push(leftCard, selectedWorkout, rightCard)
+        }
+      })
+      this.setState({displayCollection: displayCollection})
+    }
+
     toggleDetailPage(workout) {
       let workoutId;
+      let currentWeek = this.state.currentWeek
       if (workout === null) {
         workoutId = null
       } else {
@@ -275,10 +298,12 @@ class WorkoutsIndexContainer extends Component {
       if (detailStateId === workoutId) {
         this.setState({
           showDetails: false,
-          detailPage: null
+          detailPage: null,
+          displayCollection: []
         })
       }
       else {
+        this.handleMultipleDates(workout, currentWeek)
         this.setState({
           showDetails: true,
           detailPage: workout
@@ -358,24 +383,37 @@ class WorkoutsIndexContainer extends Component {
     }
 
       if(this.state.showDetails === true) {
+        let selectedClassName;
         if (this.state.detailPage !== null) {
           handleDelete = () => this.deleteWorkout(this.state.detailPage.id)
           handleEdit = () => this.toggleEditForm(this.state.detailPage, event)
           let creator = this.state.detailPage.user_id
         }
-        detailsTile =
-          <WorkoutDescriptionTile
-            distance={this.state.detailPage.distance}
-            time={this.state.detailPage.time}
-            notes={this.state.detailPage.notes}
-            date={this.state.detailPage.workout_date}
-            id={this.state.detailPage.id}
-            pace={this.calculatePace(this.state.detailPage.distance, this.state.detailPage.time)}
+        detailsTile = this.state.displayCollection.map(workout => {
+          if (workout.id === this.state.detailPage.id) {
+            selectedClassName = 'selected-detail-card'
+
+          } else {
+            selectedClassName = 'description-container'
+            
+          }
+          return(
+            <WorkoutDescriptionTile
+            distance={workout.distance}
+            time={workout.time}
+            notes={workout.notes}
+            date={workout.workout_date}
+            id={workout.id}
+            key={workout.id}
+            pace={this.calculatePace(workout.distance, workout.time)}
             currentUser={this.state.currentUser}
-            creator={this.state.detailPage.user_id}
+            creator={workout.user_id}
             handleDelete={handleDelete}
             toggleEditForm={handleEdit}
-          />
+            selectedClassName={selectedClassName}
+            />
+          )
+        })
       } else
         {
           detailsTile = ''
@@ -556,9 +594,11 @@ class WorkoutsIndexContainer extends Component {
           </div>
           <button id="add-a-workout" onClick={this.toggleNewForm}>Add A Workout</button>
         </div>
-          {detailsTile}
-        {newForm}
-        {editForm}
+        <div id="workout-description-breakout-container">
+            {detailsTile}
+          {newForm}
+          {editForm}
+        </div>
         <div>
         </div>
         <div id='week-compare-dashboard-tile'>

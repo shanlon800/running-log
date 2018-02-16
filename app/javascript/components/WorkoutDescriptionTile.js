@@ -13,10 +13,10 @@ const WorkoutDescriptionTile = props => {
     let editButton = ""
   }
   return(
-    <div onClick={props.toggleDetailPage} className="description-container">
+    <div onClick={props.toggleDetailPage} className={props.selectedClassName}>
       <div className="description-card__wrapper">
         <div className="description-card__header">
-          <h3 className="description-date">{date}</h3>
+          <h2 className="description-date">{date}</h2>
           <h4 id="workout-details-header">Workout Details</h4>
         </div>
         <div className="description-card__body">
