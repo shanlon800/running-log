@@ -27,7 +27,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(returned_json['workouts'].length).to eq 3
       expect(returned_json['workouts'][0]['time']).to eq workout_one.time
       expect(returned_json['workouts'][0]['distance']).to eq workout_one.distance
-      expect(returned_json['belong_to_teams'][0]['team_name']).to eq team_one.team_name
+      expect(returned_json['belong_to_teams'][0]['team']['team_name']).to eq team_one.team_name
     end
   end
 

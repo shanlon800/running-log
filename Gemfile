@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 gem "carrierwave"
 gem "fog"
 gem 'fog-aws'
+gem 'omniauth-facebook'
 group :development, :test do
   gem "dotenv-rails"
 end
