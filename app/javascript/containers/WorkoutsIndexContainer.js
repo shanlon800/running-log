@@ -125,7 +125,7 @@ class WorkoutsIndexContainer extends Component {
     .then(body => {
       this.setState({
         belongTeams: body.belong_to_teams,
-        allTeams: body.all_teams
+        allTeams: body.all_teams,
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -445,7 +445,6 @@ class WorkoutsIndexContainer extends Component {
         } else {
           newForm = ''
         }
-
     let belongTeams = this.state.belongTeams.map(team => {
       return(
         <div className="team-list-wrapper" key={`${team.team.id}`}>
