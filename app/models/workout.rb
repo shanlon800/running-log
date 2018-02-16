@@ -43,6 +43,9 @@ class Workout < ApplicationRecord
     end
   end
 
+  def self.all_user_workouts(user)
+    self.where(user: user)
+  end
 
 
   def self.dated_workouts(workout_scope, start_date, end_date)
