@@ -550,9 +550,7 @@ class WorkoutsIndexContainer extends Component {
         </div>
         <div id="index-page-current-week">
           <h3 id="current-week-dashboard-header">Current Week 2/12 - 2/18</h3>
-          <div id="current-month">
-            <h1 id="month-text">February</h1>
-          </div>
+
           <div className="container">
             {currentWeek}
           </div>
