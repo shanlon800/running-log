@@ -46,6 +46,7 @@ class WorkoutsIndexContainer extends Component {
     this.toggleChooseTeam = this.toggleChooseTeam.bind(this)
     this.toggleNewTeamForm = this.toggleNewTeamForm.bind(this)
     this.handleChartSelector = this.handleChartSelector.bind(this)
+    this.handleMultipleDates = this.handleMultipleDates.bind(this)
   }
 
 
@@ -258,8 +259,29 @@ class WorkoutsIndexContainer extends Component {
       }
     }
 
+    handleMultipleDates(selectedWorkout, weeksWorkouts){
+      let leftCard;
+      let rightCard;
+      let displayCollection = []
+      this.state.currentWeek.forEach(function (workout, index){
+        if (workout.id === selectedWorkout.id && index === 0) {
+          rightCard = weeksWorkouts[index + 1]
+          displayCollection.push(selectedWorkout, rightCard)
+        } else if (workout.id === selectedWorkout.id && index === 6) {
+          leftCard = weeksWorkouts[index - 1]
+          displayCollection.push(leftCard, selectedWorkout)
+        } else if (workout.id === selectedWorkout.id){
+          leftCard = weeksWorkouts[index - 1]
+          rightCard = weeksWorkouts[index + 1]
+          displayCollection.push(leftCard, selectedWorkout, rightCard)
+        }
+      })
+      return displayCollection
+    }
+
     toggleDetailPage(workout) {
       let workoutId;
+      let currentWeek = this.state.currentWeek
       if (workout === null) {
         workoutId = null
       } else {
@@ -279,6 +301,7 @@ class WorkoutsIndexContainer extends Component {
         })
       }
       else {
+        this.handleMultipleDates(workout, currentWeek)
         this.setState({
           showDetails: true,
           detailPage: workout
