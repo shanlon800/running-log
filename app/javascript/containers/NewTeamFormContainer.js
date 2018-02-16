@@ -116,7 +116,7 @@ class NewTeamFormContainer extends Component {
           handleChange={this.handleNewTeamChange}
           message="Please enter team name here"
           />
-          <input type="submit" value="Submit" onClick={this.handleNewTeamSubmit}/>
+          <button id='new-team-cancel-button' onClick={this.handleNewTeamSubmit}>Submit</button>
         </div>
     } else {
       newTeam = ''
