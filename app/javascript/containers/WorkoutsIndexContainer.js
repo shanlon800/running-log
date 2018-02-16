@@ -268,7 +268,7 @@ class WorkoutsIndexContainer extends Component {
         if (workout.id === selectedWorkout.id && index === 0) {
           rightCard = weeksWorkouts[index + 1]
           displayCollection.push(selectedWorkout, rightCard)
-        } else if (workout.id === selectedWorkout.id && index === 6) {
+        } else if (workout.id === selectedWorkout.id && index === (weeksWorkouts.length - 1)) {
           leftCard = weeksWorkouts[index - 1]
           displayCollection.push(leftCard, selectedWorkout)
         } else if (workout.id === selectedWorkout.id){
@@ -395,7 +395,7 @@ class WorkoutsIndexContainer extends Component {
 
           } else {
             selectedClassName = 'description-container'
-            
+
           }
           return(
             <WorkoutDescriptionTile

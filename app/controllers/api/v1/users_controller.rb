@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
       @teams = @current_user.teams
       year_to_date_workouts = Workout.year_to_date_workouts(current_user)
       @workouts = Workout.all
-
+      num_of_workouts_in_week = User.find(current_user.id).workouts.length
 
 
       @teams_with_goals = []
@@ -26,13 +26,17 @@ class Api::V1::UsersController < ApplicationController
         minutes_to_date += workout.time
       end
 
-      if User.find(current_user.id).workouts.length > 0
+      if num_of_workouts_in_week > 0
         year_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_year, Date.today, miles_to_date, minutes_to_date)
       else
         year_to_date_pace = "N/A"
       end
 
-      seconds_per_mile_ytd = (minutes_to_date * 60) / miles_to_date
+      if num_of_workouts_in_week > 0
+        seconds_per_mile_ytd = (minutes_to_date * 60) / miles_to_date
+      else
+        seconds_per_mile_ytd = "N/A"
+      end
 
       @current_week_workouts = Workout.current_week_workouts(current_user)
       @one_week_back_workouts = Workout.prior_week_workouts(1, current_user)
@@ -49,21 +53,33 @@ class Api::V1::UsersController < ApplicationController
         total_minutes_week += workout.time
       end
 
-      if User.find(current_user.id).workouts.length > 0
+      if num_of_workouts_in_week > 0
         week_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_week, Date.today.at_end_of_week, total_miles_week, total_minutes_week)
       else
         week_to_date_pace = 'N/A'
       end
 
-      seconds_per_mile_current_week = (total_minutes_week * 60) / total_miles_week
+      if num_of_workouts_in_week > 0
+        seconds_per_mile_current_week = (total_minutes_week * 60) / total_miles_week
+      else
+        seconds_per_mile_current_week = "N/A"
+      end
 
-      pace_rate_change = (((seconds_per_mile_current_week - seconds_per_mile_ytd)/seconds_per_mile_ytd) * 100).round(2)
+      if num_of_workouts_in_week > 0
+        pace_rate_change = (((seconds_per_mile_current_week - seconds_per_mile_ytd)/seconds_per_mile_ytd) * 100).round(2)
+      else
+        pace_rate_change = "N/A"
+      end
 
-
-      average_miles_per_day = (total_miles_week / 7).round(2)
-      average_miles_per_day_year_to_date = (miles_to_date / year_to_date_workouts.count).round(2)
-      average_miles_change = (((average_miles_per_day - average_miles_per_day_year_to_date)/average_miles_per_day_year_to_date) * 100).round(2)
-
+      if num_of_workouts_in_week > 0
+        average_miles_per_day = (total_miles_week / num_of_workouts_in_week).round(2)
+        average_miles_per_day_year_to_date = (miles_to_date / year_to_date_workouts.count).round(2)
+        average_miles_change = (((average_miles_per_day - average_miles_per_day_year_to_date)/average_miles_per_day_year_to_date) * 100).round(2)
+      else
+        average_miles_per_day = "N/A"
+        average_miles_per_day_year_to_date = "N/A"
+        average_miles_change = "N/A"
+      end
       date_from = Date.today.beginning_of_year
       date_to = Date.today
 
