@@ -32,7 +32,11 @@ class Api::V1::UsersController < ApplicationController
         year_to_date_pace = "N/A"
       end
 
-      seconds_per_mile_ytd = (minutes_to_date * 60) / miles_to_date
+      if User.find(current_user.id).workouts.length > 0
+        seconds_per_mile_ytd = (minutes_to_date * 60) / miles_to_date
+      else
+        seconds_per_mile_ytd = "N/A"
+      end
 
       @current_week_workouts = Workout.current_week_workouts(current_user)
       @one_week_back_workouts = Workout.prior_week_workouts(1, current_user)
@@ -55,8 +59,12 @@ class Api::V1::UsersController < ApplicationController
         week_to_date_pace = 'N/A'
       end
 
-      seconds_per_mile_current_week = (total_minutes_week * 60) / total_miles_week
-
+      if User.find(current_user.id).workouts.length > 0
+        seconds_per_mile_current_week = (total_minutes_week * 60) / total_miles_week
+      else
+        seconds_per_mile_current_week = "N/A"
+      end
+      if User.find(current_user.id).workouts.length > 0
       pace_rate_change = (((seconds_per_mile_current_week - seconds_per_mile_ytd)/seconds_per_mile_ytd) * 100).round(2)
 
 
