@@ -508,7 +508,7 @@ class WorkoutsIndexContainer extends Component {
               <div className="bio-info">
                 <h2 className="bio-header">{currentUserName}</h2>
                 <p className="bio-text">{email}</p>
-                <p className="bio-text">Boston, MA</p>
+
               </div>
             </div>
             <div id="stats text">
