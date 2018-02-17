@@ -111,32 +111,40 @@ class WorkoutFormContainer extends Component {
           <form className='new-workout-form callout' onSubmit={this.handleSubmit}>
             <h3>Add A New Workout</h3>
             <span className="errors">{errorMessage}</span>
-            <FormField
-              content={this.state.workoutDate}
-              label='Workout Date'
-              name='workout-date'
-              handleChange={this.handleDateChange}
-            />
-            <FormField
-              content={this.state.workoutDistance}
-              label='Workout Distance'
-              name='workout-distance'
-              handleChange={this.handleDistanceChange}
-            />
-            <FormField
-              content={this.state.workoutTime}
-              label='Workout Time'
-              name='workout-time'
-              handleChange={this.handleTimeChange}
-            />
+            <div className="field-new-workout">
+              <FormField
+                content={this.state.workoutDate}
+                label='Workout Date'
+                name='workout-date'
+                handleChange={this.handleDateChange}
+              />
+            </div>
+            <div className="field-new-workout">
+              <FormField
+                content={this.state.workoutDistance}
+                label='Workout Distance'
+                name='workout-distance'
+                handleChange={this.handleDistanceChange}
+              />
+            </div>
+            <div className="field-new-workout">
+              <FormField
+                content={this.state.workoutTime}
+                label='Workout Time'
+                name='workout-time'
+                handleChange={this.handleTimeChange}
+              />
+            </div>
+            <div className="field-new-workout-notes">
             <FormField
               content={this.state.workoutNotes}
               label='Workout Notes'
               name='workout-notes'
               handleChange={this.handleNotesChange}
             />
-            <input className="button" type="submit" value="Submit" onClick={this.handleSubmit}/>
-            <button className="button" onClick={this.props.toggleNewForm}>Cancel</button>
+            </div>
+            <button id="add-new-workout-buttons" type="submit" onClick={this.handleSubmit}>Submit</button>
+            <button id="add-new-workout-buttons" onClick={this.props.toggleNewForm}>Cancel</button>
           </form>
         </div>
         <div className="form-sheet"></div>

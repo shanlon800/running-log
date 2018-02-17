@@ -66,15 +66,15 @@ class Api::V1::UsersController < ApplicationController
       end
 
       if num_of_workouts_completed > 0
-        pace_rate_change = (((seconds_per_mile_current_week - seconds_per_mile_ytd)/seconds_per_mile_ytd) * 100).round(2)
+        pace_rate_change = (((seconds_per_mile_current_week - seconds_per_mile_ytd)/seconds_per_mile_ytd) * 100).round(1)
       else
         pace_rate_change = "N/A"
       end
 
       if num_of_workouts_completed > 0
-        average_miles_per_day = (total_miles_week / @current_week_workouts.length).round(2)
-        average_miles_per_day_year_to_date = (miles_to_date / year_to_date_workouts.count).round(2)
-        average_miles_change = (((average_miles_per_day - average_miles_per_day_year_to_date)/average_miles_per_day_year_to_date) * 100).round(2)
+        average_miles_per_day = (total_miles_week / @current_week_workouts.length).round(1)
+        average_miles_per_day_year_to_date = (miles_to_date / year_to_date_workouts.count).round(1)
+        average_miles_change = (((average_miles_per_day - average_miles_per_day_year_to_date)/average_miles_per_day_year_to_date) * 100).round(1)
       else
         average_miles_per_day = "N/A"
         average_miles_per_day_year_to_date = "N/A"

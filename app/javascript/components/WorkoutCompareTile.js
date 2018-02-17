@@ -13,7 +13,7 @@ const WorkoutCompareTile = props => {
         <div>{weekday}</div>
       </div>
       <div className="workout-compare-card__distance">
-        <h2 id="distance">{props.distance}</h2>
+        <h3 id="distance">{props.distance}</h3>
         <p>Miles</p>
       </div>
     </div>
