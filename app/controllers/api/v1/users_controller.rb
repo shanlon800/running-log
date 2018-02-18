@@ -96,6 +96,7 @@ class Api::V1::UsersController < ApplicationController
 
       render json: {
         current_user: @current_user,
+        token: ENV['STRAVA_TOKEN'],
         workouts: @workouts,
         belong_to_teams: @teams_with_goals,
         all_teams: @all_teams,

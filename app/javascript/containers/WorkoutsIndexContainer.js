@@ -32,7 +32,8 @@ class WorkoutsIndexContainer extends Component {
       fourBack: [],
       currentWeekStats:'',
       yearToDateStats: '',
-      displayCollection:[]
+      displayCollection:[],
+      stravaData: ''
     }
     this.calculatePace = this.calculatePace.bind(this)
     this.addNewWorkout = this.addNewWorkout.bind(this)
@@ -48,6 +49,8 @@ class WorkoutsIndexContainer extends Component {
     this.toggleNewTeamForm = this.toggleNewTeamForm.bind(this)
     this.handleChartSelector = this.handleChartSelector.bind(this)
     this.handleMultipleDates = this.handleMultipleDates.bind(this)
+    this.stravaPace = this.stravaPace.bind(this)
+    this.handleStravaFetch = this.handleStravaFetch.bind(this)
   }
 
 
@@ -213,14 +216,97 @@ class WorkoutsIndexContainer extends Component {
           allTeams: body.all_teams,
           chartData: body.current_week,
           yearToDateStats: body.year_to_date_index_statistics,
-          currentWeekStats:body.current_week_index_statistics
+          currentWeekStats:body.current_week_index_statistics,
         })
+        this.handleStravaFetch(body.current_user.provider, body.token, body.current_user.uid)
+        // fetch(`https://www.strava.com/api/v3/athletes/${body.current_user.uid}/activities?access_token=${body.token}`)
+        //   .then(response => {
+        //     if (response.ok) {
+        //       return response;
+        //     } else {
+        //       let errorMessage = `${response.status} (${response.statusText})`,
+        //           error = new Error(errorMessage);
+        //       throw(error);
+        //     }
+        //   })
+        //   .then(response => response.json())
+        //   .then(body => {
+        //     this.setState({stravaWorkouts: body})
+        //   })
+        //   .catch(error => console.error(`Error in fetch: ${error.message}`));
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
+
+    handleStravaFetch(provider, token, id) {
+      if (provider === 'strava') {
+        fetch(`https://www.strava.com/api/v3/athletes/${id}/stats?access_token=${token}`)
+          .then(response => {
+            if (response.ok) {
+              return response;
+            } else {
+              let errorMessage = `${response.status} (${response.statusText})`,
+                  error = new Error(errorMessage);
+              throw(error);
+            }
+          })
+          .then(response => response.json())
+          .then(body => {
+            this.setState({stravaData: body})
+
+          })
+          .catch(error => console.error(`Error in fetch: ${error.message}`));
+      }
+    }
+    // THE CODE BELOW WORKS WITHOUT STRAVA
+    // componentWillMount() {
+    //   fetch('/api/v1/users', { credentials: 'same-origin' })
+    //     .then(response => {
+    //       if (response.ok) {
+    //         return response;
+    //       } else {
+    //         let errorMessage = `${response.status} (${response.statusText})`,
+    //             error = new Error(errorMessage);
+    //         throw(error);
+    //       }
+    //     })
+    //     .then(response => response.json())
+    //     .then(body => {
+    //       this.setState({
+    //         currentUser: body.current_user,
+    //         workouts: body.workouts,
+    //         belongTeams: body.belong_to_teams,
+    //         currentWeek: body.current_week,
+    //         oneBack: body.past_weeks.one_week_back,
+    //         twoBack: body.past_weeks.two_week_back,
+    //         threeBack: body.past_weeks.three_week_back,
+    //         fourBack: body.past_weeks.four_week_back,
+    //         allTeams: body.all_teams,
+    //         chartData: body.current_week,
+    //         yearToDateStats: body.year_to_date_index_statistics,
+    //         currentWeekStats:body.current_week_index_statistics,
+    //       })
+    //     })
+    //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+    //   }
+
+
+
     calculatePace(miles, min) {
       let secondsPerMile = (min * 60) / miles
+      let minPace = Math.floor(secondsPerMile / 60)
+      let secPace = Math.floor(secondsPerMile % 60)
+      if (secPace === 0){
+        return `${minPace}:00`
+      } else {
+        return `${minPace}:${secPace}`
+      }
+    }
+
+    stravaPace(meters, seconds) {
+      let miles = Math.round(meters * 0.000621, 1)
+      let secondsPerMile = (seconds) / miles
       let minPace = Math.floor(secondsPerMile / 60)
       let secPace = Math.floor(secondsPerMile % 60)
       if (secPace === 0){
@@ -364,6 +450,7 @@ class WorkoutsIndexContainer extends Component {
     }
 
   render() {
+
     let detailsTile;
     let handleDelete;
     let handleEdit;
@@ -371,6 +458,31 @@ class WorkoutsIndexContainer extends Component {
     let imageAlt;
     let currentUserName;
     let email;
+    let stravaData;
+
+    if (this.state.currentUser != null && this.state.currentUser.provider === 'strava' && this.state.stravaData != ''){
+      stravaData =
+      <div id='strava-text'>
+        <div id='year-to-date'>Strava Data YTD</div>
+        <div id='stats-container'>
+          <div className='indiv-stats-container'>
+            <div className='stat-header'>Miles:</div>
+            <div className='stat-number'>{Math.round(this.state.stravaData.ytd_run_totals.distance * 0.000621, 1)}</div>
+          </div>
+          <div className='indiv-stats-container'>
+            <div className='stat-header'>Avg Pace:</div>
+            <div className='stat-number'>{this.stravaPace(this.state.stravaData.ytd_run_totals.distance, this.state.stravaData.ytd_run_totals.elapsed_time)}</div>
+          </div>
+          <div className='indiv-stats-container'>
+            <div className='stat-header'>Number of Runs:</div>
+            <div className='stat-number'>{this.state.stravaData.ytd_run_totals.count}</div>
+          </div>
+        </div>
+      </div>
+    } else {
+      stravaData = ''
+    }
+
 
     if (this.state.currentUser != null){
       imageUrl = this.state.currentUser.profile_photo.url
@@ -533,8 +645,8 @@ class WorkoutsIndexContainer extends Component {
                   <div className="stat-number">16605</div>
                 </div>
               </div>
-
             </div>
+            {stravaData}
           </div>
           <div id="team-list">
             <div id="join-team">
@@ -583,8 +695,8 @@ class WorkoutsIndexContainer extends Component {
               </table>
             </div>
           </div>
-
         </div>
+
         <div id="index-page-current-week">
           <h3 id="current-week-dashboard-header">Current Week 2/12 - 2/18</h3>
 
