@@ -32,6 +32,10 @@ gem "carrierwave"
 gem "fog"
 gem 'fog-aws'
 gem 'omniauth-facebook'
+gem 'strava-api-v3'
+gem 'omniauth-strava-oauth2', '~> 0.0.2'
+gem 'omniauth'
+
 group :development, :test do
   gem "dotenv-rails"
 end

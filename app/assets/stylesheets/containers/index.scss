@@ -157,7 +157,7 @@ table {
   line-height: 0.5rem;
 }
 #total-miles{
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bolder;
 }
 
@@ -254,6 +254,10 @@ table {
 #stats-text {
   margin-bottom: 5%;
   padding-bottom: 5%;
+}
+
+#strava-text{
+  margin-top: 5%;
 }
 .indiv-stats-container{
   display: flex;
