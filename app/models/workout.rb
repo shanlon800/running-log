@@ -53,4 +53,29 @@ class Workout < ApplicationRecord
   def self.dated_workouts(workout_scope, start_date, end_date)
     workout_scope.where("workout_date >= ? AND workout_date <= ?", start_date, end_date).order(:workout_date)
   end
+
+  def self.add_strava_workouts(strava_workouts, all_workouts_before_strava, current_user)
+    workout_id_list = []
+    all_workouts_before_strava.each do |workout|
+      workout_id_list << workout.id
+    end
+
+    strava_workouts_in_system = []
+    new_strava_workouts = []
+    strava_workouts.each do |workout|
+      if workout_id_list.include?(workout['id'])
+        strava_workouts_in_system << workout
+      else
+        new_strava_workouts << workout
+      end
+    end
+    new_strava_workouts.each do |workout|
+      Workout.create(id: workout['id'], user_id: current_user.id, distance: (workout['distance'].to_f * 0.000621).round(1), time: (workout['elapsed_time'].to_f / 60), notes: workout['name'], workout_date: workout['start_date_local'])
+    end
+  end
+
+
+
+
+
 end

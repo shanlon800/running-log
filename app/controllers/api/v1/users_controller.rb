@@ -11,6 +11,18 @@ class Api::V1::UsersController < ApplicationController
       num_of_workouts_completed = User.find(current_user.id).workouts.length
 
 
+        if current_user.provider == 'strava'
+          strava_info =  HTTParty.get("https://www.strava.com/api/v3/athletes/#{current_user.uid}/stats?access_token=#{ENV['STRAVA_TOKEN']}")
+          year_to_date_strava = strava_info['ytd_run_totals']
+          all_workouts_before_strava = Workout.where(user_id: current_user.id)
+          strava_workouts = HTTParty.get("https://www.strava.com/api/v3/athletes/#{current_user.uid}/activities?access_token=#{ENV['STRAVA_TOKEN']}")
+
+          Workout.add_strava_workouts(strava_workouts, all_workouts_before_strava, current_user)
+
+        end
+
+
+
       @teams_with_goals = []
       @teams.each do |team|
         team_goal = {team: team, goal: team.goal}
@@ -43,6 +55,7 @@ class Api::V1::UsersController < ApplicationController
       @two_week_back_workouts = Workout.prior_week_workouts(2, current_user)
       @three_week_back_workouts = Workout.prior_week_workouts(3, current_user)
       @four_week_back_workouts = Workout.prior_week_workouts(4, current_user)
+
 
 
       total_miles_week = 0
@@ -107,9 +120,7 @@ class Api::V1::UsersController < ApplicationController
       week_dropdown = current_week_all_dates - user_current_week_workouts_dates
 
 
-      strava_info =  HTTParty.get("https://www.strava.com/api/v3/athletes/#{current_user.uid}/stats?access_token=#{ENV['STRAVA_TOKEN']}")
-      year_to_date_strava = strava_info['ytd_run_totals']
-      
+
       render json: {
         current_user: @current_user,
         workouts: @workouts,
