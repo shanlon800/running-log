@@ -255,6 +255,7 @@ GEM
       domain_name (~> 0.5)
     httparty (0.16.0)
       multi_xml (>= 0.5.2)
+    httpclient (2.8.3)
     i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     inflecto (0.0.2)
@@ -459,6 +460,8 @@ DEPENDENCIES
   fog
   fog-aws
   foundation-rails (~> 5.0)
+  httparty
+  httpclient
   jbuilder (~> 2.5)
   jquery-rails
   launchy
