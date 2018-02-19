@@ -107,9 +107,11 @@ class Api::V1::UsersController < ApplicationController
       week_dropdown = current_week_all_dates - user_current_week_workouts_dates
 
 
+      strava_info =  HTTParty.get("https://www.strava.com/api/v3/athletes/#{current_user.uid}/stats?access_token=#{ENV['STRAVA_TOKEN']}")
+      year_to_date_strava = strava_info['ytd_run_totals']
+      
       render json: {
         current_user: @current_user,
-        token: ENV['STRAVA_TOKEN'],
         workouts: @workouts,
         belong_to_teams: @teams_with_goals,
         all_teams: @all_teams,
@@ -130,7 +132,8 @@ class Api::V1::UsersController < ApplicationController
             total_miles_year_to_date: miles_to_date,
             year_to_date_avg_pace: year_to_date_pace,
             days_run_in_row: running_date_streak,
-            average_miles_per_day_year_to_date: average_miles_per_day_year_to_date
+            average_miles_per_day_year_to_date: average_miles_per_day_year_to_date,
+            year_to_date_strava: year_to_date_strava
         },
         past_weeks:{
           one_week_back: @one_week_back_workouts,

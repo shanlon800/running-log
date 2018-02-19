@@ -35,6 +35,8 @@ gem 'omniauth-facebook'
 gem 'strava-api-v3'
 gem 'omniauth-strava-oauth2', '~> 0.0.2'
 gem 'omniauth'
+gem 'httpclient'
+gem 'httparty'
 
 group :development, :test do
   gem "dotenv-rails"

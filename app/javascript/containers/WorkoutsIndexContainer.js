@@ -34,7 +34,7 @@ class WorkoutsIndexContainer extends Component {
       currentWeekStats:'',
       yearToDateStats: '',
       displayCollection:[],
-      stravaData: '',
+      stravaData: [],
       weekDropdown: []
     }
     this.calculatePace = this.calculatePace.bind(this)
@@ -52,7 +52,7 @@ class WorkoutsIndexContainer extends Component {
     this.handleChartSelector = this.handleChartSelector.bind(this)
     this.handleMultipleDates = this.handleMultipleDates.bind(this)
     this.stravaPace = this.stravaPace.bind(this)
-    this.handleStravaFetch = this.handleStravaFetch.bind(this)
+    // this.handleStravaFetch = this.handleStravaFetch.bind(this)
   }
 
 
@@ -227,49 +227,34 @@ class WorkoutsIndexContainer extends Component {
           currentWeekStats:body.current_week_index_statistics,
           weekDropdown: body.week_dropdown,
           weekStart: body.current_week_index_statistics.week_start,
-          weekEnd: body.current_week_index_statistics.week_end
+          weekEnd: body.current_week_index_statistics.week_end,
+          stravaData: body.year_to_date_index_statistics.year_to_date_strava
         })
-        this.handleStravaFetch(body.current_user.provider, body.token, body.current_user.uid)
-        // fetch(`https://www.strava.com/api/v3/athletes/${body.current_user.uid}/activities?access_token=${body.token}`)
-        //   .then(response => {
-        //     if (response.ok) {
-        //       return response;
-        //     } else {
-        //       let errorMessage = `${response.status} (${response.statusText})`,
-        //           error = new Error(errorMessage);
-        //       throw(error);
-        //     }
-        //   })
-        //   .then(response => response.json())
-        //   .then(body => {
-        //     this.setState({stravaWorkouts: body})
-        //   })
-        //   .catch(error => console.error(`Error in fetch: ${error.message}`));
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
 
-    handleStravaFetch(provider, token, id) {
-      if (provider === 'strava') {
-        fetch(`https://www.strava.com/api/v3/athletes/${id}/stats?access_token=${token}`)
-          .then(response => {
-            if (response.ok) {
-              return response;
-            } else {
-              let errorMessage = `${response.status} (${response.statusText})`,
-                  error = new Error(errorMessage);
-              throw(error);
-            }
-          })
-          .then(response => response.json())
-          .then(body => {
-            this.setState({stravaData: body})
-
-          })
-          .catch(error => console.error(`Error in fetch: ${error.message}`));
-      }
-    }
+    // handleStravaFetch(provider, token, id) {
+    //   if (provider === 'strava') {
+    //     fetch(`https://www.strava.com/api/v3/athletes/${id}/stats?access_token=${token}`)
+    //       .then(response => {
+    //         if (response.ok) {
+    //           return response;
+    //         } else {
+    //           let errorMessage = `${response.status} (${response.statusText})`,
+    //               error = new Error(errorMessage);
+    //           throw(error);
+    //         }
+    //       })
+    //       .then(response => response.json())
+    //       .then(body => {
+    //         this.setState({stravaData: body})
+    //
+    //       })
+    //       .catch(error => console.error(`Error in fetch: ${error.message}`));
+    //   }
+    // }
     // THE CODE BELOW WORKS WITHOUT STRAVA
     // componentWillMount() {
     //   fetch('/api/v1/users', { credentials: 'same-origin' })
@@ -484,15 +469,15 @@ class WorkoutsIndexContainer extends Component {
         <div id='stats-container'>
           <div className='indiv-stats-container'>
             <div className='stat-header'>Miles:</div>
-            <div className='stat-number'>{Math.round(this.state.stravaData.ytd_run_totals.distance * 0.000621, 1)}</div>
+            <div className='stat-number'>{Math.round(this.state.stravaData.distance * 0.000621, 1)}</div>
           </div>
           <div className='indiv-stats-container'>
             <div className='stat-header'>Avg Pace:</div>
-            <div className='stat-number'>{this.stravaPace(this.state.stravaData.ytd_run_totals.distance, this.state.stravaData.ytd_run_totals.elapsed_time)}</div>
+            <div className='stat-number'>{this.stravaPace(this.state.stravaData.distance, this.state.stravaData.elapsed_time)}</div>
           </div>
           <div className='indiv-stats-container'>
             <div className='stat-header'>Number of Runs:</div>
-            <div className='stat-number'>{this.state.stravaData.ytd_run_totals.count}</div>
+            <div className='stat-number'>{this.state.stravaData.count}</div>
           </div>
         </div>
       </div>
