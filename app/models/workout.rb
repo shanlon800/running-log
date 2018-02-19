@@ -38,6 +38,8 @@ class Workout < ApplicationRecord
 
     if secPace == 0
       return "#{minPace}:00"
+    elsif secPace < 10
+      return "#{minPace}:0#{secPace}"
     else
       return "#{minPace}:#{secPace}"
     end

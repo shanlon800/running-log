@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
+import moment from 'moment';
 
 import WorkoutDetailTile from '../components/WorkoutDetailTile';
 import WorkoutFormContainer from './WorkoutFormContainer';
@@ -33,7 +34,8 @@ class WorkoutsIndexContainer extends Component {
       currentWeekStats:'',
       yearToDateStats: '',
       displayCollection:[],
-      stravaData: ''
+      stravaData: '',
+      weekDropdown: []
     }
     this.calculatePace = this.calculatePace.bind(this)
     this.addNewWorkout = this.addNewWorkout.bind(this)
@@ -75,9 +77,10 @@ class WorkoutsIndexContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        currentWeek: body,
+        currentWeek: body.workouts,
         showNewForm: false,
-        chartData: body
+        chartData: body.workouts,
+        weekDropdown: body.week_dropdown
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -151,9 +154,11 @@ class WorkoutsIndexContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        currentWeek: body,
+        currentWeek: body.workouts,
         showDetails: false,
-        detailPage: null
+        detailPage: null,
+        chartData: body.workouts,
+        weekDropdown: body.week_dropdown
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -183,9 +188,12 @@ class WorkoutsIndexContainer extends Component {
       // })
       // updatedWorkouts = updatedWorkouts.concat(body)
       this.setState({
-        currentWeek: body,
+        currentWeek: body.workouts,
         showEditForm: false,
-        selectedWorkout: null
+        selectedWorkout: null,
+        showDetails: false,
+        chartData: body.workouts,
+        weekDropdown: body.week_dropdown
       })
     })
     .catch(error => console.error(`Error in fetch patch: ${error.message}`))
@@ -217,6 +225,9 @@ class WorkoutsIndexContainer extends Component {
           chartData: body.current_week,
           yearToDateStats: body.year_to_date_index_statistics,
           currentWeekStats:body.current_week_index_statistics,
+          weekDropdown: body.week_dropdown,
+          weekStart: body.current_week_index_statistics.week_start,
+          weekEnd: body.current_week_index_statistics.week_end
         })
         this.handleStravaFetch(body.current_user.provider, body.token, body.current_user.uid)
         // fetch(`https://www.strava.com/api/v3/athletes/${body.current_user.uid}/activities?access_token=${body.token}`)
@@ -299,6 +310,8 @@ class WorkoutsIndexContainer extends Component {
       let secPace = Math.floor(secondsPerMile % 60)
       if (secPace === 0){
         return `${minPace}:00`
+      } else if (secPace < 10){
+        return `${minPace}:0${secPace}`
       } else {
         return `${minPace}:${secPace}`
       }
@@ -311,7 +324,10 @@ class WorkoutsIndexContainer extends Component {
       let secPace = Math.floor(secondsPerMile % 60)
       if (secPace === 0){
         return `${minPace}:00`
-      } else {
+      } else if (secPace < 10){
+        return `${minPace}:0${secPace}`
+      }
+      else {
         return `${minPace}:${secPace}`
       }
     }
@@ -351,7 +367,9 @@ class WorkoutsIndexContainer extends Component {
       let rightCard;
       let displayCollection = []
       this.state.currentWeek.forEach(function (workout, index){
-        if (workout.id === selectedWorkout.id && index === 0) {
+        if(weeksWorkouts.length === 1) {
+          displayCollection.push(workout)
+        } else if (workout.id === selectedWorkout.id && index === 0) {
           rightCard = weeksWorkouts[index + 1]
           displayCollection.push(selectedWorkout, rightCard)
         } else if (workout.id === selectedWorkout.id && index === (weeksWorkouts.length - 1)) {
@@ -450,7 +468,6 @@ class WorkoutsIndexContainer extends Component {
     }
 
   render() {
-
     let detailsTile;
     let handleDelete;
     let handleEdit;
@@ -540,6 +557,7 @@ class WorkoutsIndexContainer extends Component {
             selectedWorkout={this.state.selectedWorkout}
             currentUser={this.state.currentUser}
             closeEditForm={this.closeEditForm}
+            weekDropdown={this.state.weekDropdown}
 
           />
       }  else {
@@ -553,6 +571,7 @@ class WorkoutsIndexContainer extends Component {
             currentUser={this.state.currentUser}
             addNewWorkout={this.addNewWorkout}
             toggleNewForm={this.toggleNewForm}
+            weekDropdown={this.state.weekDropdown}
           />
         } else {
           newForm = ''
@@ -591,21 +610,25 @@ class WorkoutsIndexContainer extends Component {
     })
 
     let paceIcon = ''
-    if (this.state.yearToDateStats.year_to_date_avg_pace < this.state.currentWeekStats.average_pace) {
-      paceIcon = <span><i className="fas fa-long-arrow-alt-up" id="increasing-red"></i><h7 id="increasing-red-text">({this.state.currentWeekStats.pace_rate_change}%)</h7></span>
-    } else if (this.state.yearToDateStats.year_to_date_avg_pace < this.state.currentWeekStats.average_pace) {
-      paceIcon = <span><i className="fas fa-long-arrow-alt-down" id='decreasing green'></i><h7 id="decreasing-green-text">({this.state.currentWeekStats.pace_rate_change}%)</h7></span>
-    } else {
-      paceIcon = <span><i className="fas fa-arrows-alt-h" id='equal-sign'></i></span>
+    if (this.state.yearToDateStats != ''){
+      if (this.state.yearToDateStats.year_to_date_avg_pace < this.state.currentWeekStats.average_pace) {
+        paceIcon = <span><i className="fas fa-long-arrow-alt-up" id="increasing-red"></i><h7 id="increasing-red-text">({this.state.currentWeekStats.pace_rate_change}%)</h7></span>
+      } else if (this.state.yearToDateStats.year_to_date_avg_pace > this.state.currentWeekStats.average_pace) {
+        paceIcon = <span><i className="fas fa-long-arrow-alt-down" id='decreasing-green'></i><h7 id="decreasing-green-text">({this.state.currentWeekStats.pace_rate_change}%)</h7></span>
+      } else {
+        paceIcon = <span><i className="fas fa-arrows-alt-h" id='equal-sign'></i></span>
+      }
     }
 
     let avgMilesIcon = ''
-    if(this.state.yearToDateStats.average_miles_per_day_year_to_date < this.state.currentWeekStats.average_miles_per_day) {
-      avgMilesIcon = <span><i className="fas fa-long-arrow-alt-up" id="increasing-green"></i><h7 id="increasing-green-text">({this.state.currentWeekStats.average_miles_change}%)</h7></span>
-    } else if (this.state.yearToDateStats.average_miles_per_day_year_to_date > this.state.currentWeekStats.average_miles_per_day){
-      avgMilesIcon = <span><i className="fas fa-long-arrow-alt-down" id='decreasing-red'></i><h7 id="decreasing-red-text">({this.state.currentWeekStats.average_miles_change}%)</h7></span>
-    } else {
-      avgMilesIcon = <span><i className="fas fa-arrows-alt-h" id='equal-sign'></i></span>
+    if (this.state.yearToDateStats != '') {
+      if(this.state.yearToDateStats.average_miles_per_day_year_to_date < this.state.currentWeekStats.average_miles_per_day) {
+        avgMilesIcon = <span><i className="fas fa-long-arrow-alt-up" id="increasing-green"></i><h7 id="increasing-green-text">({this.state.currentWeekStats.average_miles_change}%)</h7></span>
+      } else if (this.state.yearToDateStats.average_miles_per_day_year_to_date > this.state.currentWeekStats.average_miles_per_day){
+        avgMilesIcon = <span><i className="fas fa-long-arrow-alt-down" id='decreasing-red'></i><h7 id="decreasing-red-text">({this.state.currentWeekStats.average_miles_change}%)</h7></span>
+      } else {
+        avgMilesIcon = <span><i className="fas fa-arrows-alt-h" id='equal-sign'></i></span>
+      }
     }
 
     return(
@@ -639,10 +662,6 @@ class WorkoutsIndexContainer extends Component {
                 <div className="indiv-stats-container">
                   <div className="stat-header">Days Run in a Row:</div>
                   <div className="stat-number">{this.state.yearToDateStats.days_run_in_row}</div>
-                </div>
-                <div className="indiv-stats-container">
-                  <div className="stat-header">Total Calories Burned:</div>
-                  <div className="stat-number">16605</div>
                 </div>
               </div>
             </div>
@@ -698,7 +717,7 @@ class WorkoutsIndexContainer extends Component {
         </div>
 
         <div id="index-page-current-week">
-          <h3 id="current-week-dashboard-header">Current Week 2/12 - 2/18</h3>
+          <h3 id="current-week-dashboard-header">Current Week {moment(this.state.weekStart).format("M/DD")} - {moment(this.state.weekEnd).format("M/DD")}</h3>
 
           <div className="container">
             {currentWeek}

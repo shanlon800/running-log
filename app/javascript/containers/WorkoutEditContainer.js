@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FormField from '../components/FormField'
+import moment from 'moment';
 
 class WorkoutEditContainer extends Component {
   constructor(props) {
@@ -104,6 +105,12 @@ class WorkoutEditContainer extends Component {
   }
 
   render() {
+    let dropDown = this.props.weekDropdown.map(date => {
+      return(
+        <option key={date} value={date}>{moment(date).format('dddd MMM DD YYYY')}</option>
+      )
+    })
+
     let errorMessage = this.state.errors.map(error => {
       return(<div key={error}> {error} </div>)
     })
@@ -113,32 +120,37 @@ class WorkoutEditContainer extends Component {
           <form id='new-workout-form callout' onSubmit={this.handleSubmit}>
             <h3>Edit a Workout</h3>
             <span className="errors">{errorMessage}</span>
-            <FormField
-              content={this.state.workoutDate}
-              label='Workout Date'
-              name='workout-date'
-              handleChange={this.handleDateChange}
-            />
-            <FormField
-              content={this.state.workoutDistance}
-              label='Workout Distance'
-              name='workout-distance'
-              handleChange={this.handleDistanceChange}
-            />
-            <FormField
-              content={this.state.workoutTime}
-              label='Workout Time'
-              name='workout-time'
-              handleChange={this.handleTimeChange}
-            />
-            <FormField
-              content={this.state.workoutNotes}
-              label='Workout Notes'
-              name='workout-notes'
-              handleChange={this.handleNotesChange}
-            />
-            <input className="button" type="submit" value="Submit" onClick={this.handleSubmit}/>
-            <button className="button" onClick={this.props.closeEditForm}>Cancel</button>
+
+            <label htmlFor="workout-date">Workout Date</label>
+            <select id='workout-date' className='field-new-workout' value={this.state.newDate} onChange={this.handleDateChange} >
+              {dropDown}
+            </select>
+            <div className='field-edit-workout'>
+              <FormField
+                content={this.state.workoutDistance}
+                label='Workout Distance'
+                name='workout-distance'
+                handleChange={this.handleDistanceChange}
+              />
+            </div>
+            <div className='field-edit-workout'>
+              <FormField
+                content={this.state.workoutTime}
+                label='Workout Time'
+                name='workout-time'
+                handleChange={this.handleTimeChange}
+              />
+            </div>
+            <div className='field-edit-workout-notes'>
+              <FormField
+                content={this.state.workoutNotes}
+                label='Workout Notes'
+                name='workout-notes'
+                handleChange={this.handleNotesChange}
+              />
+            </div>
+            <button id="add-new-workout-buttons" type="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>
+            <button id="add-new-workout-buttons" onClick={this.props.closeEditForm}>Cancel</button>
           </form>
         </div>
         <div className="form-sheet"></div>
@@ -148,3 +160,10 @@ class WorkoutEditContainer extends Component {
 }
 
 export default WorkoutEditContainer;
+
+// <FormField
+// content={this.state.workoutDate}
+// label='Workout Date'
+// name='workout-date'
+// handleChange={this.handleDateChange}
+// />
