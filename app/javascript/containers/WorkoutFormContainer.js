@@ -103,7 +103,6 @@ class WorkoutFormContainer extends Component {
   }
 
   render() {
-    console.log(this.state.workoutDate)
     let dropDown = this.props.weekDropdown.map(date => {
       return(
         <option key={date} value={date}>{moment(date).format('dddd MMM DD YYYY')}</option>
@@ -122,7 +121,7 @@ class WorkoutFormContainer extends Component {
             <span className="errors">{errorMessage}</span>
 
             <label htmlFor="workout-date">Workout Date</label>
-            <select id='workout-date' className='field-new-workout' onClick={this.handleDateChange} >
+            <select id='workout-date' className='field-new-workout' onChange={this.handleDateChange}value={this.state.workoutDate}>
               {dropDown}
             </select>
             <div className="field-new-workout">

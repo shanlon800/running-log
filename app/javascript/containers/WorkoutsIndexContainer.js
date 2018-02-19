@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
+import moment from 'moment';
 
 import WorkoutDetailTile from '../components/WorkoutDetailTile';
 import WorkoutFormContainer from './WorkoutFormContainer';
@@ -153,9 +154,11 @@ class WorkoutsIndexContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        currentWeek: body,
+        currentWeek: body.workouts,
         showDetails: false,
-        detailPage: null
+        detailPage: null,
+        chartData: body.workouts,
+        weekDropdown: body.week_dropdown
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -185,9 +188,12 @@ class WorkoutsIndexContainer extends Component {
       // })
       // updatedWorkouts = updatedWorkouts.concat(body)
       this.setState({
-        currentWeek: body,
+        currentWeek: body.workouts,
         showEditForm: false,
-        selectedWorkout: null
+        selectedWorkout: null,
+        showDetails: false,
+        chartData: body.workouts,
+        weekDropdown: body.week_dropdown
       })
     })
     .catch(error => console.error(`Error in fetch patch: ${error.message}`))
@@ -219,7 +225,9 @@ class WorkoutsIndexContainer extends Component {
           chartData: body.current_week,
           yearToDateStats: body.year_to_date_index_statistics,
           currentWeekStats:body.current_week_index_statistics,
-          weekDropdown: body.week_dropdown
+          weekDropdown: body.week_dropdown,
+          weekStart: body.current_week_index_statistics.week_start,
+          weekEnd: body.current_week_index_statistics.week_end
         })
         this.handleStravaFetch(body.current_user.provider, body.token, body.current_user.uid)
         // fetch(`https://www.strava.com/api/v3/athletes/${body.current_user.uid}/activities?access_token=${body.token}`)
@@ -544,6 +552,7 @@ class WorkoutsIndexContainer extends Component {
             selectedWorkout={this.state.selectedWorkout}
             currentUser={this.state.currentUser}
             closeEditForm={this.closeEditForm}
+            weekDropdown={this.state.weekDropdown}
 
           />
       }  else {
@@ -645,10 +654,6 @@ class WorkoutsIndexContainer extends Component {
                   <div className="stat-header">Days Run in a Row:</div>
                   <div className="stat-number">{this.state.yearToDateStats.days_run_in_row}</div>
                 </div>
-                <div className="indiv-stats-container">
-                  <div className="stat-header">Total Calories Burned:</div>
-                  <div className="stat-number">16605</div>
-                </div>
               </div>
             </div>
             {stravaData}
@@ -703,7 +708,7 @@ class WorkoutsIndexContainer extends Component {
         </div>
 
         <div id="index-page-current-week">
-          <h3 id="current-week-dashboard-header">Current Week 2/12 - 2/18</h3>
+          <h3 id="current-week-dashboard-header">Current Week {moment(this.state.weekStart).format("M/DD")} - {moment(this.state.weekEnd).format("M/DD")}</h3>
 
           <div className="container">
             {currentWeek}

@@ -118,6 +118,8 @@ class Api::V1::UsersController < ApplicationController
         year_to_date_minutes: minutes_to_date,
         week_dropdown: week_dropdown,
         current_week_index_statistics:{
+          week_start: week_start,
+          week_end: week_end,
           total_miles: total_miles_week,
           average_pace: week_to_date_pace,
           average_miles_per_day: average_miles_per_day,

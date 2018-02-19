@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FormField from '../components/FormField'
+import moment from 'moment';
 
 class WorkoutEditContainer extends Component {
   constructor(props) {
@@ -104,6 +105,12 @@ class WorkoutEditContainer extends Component {
   }
 
   render() {
+    let dropDown = this.props.weekDropdown.map(date => {
+      return(
+        <option key={date} value={date}>{moment(date).format('dddd MMM DD YYYY')}</option>
+      )
+    })
+
     let errorMessage = this.state.errors.map(error => {
       return(<div key={error}> {error} </div>)
     })
@@ -113,12 +120,11 @@ class WorkoutEditContainer extends Component {
           <form id='new-workout-form callout' onSubmit={this.handleSubmit}>
             <h3>Edit a Workout</h3>
             <span className="errors">{errorMessage}</span>
-            <FormField
-              content={this.state.workoutDate}
-              label='Workout Date'
-              name='workout-date'
-              handleChange={this.handleDateChange}
-            />
+
+            <label htmlFor="workout-date">Workout Date</label>
+            <select id='workout-date' className='field-new-workout' value={this.state.newDate} onChange={this.handleDateChange} >
+              {dropDown}
+            </select>
             <FormField
               content={this.state.workoutDistance}
               label='Workout Distance'
@@ -148,3 +154,10 @@ class WorkoutEditContainer extends Component {
 }
 
 export default WorkoutEditContainer;
+
+// <FormField
+// content={this.state.workoutDate}
+// label='Workout Date'
+// name='workout-date'
+// handleChange={this.handleDateChange}
+// />
