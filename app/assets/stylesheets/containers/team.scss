@@ -1,11 +1,3 @@
-// TeamContainer
-// .team-header{
-//     // text-align: center;
-//     // margin-top: 3%;
-//     // display: flex;
-//     // flex-wrap: wrap;
-//     // flex-direction: column;
-// }
 
 .team-members{
   margin-top: 1%;
@@ -18,6 +10,7 @@
   text-align: center;
   height: 15rem;
   background-position: center;
+  background-size: cover;
   background-image:
     url("https://s3.amazonaws.com/running-log-development-43432/uploads/user/profile_photo/30/202_volumefour_book_v7_review_8_1600_800_80_1.jpg");
 }
@@ -54,38 +47,7 @@
   width: 40%;
   margin: auto;
 }
-// .header-text{
-//   flex: 0 0 58%;
-//   background-color: #F8F8F8;
-//   border-radius: .4rem;
-// }
-// .goal-creation-text{
-//   flex: 0 0 40%;
-//   background-color: #F8F8F8;
-//   border-radius: .4rem;
-// }
 
-// .team-goal-form{
-//   // padding: 2%;
-//   // width: 40%;
-//   // margin: 2% auto 0 auto;
-//   margin-left: 3rem;
-//   background-color: #F8F8F8;
-//   border-radius: .4rem;
-// }
-
-// .team-top-row{
-//   display: flex;
-//   flex-wrap: wrap;
-//   flex-direction: row;
-// }
-
-// .team-goal-container{
-//   // flex: 0 0 40%;
-//   // margin-left: 2rem;
-//   // background-color: #F8F8F8;
-//   // border-radius: .4rem;
-// }
 
 // buttons
 .current-team-goal-button{
@@ -238,95 +200,3 @@
   text-align: center;
   border: .01rem solid black;
 }
-
-//
-// .team-container{
-//   // max-width: 1200px;
-//   margin: 2rem auto;
-//   display: flex;
-//   flex-wrap: wrap;
-//   // flex-direction: column;
-//   flex-direction: row;
-//   background-color: #F8F8F8;
-//   border-radius: .4rem;
-// }
-//
-// #team-workout-calendar{
-//   display: flex;
-//   flex-direction: row;
-//   height: 4rem;
-// }
-//
-// #users-dashboard-tiles{
-//   background-color: #F8F8F8;
-//   border-radius: .4rem;
-// }
-//
-// .team-user-header {
-//   flex: 0 0 10%;
-//   padding: 2%;
-//   margin: 0;
-// }
-//
-// .team-user-header__text {
-//   color: #262E3A;
-//   text-align: center;
-// }
-//
-// .workout-compare-card {
-//   background: white;
-//   // box-shadow: 1px 1px 1px rgba(0,0,0, 0.5);
-//   border-radius: 3px;
-//   flex: 0 0 9%;
-//   outline: .02rem solid black;
-//   position:relative;
-//   padding-top: 0;
-//
-// }
-//
-// .workout-compare-card__distance {
-//   text-align: center;
-//   height: 2rem;
-// }
-//
-// .workout-compare-card__date {
-//   text-align: center;
-//   background-color: #F74747;
-//   height: 2rem;
-//   padding-bottom: 0;
-//   padding-top: 0;
-//   color: #262E3A;
-//   border-bottom: .02rem solid black;
-// }
-//
-// .team-user-header__image {
-//   height: 7rem;
-//   width: 7rem;
-//   // border-radius: 100%;
-//   // border: solid white;
-//   margin: 0 3% 3% 3%;
-//   padding: 2%;
-//   background-color: #F1F1F1;
-//   border-radius: .4rem;
-//   overflow: hidden;
-// }
-//
-//
-// .workout-compare-chart {
-//   border-radius: 3px;
-//   flex: 0 0 13%;
-//   margin: 0.6rem;
-// }
-//
-// .workout-compare-chart__header{
-//   text-align: center;
-//   color: white;
-// }
-//
-// .workout-compare-chart__header-text{
-//   color: white;
-// }
-//
-// #team-header{
-//   text-align: center;
-// }

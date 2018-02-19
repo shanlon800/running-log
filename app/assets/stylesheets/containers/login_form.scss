@@ -1,0 +1,62 @@
+#facebook-login-login-page{
+  flex: 0 0 22.5%;
+  background: #4468B0;
+  border-radius: .4rem;
+  text-align: center;
+  width: 23%;
+  height: 2rem;
+  padding-top: .4%;
+  margin-left: 3%;
+
+  a {
+    color: white;
+  }
+  i {
+    color: white;
+    font-size: 1.5rem;
+    background-color: white;
+  }
+}
+
+#strava-login-login-page{
+  flex: 0 0 22.5%;
+  background: #F94D1F;
+  border-radius: .4rem;
+  text-align: center;
+  height: 2rem;
+  padding-top: .4%;
+  margin-left: 3%;
+
+  a {
+    color: white;
+  }
+  i {
+    color: white;
+    font-size: 1.5rem;
+    background-color: white;
+  }
+}
+
+
+#create-an-account{
+  flex: 0 0 22.5%;
+  background-color: #9EA3A6;
+  border-radius: .4rem;
+  width: 21%;
+  height: 2rem;
+  margin-left: 14%;
+  padding: .4% 1% 0% 1%;
+
+  a {
+    color: white;
+  }
+
+}
+
+.remember-field{
+  margin-left: 9.3rem;
+}
+
+.forgot-password{
+  margin-left: 9.3rem;
+}

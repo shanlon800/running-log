@@ -1,0 +1,144 @@
+#new-user-form{
+  background-color: #F8F8F8;
+  border-radius: .4rem;
+  margin: auto;
+  padding-bottom: 3%;
+}
+
+#sign-up-title-container{
+  height: 15rem;
+
+  margin: auto;
+  background-image:
+   url('https://s3.amazonaws.com/running-log-development-43432/uploads/user/profile_photo/41/road-expressions-1.jpg');
+   background-position: center;
+   background-size: cover;
+}
+#sign-up-title{
+  color: white;
+  padding-top: 6rem;
+  text-align: center;
+}
+
+#new-user-form{
+  padding-top: 2rem;
+  padding: auto;
+}
+
+.user-field{
+  width: 70%;
+  margin: 0 auto;
+}
+
+#already-has-account{
+  flex: 0 0 22%;
+  background-color: #9EA3A6;
+  border-radius: .4rem;
+  width: 21%;
+  height: 2rem;
+  margin-left: 14%;
+  padding: .4% 1% 0% 1%;
+
+  a {
+    color: white;
+  }
+
+}
+
+
+
+#facebook-login{
+  flex: 0 0 22%;
+  background: #4468B0;
+  border-radius: .4rem;
+  text-align: center;
+  width: 21%;
+  height: 2rem;
+  padding-top: .4%;
+  margin-left: 3%;
+
+  a {
+    color: white;
+  }
+  i {
+    color: white;
+    font-size: 1.5rem;
+    background-color: white;
+  }
+}
+
+#facebook-logo{
+  color: white;
+  margin-left: .05rem;
+}
+
+#strava-login{
+  flex: 0 0 22%;
+  background: #F94D1F;
+  border-radius: .4rem;
+  text-align: center;
+  height: 2rem;
+  padding-top: .4%;
+  margin-left: 3%;
+
+  a {
+    color: white;
+  }
+  i {
+    color: white;
+    font-size: 1.5rem;
+    background-color: white;
+  }
+}
+
+#strava-logo{
+  color:white;
+  margin-left: .05rem;
+}
+
+#additional-logins{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+#password-length{
+  font-size: .4rem;
+}
+
+.new-user-submit{
+  font-weight: bold;
+  background-color: #F74747;
+  color: #F8F8F8;
+  height: 2rem;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: .8rem;
+  border-radius: .2rem;
+  margin-left: 9.3rem;
+  width: 6rem;
+}
+
+.new-user-submit:hover{
+  background-color: #E7E7E7;
+  cursor: pointer;
+}
+
+#user_profile_photo{
+  width: 20%;
+  margin-left: 9.3rem;
+}
+
+#devise-error-messages{
+  margin-left: 9.3rem;
+  li{
+    font-size: 1rem;
+    color: red;
+  }
+  h2{
+    font-size: 1.5rem;
+    color: red;
+  }
+}
