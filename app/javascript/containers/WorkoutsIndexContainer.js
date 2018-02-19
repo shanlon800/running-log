@@ -33,7 +33,8 @@ class WorkoutsIndexContainer extends Component {
       currentWeekStats:'',
       yearToDateStats: '',
       displayCollection:[],
-      stravaData: ''
+      stravaData: '',
+      weekDropdown: []
     }
     this.calculatePace = this.calculatePace.bind(this)
     this.addNewWorkout = this.addNewWorkout.bind(this)
@@ -75,9 +76,10 @@ class WorkoutsIndexContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        currentWeek: body,
+        currentWeek: body.workouts,
         showNewForm: false,
-        chartData: body
+        chartData: body.workouts,
+        weekDropdown: body.week_dropdown
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -217,6 +219,7 @@ class WorkoutsIndexContainer extends Component {
           chartData: body.current_week,
           yearToDateStats: body.year_to_date_index_statistics,
           currentWeekStats:body.current_week_index_statistics,
+          weekDropdown: body.week_dropdown
         })
         this.handleStravaFetch(body.current_user.provider, body.token, body.current_user.uid)
         // fetch(`https://www.strava.com/api/v3/athletes/${body.current_user.uid}/activities?access_token=${body.token}`)
@@ -351,7 +354,9 @@ class WorkoutsIndexContainer extends Component {
       let rightCard;
       let displayCollection = []
       this.state.currentWeek.forEach(function (workout, index){
-        if (workout.id === selectedWorkout.id && index === 0) {
+        if(weeksWorkouts.length === 1) {
+          displayCollection.push(workout)
+        } else if (workout.id === selectedWorkout.id && index === 0) {
           rightCard = weeksWorkouts[index + 1]
           displayCollection.push(selectedWorkout, rightCard)
         } else if (workout.id === selectedWorkout.id && index === (weeksWorkouts.length - 1)) {
@@ -450,7 +455,6 @@ class WorkoutsIndexContainer extends Component {
     }
 
   render() {
-
     let detailsTile;
     let handleDelete;
     let handleEdit;
@@ -553,6 +557,7 @@ class WorkoutsIndexContainer extends Component {
             currentUser={this.state.currentUser}
             addNewWorkout={this.addNewWorkout}
             toggleNewForm={this.toggleNewForm}
+            weekDropdown={this.state.weekDropdown}
           />
         } else {
           newForm = ''

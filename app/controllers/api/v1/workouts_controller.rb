@@ -9,14 +9,19 @@ class Api::V1::WorkoutsController < ApplicationController
       @current_week_start = Date.today.beginning_of_week
       @current_week_end = Date.today.at_end_of_week
       current_week_all_users = calculateWeek(0).order(:workout_date)
+      current_week_all_dates = Array(@current_week_start..@current_week_end)
 
-      workouts_selected = []
-      current_week_all_users.each do |workout|
-        if workout.user_id == @current_user.id
-          workouts_selected << workout
-        end
+      workouts_selected = Workout.current_week_workouts(current_user)
+
+      user_current_week_workouts_dates = []
+
+      workouts_selected.each do |workout|
+        user_current_week_workouts_dates << workout.workout_date
       end
-      render json: workouts_selected
+
+      week_dropdown = current_week_all_dates - user_current_week_workouts_dates
+
+      render json: {workouts: workouts_selected, week_dropdown: week_dropdown}
     else
       render json: { error: review.errors.full_messages }, status: :unprocessable_entity
     end

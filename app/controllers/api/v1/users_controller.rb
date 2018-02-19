@@ -53,25 +53,25 @@ class Api::V1::UsersController < ApplicationController
         total_minutes_week += workout.time
       end
 
-      if num_of_workouts_completed > 0
+      if @current_week_workouts.length > 0
         week_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_week, Date.today.at_end_of_week, total_miles_week, total_minutes_week)
       else
         week_to_date_pace = '0'
       end
 
-      if num_of_workouts_completed > 0
+      if @current_week_workouts.length > 0
         seconds_per_mile_current_week = (total_minutes_week * 60) / total_miles_week
       else
         seconds_per_mile_current_week = '0'
       end
 
-      if num_of_workouts_completed > 0
+      if @current_week_workouts.length > 0
         pace_rate_change = (((seconds_per_mile_current_week - seconds_per_mile_ytd)/seconds_per_mile_ytd) * 100).round(1)
       else
         pace_rate_change = '0'
       end
 
-      if num_of_workouts_completed > 0
+      if @current_week_workouts.length > 0
         average_miles_per_day = (total_miles_week / @current_week_workouts.length).round(1)
         average_miles_per_day_year_to_date = (miles_to_date / year_to_date_workouts.count).round(1)
         average_miles_change = (((average_miles_per_day - average_miles_per_day_year_to_date)/average_miles_per_day_year_to_date) * 100).round(1)
@@ -94,6 +94,19 @@ class Api::V1::UsersController < ApplicationController
       last_date_missed = missing_dates.sort!.last
       running_date_streak = (Date.today - last_date_missed).to_i
 
+      week_start = start_date = Date.today.beginning_of_week
+      week_end = end_date = Date.today.at_end_of_week
+      current_week_all_dates = Array(week_start..week_end)
+
+      user_current_week_workouts_dates = []
+
+      @current_week_workouts.each do |workout|
+        user_current_week_workouts_dates << workout.workout_date
+      end
+
+      week_dropdown = current_week_all_dates - user_current_week_workouts_dates
+
+
       render json: {
         current_user: @current_user,
         token: ENV['STRAVA_TOKEN'],
@@ -103,6 +116,7 @@ class Api::V1::UsersController < ApplicationController
         current_week: @current_week_workouts,
         year_to_date_miles: miles_to_date,
         year_to_date_minutes: minutes_to_date,
+        week_dropdown: week_dropdown,
         current_week_index_statistics:{
           total_miles: total_miles_week,
           average_pace: week_to_date_pace,

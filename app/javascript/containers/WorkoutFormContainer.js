@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FormField from '../components/FormField'
+import moment from 'moment';
 
 class WorkoutFormContainer extends Component {
   constructor(props) {
@@ -102,6 +103,14 @@ class WorkoutFormContainer extends Component {
   }
 
   render() {
+    console.log(this.state.workoutDate)
+    let dropDown = this.props.weekDropdown.map(date => {
+      return(
+        <option key={date} value={date}>{moment(date).format('dddd MMM DD YYYY')}</option>
+      )
+    })
+
+
     let errorMessage = this.state.errors.map(error => {
       return(<div key={error}> {error} </div>)
     })
@@ -111,14 +120,11 @@ class WorkoutFormContainer extends Component {
           <form className='new-workout-form callout' onSubmit={this.handleSubmit}>
             <h3>Add A New Workout</h3>
             <span className="errors">{errorMessage}</span>
-            <div className="field-new-workout">
-              <FormField
-                content={this.state.workoutDate}
-                label='Workout Date'
-                name='workout-date'
-                handleChange={this.handleDateChange}
-              />
-            </div>
+
+            <label htmlFor="workout-date">Workout Date</label>
+            <select id='workout-date' className='field-new-workout' onClick={this.handleDateChange} >
+              {dropDown}
+            </select>
             <div className="field-new-workout">
               <FormField
                 content={this.state.workoutDistance}
@@ -154,3 +160,12 @@ class WorkoutFormContainer extends Component {
 }
 
 export default WorkoutFormContainer;
+
+// <div className="field-new-workout">
+// <FormField
+// content={this.state.workoutDate}
+// label='Workout Date'
+// name='workout-date'
+// handleChange={this.handleDateChange}
+// />
+// </div>
