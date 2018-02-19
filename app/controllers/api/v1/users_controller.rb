@@ -29,13 +29,13 @@ class Api::V1::UsersController < ApplicationController
       if num_of_workouts_completed > 0
         year_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_year, Date.today, miles_to_date, minutes_to_date)
       else
-        year_to_date_pace = "N/A"
+        year_to_date_pace = "0"
       end
 
       if num_of_workouts_completed > 0
         seconds_per_mile_ytd = (minutes_to_date * 60) / miles_to_date
       else
-        seconds_per_mile_ytd = "N/A"
+        seconds_per_mile_ytd = "0"
       end
 
       @current_week_workouts = Workout.current_week_workouts(current_user)
@@ -56,19 +56,19 @@ class Api::V1::UsersController < ApplicationController
       if num_of_workouts_completed > 0
         week_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_week, Date.today.at_end_of_week, total_miles_week, total_minutes_week)
       else
-        week_to_date_pace = 'N/A'
+        week_to_date_pace = '0'
       end
 
       if num_of_workouts_completed > 0
         seconds_per_mile_current_week = (total_minutes_week * 60) / total_miles_week
       else
-        seconds_per_mile_current_week = "N/A"
+        seconds_per_mile_current_week = '0'
       end
 
       if num_of_workouts_completed > 0
         pace_rate_change = (((seconds_per_mile_current_week - seconds_per_mile_ytd)/seconds_per_mile_ytd) * 100).round(1)
       else
-        pace_rate_change = "N/A"
+        pace_rate_change = '0'
       end
 
       if num_of_workouts_completed > 0
@@ -76,9 +76,9 @@ class Api::V1::UsersController < ApplicationController
         average_miles_per_day_year_to_date = (miles_to_date / year_to_date_workouts.count).round(1)
         average_miles_change = (((average_miles_per_day - average_miles_per_day_year_to_date)/average_miles_per_day_year_to_date) * 100).round(1)
       else
-        average_miles_per_day = "N/A"
-        average_miles_per_day_year_to_date = "N/A"
-        average_miles_change = "N/A"
+        average_miles_per_day = '0'
+        average_miles_per_day_year_to_date = '0'
+        average_miles_change = '0'
       end
       date_from = Date.today.beginning_of_year
       date_to = Date.today
