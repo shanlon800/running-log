@@ -234,61 +234,6 @@ class WorkoutsIndexContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
-
-    // handleStravaFetch(provider, token, id) {
-    //   if (provider === 'strava') {
-    //     fetch(`https://www.strava.com/api/v3/athletes/${id}/stats?access_token=${token}`)
-    //       .then(response => {
-    //         if (response.ok) {
-    //           return response;
-    //         } else {
-    //           let errorMessage = `${response.status} (${response.statusText})`,
-    //               error = new Error(errorMessage);
-    //           throw(error);
-    //         }
-    //       })
-    //       .then(response => response.json())
-    //       .then(body => {
-    //         this.setState({stravaData: body})
-    //
-    //       })
-    //       .catch(error => console.error(`Error in fetch: ${error.message}`));
-    //   }
-    // }
-    // THE CODE BELOW WORKS WITHOUT STRAVA
-    // componentWillMount() {
-    //   fetch('/api/v1/users', { credentials: 'same-origin' })
-    //     .then(response => {
-    //       if (response.ok) {
-    //         return response;
-    //       } else {
-    //         let errorMessage = `${response.status} (${response.statusText})`,
-    //             error = new Error(errorMessage);
-    //         throw(error);
-    //       }
-    //     })
-    //     .then(response => response.json())
-    //     .then(body => {
-    //       this.setState({
-    //         currentUser: body.current_user,
-    //         workouts: body.workouts,
-    //         belongTeams: body.belong_to_teams,
-    //         currentWeek: body.current_week,
-    //         oneBack: body.past_weeks.one_week_back,
-    //         twoBack: body.past_weeks.two_week_back,
-    //         threeBack: body.past_weeks.three_week_back,
-    //         fourBack: body.past_weeks.four_week_back,
-    //         allTeams: body.all_teams,
-    //         chartData: body.current_week,
-    //         yearToDateStats: body.year_to_date_index_statistics,
-    //         currentWeekStats:body.current_week_index_statistics,
-    //       })
-    //     })
-    //     .catch(error => console.error(`Error in fetch: ${error.message}`));
-    //   }
-
-
-
     calculatePace(miles, min) {
       let secondsPerMile = (min * 60) / miles
       let minPace = Math.floor(secondsPerMile / 60)
