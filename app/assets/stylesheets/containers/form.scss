@@ -19,7 +19,7 @@
 }
 
 .editing-form {
-  width: 500px;
+  width: 400px;
   height: 500px;
   padding: 10px;
   position: absolute;
@@ -58,6 +58,16 @@
 }
 
 .field-new-workout-notes{
+  margin: auto;
+  width: 60%;
+}
+
+.field-edit-workout{
+  margin: auto;
+  width: 60%;
+}
+
+.field-edit-workout-notes{
   margin: auto;
   width: 60%;
 }

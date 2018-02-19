@@ -125,26 +125,32 @@ class WorkoutEditContainer extends Component {
             <select id='workout-date' className='field-new-workout' value={this.state.newDate} onChange={this.handleDateChange} >
               {dropDown}
             </select>
-            <FormField
-              content={this.state.workoutDistance}
-              label='Workout Distance'
-              name='workout-distance'
-              handleChange={this.handleDistanceChange}
-            />
-            <FormField
-              content={this.state.workoutTime}
-              label='Workout Time'
-              name='workout-time'
-              handleChange={this.handleTimeChange}
-            />
-            <FormField
-              content={this.state.workoutNotes}
-              label='Workout Notes'
-              name='workout-notes'
-              handleChange={this.handleNotesChange}
-            />
-            <input className="button" type="submit" value="Submit" onClick={this.handleSubmit}/>
-            <button className="button" onClick={this.props.closeEditForm}>Cancel</button>
+            <div className='field-edit-workout'>
+              <FormField
+                content={this.state.workoutDistance}
+                label='Workout Distance'
+                name='workout-distance'
+                handleChange={this.handleDistanceChange}
+              />
+            </div>
+            <div className='field-edit-workout'>
+              <FormField
+                content={this.state.workoutTime}
+                label='Workout Time'
+                name='workout-time'
+                handleChange={this.handleTimeChange}
+              />
+            </div>
+            <div className='field-edit-workout-notes'>
+              <FormField
+                content={this.state.workoutNotes}
+                label='Workout Notes'
+                name='workout-notes'
+                handleChange={this.handleNotesChange}
+              />
+            </div>
+            <button id="add-new-workout-buttons" type="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>
+            <button id="add-new-workout-buttons" onClick={this.props.closeEditForm}>Cancel</button>
           </form>
         </div>
         <div className="form-sheet"></div>

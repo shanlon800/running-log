@@ -310,6 +310,8 @@ class WorkoutsIndexContainer extends Component {
       let secPace = Math.floor(secondsPerMile % 60)
       if (secPace === 0){
         return `${minPace}:00`
+      } else if (secPace < 10){
+        return `${minPace}:0${secPace}`
       } else {
         return `${minPace}:${secPace}`
       }
@@ -322,7 +324,10 @@ class WorkoutsIndexContainer extends Component {
       let secPace = Math.floor(secondsPerMile % 60)
       if (secPace === 0){
         return `${minPace}:00`
-      } else {
+      } else if (secPace < 10){
+        return `${minPace}:0${secPace}`
+      }
+      else {
         return `${minPace}:${secPace}`
       }
     }
@@ -605,21 +610,25 @@ class WorkoutsIndexContainer extends Component {
     })
 
     let paceIcon = ''
-    if (this.state.yearToDateStats.year_to_date_avg_pace < this.state.currentWeekStats.average_pace) {
-      paceIcon = <span><i className="fas fa-long-arrow-alt-up" id="increasing-red"></i><h7 id="increasing-red-text">({this.state.currentWeekStats.pace_rate_change}%)</h7></span>
-    } else if (this.state.yearToDateStats.year_to_date_avg_pace < this.state.currentWeekStats.average_pace) {
-      paceIcon = <span><i className="fas fa-long-arrow-alt-down" id='decreasing green'></i><h7 id="decreasing-green-text">({this.state.currentWeekStats.pace_rate_change}%)</h7></span>
-    } else {
-      paceIcon = <span><i className="fas fa-arrows-alt-h" id='equal-sign'></i></span>
+    if (this.state.yearToDateStats != ''){
+      if (this.state.yearToDateStats.year_to_date_avg_pace < this.state.currentWeekStats.average_pace) {
+        paceIcon = <span><i className="fas fa-long-arrow-alt-up" id="increasing-red"></i><h7 id="increasing-red-text">({this.state.currentWeekStats.pace_rate_change}%)</h7></span>
+      } else if (this.state.yearToDateStats.year_to_date_avg_pace > this.state.currentWeekStats.average_pace) {
+        paceIcon = <span><i className="fas fa-long-arrow-alt-down" id='decreasing-green'></i><h7 id="decreasing-green-text">({this.state.currentWeekStats.pace_rate_change}%)</h7></span>
+      } else {
+        paceIcon = <span><i className="fas fa-arrows-alt-h" id='equal-sign'></i></span>
+      }
     }
 
     let avgMilesIcon = ''
-    if(this.state.yearToDateStats.average_miles_per_day_year_to_date < this.state.currentWeekStats.average_miles_per_day) {
-      avgMilesIcon = <span><i className="fas fa-long-arrow-alt-up" id="increasing-green"></i><h7 id="increasing-green-text">({this.state.currentWeekStats.average_miles_change}%)</h7></span>
-    } else if (this.state.yearToDateStats.average_miles_per_day_year_to_date > this.state.currentWeekStats.average_miles_per_day){
-      avgMilesIcon = <span><i className="fas fa-long-arrow-alt-down" id='decreasing-red'></i><h7 id="decreasing-red-text">({this.state.currentWeekStats.average_miles_change}%)</h7></span>
-    } else {
-      avgMilesIcon = <span><i className="fas fa-arrows-alt-h" id='equal-sign'></i></span>
+    if (this.state.yearToDateStats != '') {
+      if(this.state.yearToDateStats.average_miles_per_day_year_to_date < this.state.currentWeekStats.average_miles_per_day) {
+        avgMilesIcon = <span><i className="fas fa-long-arrow-alt-up" id="increasing-green"></i><h7 id="increasing-green-text">({this.state.currentWeekStats.average_miles_change}%)</h7></span>
+      } else if (this.state.yearToDateStats.average_miles_per_day_year_to_date > this.state.currentWeekStats.average_miles_per_day){
+        avgMilesIcon = <span><i className="fas fa-long-arrow-alt-down" id='decreasing-red'></i><h7 id="decreasing-red-text">({this.state.currentWeekStats.average_miles_change}%)</h7></span>
+      } else {
+        avgMilesIcon = <span><i className="fas fa-arrows-alt-h" id='equal-sign'></i></span>
+      }
     }
 
     return(

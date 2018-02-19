@@ -12,7 +12,6 @@ const App = props => {
       <Router history={browserHistory}>
         <Route path='/' component={NavBar} >
           <IndexRoute component={WorkoutsIndexContainer} />
-          <Route path='/weeks' component={MultipleWeeksContainer} />
           <Route path='/teams/:id' component={TeamContainer} />
         </Route>
       </Router>
