@@ -136,7 +136,7 @@
 
 .team-member-bio{
   text-align: center;
-  flex: 0 0 12%;
+  flex: 0 0 11%;
   padding: 1rem 1rem 1rem 1rem;
   background-color: #F8F8F8;
   border-radius: .4rem;
@@ -166,9 +166,10 @@
   padding-top: 1%;
 }
 .team-member-graph{
-  flex: 0 0 20%;
+  flex: 0 0 19%;
   background-color: #F8F8F8;
   border-radius: .4rem;
+  display: inline-block;
 }
 
 .workout-compare-chart__mileage-text {
