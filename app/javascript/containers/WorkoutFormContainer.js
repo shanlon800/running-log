@@ -103,12 +103,19 @@ class WorkoutFormContainer extends Component {
   }
 
   render() {
-    let dropDown = this.props.weekDropdown.map(date => {
+    let weekFormattedDates = this.props.weekDropdown.map(date => {
       return(
-        <option key={date} value={date}>{moment(date).format('dddd MMM DD YYYY')}</option>
+        moment(date).format('dddd MMM DD YYYY')
       )
     })
+    let newDates = weekFormattedDates.unshift('Please Select Date')
 
+
+    let dropDown = weekFormattedDates.map(date => {
+      return(
+        <option key={date} value={date}>{date}</option>
+      )
+    })
 
     let errorMessage = this.state.errors.map(error => {
       return(<div key={error}> {error} </div>)
