@@ -1,11 +1,6 @@
 class Api::V1::TeamsController < ApplicationController
   before_action :authorize_user
-  skip_before_action :verify_authenticity_token, only: [:destroy, :show, :create]
-  # def index
-  #   @team = Team.find(params[:id])
-  #   @users = @team.users
-  #   render json: {users: @users}
-  # end
+  skip_before_action :verify_authenticity_token, only: [:destroy, :create]
 
   def show
     @current_week_start = Date.today.beginning_of_week
@@ -61,8 +56,4 @@ class Api::V1::TeamsController < ApplicationController
       raise ActionController::RoutingError.new("Not Found")
     end
   end
-
-  # def calculateWeek(weeksBack)
-  #   Workout.where("workout_date >= ? AND workout_date <= ?", (@current_week_start - (weeksBack * 7)), (@current_week_end - (weeksBack * 7)))
-  # end
 end

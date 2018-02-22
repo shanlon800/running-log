@@ -54,11 +54,15 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
 
 
   describe "Post#create" do
-    it 'creates a new team' do
+    it 'creates a new team and adds a new goal and membership for current user' do
       sign_in(user_one, :scope => :user)
 
       teams = Team.all
       prev_count = teams.count
+      memberships = Membership.all
+      goals = Goal.all
+      prev_count_memberships = memberships.count
+      prev_count_goals = goals.count
 
       post_json = {team:{team_name: "Boston Athletic Association"}}
 
@@ -67,6 +71,8 @@ RSpec.describe Api::V1::TeamsController, type: :controller do
       returned_json = JSON.parse(response.body)
       expect(Team.all.count).to eq(prev_count + 1)
       expect(returned_json['belong_to_teams'].count).to eq 2
+      expect(Membership.all.count).to eq(prev_count_memberships + 1)
+      expect(Goal.all.count).to eq(prev_count_goals + 1)
 
     end
 

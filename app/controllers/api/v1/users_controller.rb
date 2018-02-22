@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  # skip_before_action :verify_authenticity_token, only: [:destroy]
+  skip_before_action :verify_authenticity_token, only: [:destroy]
 
 
   def index
@@ -110,7 +110,7 @@ class Api::V1::UsersController < ApplicationController
       week_start = start_date = Date.today.beginning_of_week
       week_end = end_date = Date.today.at_end_of_week
       current_week_all_dates = Array(week_start..week_end)
-
+      current_week_all_dates
       user_current_week_workouts_dates = []
 
       @current_week_workouts.each do |workout|
@@ -118,7 +118,6 @@ class Api::V1::UsersController < ApplicationController
       end
 
       week_dropdown = current_week_all_dates - user_current_week_workouts_dates
-
 
 
       render json: {
