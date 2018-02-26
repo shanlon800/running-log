@@ -29,26 +29,11 @@ class Api::V1::UsersController < ApplicationController
         @teams_with_goals << team_goal
       end
 
-      # maybe move to models?
-      miles_to_date = 0
-      minutes_to_date = 0
+      miles_to_date = Workout.calcuate_total_ytd_miles(current_user)
+      minutes_to_date = Workout.calculate_total_ytd_minutes(current_user)
 
-      year_to_date_workouts.each do |workout|
-        miles_to_date += workout.distance
-        minutes_to_date += workout.time
-      end
-
-      if num_of_workouts_completed > 0
-        year_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_year, Date.today, miles_to_date, minutes_to_date)
-      else
-        year_to_date_pace = "0"
-      end
-
-      if num_of_workouts_completed > 0
-        seconds_per_mile_ytd = (minutes_to_date * 60) / miles_to_date
-      else
-        seconds_per_mile_ytd = "0"
-      end
+      year_to_date_pace = Workout.validate_ytd_pace(current_user)
+      seconds_per_mile_ytd = Workout.calculate_sec_per_mile_ytd(current_user)
 
       @current_week_workouts = Workout.current_week_workouts(current_user)
       @one_week_back_workouts = Workout.prior_week_workouts(1, current_user)
@@ -58,31 +43,14 @@ class Api::V1::UsersController < ApplicationController
 
 
 
-      total_miles_week = 0
-      total_minutes_week = 0
+      total_miles_week = Workout.calculate_week_to_date_miles(current_user)
+      total_minutes_week = Workout.calculate_week_to_date_minutes(current_user)
 
-      @current_week_workouts.each do |workout|
-        total_miles_week += workout.distance
-        total_minutes_week += workout.time
-      end
+      week_to_date_pace = Workout.calculate_week_to_date_pace(current_user)
 
-      if @current_week_workouts.length > 0
-        week_to_date_pace = Workout.calculate_pace(current_user, Date.today.beginning_of_week, Date.today.at_end_of_week, total_miles_week, total_minutes_week)
-      else
-        week_to_date_pace = '0'
-      end
+      seconds_per_mile_current_week = Workout.calculate_sec_per_mile_current_week(current_user)
 
-      if @current_week_workouts.length > 0
-        seconds_per_mile_current_week = (total_minutes_week * 60) / total_miles_week
-      else
-        seconds_per_mile_current_week = '0'
-      end
-
-      if @current_week_workouts.length > 0
-        pace_rate_change = (((seconds_per_mile_current_week - seconds_per_mile_ytd)/seconds_per_mile_ytd) * 100).round(1)
-      else
-        pace_rate_change = '0'
-      end
+      pace_rate_change = Workout.calculate_pace_rate_change(current_user)
 
       if @current_week_workouts.length > 0
         average_miles_per_day = (total_miles_week / @current_week_workouts.length).round(1)
@@ -93,32 +61,13 @@ class Api::V1::UsersController < ApplicationController
         average_miles_per_day_year_to_date = '0'
         average_miles_change = '0'
       end
-      date_from = Date.today.beginning_of_year
-      date_to = Date.today
 
-      all_dates_year_to_date = Array(date_from..date_to)
+      running_date_streak = Workout.calculate_days_run_in_row(current_user)
 
-      date_of_workouts_year_to_date = []
-      year_to_date_workouts.each do |workout|
-        date_of_workouts_year_to_date << workout.workout_date
-      end
+      week_start = Date.today.beginning_of_week
+      week_end = Date.today.at_end_of_week
 
-      missing_dates = all_dates_year_to_date - date_of_workouts_year_to_date
-      last_date_missed = missing_dates.sort!.last
-      running_date_streak = (Date.today - last_date_missed).to_i
-
-      week_start = start_date = Date.today.beginning_of_week
-      week_end = end_date = Date.today.at_end_of_week
-      current_week_all_dates = Array(week_start..week_end)
-      current_week_all_dates
-      user_current_week_workouts_dates = []
-
-      @current_week_workouts.each do |workout|
-        user_current_week_workouts_dates << workout.workout_date
-      end
-
-      week_dropdown = current_week_all_dates - user_current_week_workouts_dates
-
+      week_dropdown = Workout.week_dropdown(current_user)
 
       render json: {
         current_user: @current_user,
@@ -156,6 +105,4 @@ class Api::V1::UsersController < ApplicationController
       render json: {current_user: nil, message: "Please sign in.", status: 401}
     end
   end
-
-
 end
