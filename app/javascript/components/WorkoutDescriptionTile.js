@@ -5,7 +5,7 @@ const WorkoutDescriptionTile = props => {
   let date = moment(props.date).format("MMM DD, YYYY")
   let deleteButton;
   let editButton;
-  if (props.creator === props.currentUser.id) {
+  if (props.creator === props.currentUserId) {
     deleteButton = <button id='delete-workout-button' onClick={props.handleDelete}>Delete</button>
     editButton = <button id="edit-workout-button" onClick={props.toggleEditForm} value={props.id}>Edit</button>
   } else {
