@@ -21,9 +21,3 @@ const WorkoutCompareTile = props => {
 }
 
 export default WorkoutCompareTile;
-
-
-// <h7>Time:</h7>
-// <p id="time">{props.time} Minutes</p>
-// <h7>Pace:</h7>
-// <p id="pace">{props.pace}/mi</p>
