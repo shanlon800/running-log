@@ -466,6 +466,7 @@ class WorkoutsIndexContainer extends Component {
             key={workout.id}
             pace={this.calculatePace(workout.distance, workout.time)}
             currentUser={this.state.currentUser}
+            currentUserId={this.state.currentUser.id}
             creator={workout.user_id}
             handleDelete={handleDelete}
             toggleEditForm={handleEdit}
