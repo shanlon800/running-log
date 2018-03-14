@@ -155,7 +155,7 @@ class WorkoutFormContainer extends Component {
               handleChange={this.handleNotesChange}
             />
             </div>
-            <button id="add-new-workout-buttons" type="submit" onClick={this.handleSubmit}>Submit</button>
+            <button id="add-new-workout-buttons-submit-form" type="submit" onClick={this.handleSubmit}>Submit</button>
             <button id="add-new-workout-buttons" onClick={this.props.toggleNewForm}>Cancel</button>
           </form>
         </div>
