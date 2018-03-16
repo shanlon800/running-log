@@ -7,11 +7,6 @@ const DropdownTile = (props) => {
       <option value={team.team_name}>{team.team_name}</option>
     )
   })
-  return(
-    <select>
-      <option value="grapefruit">Grapefruit</option>
-    </select>
-  )
 }
 
 export default DropdownTile
