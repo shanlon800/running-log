@@ -3,7 +3,6 @@ import React from 'react'
 import { Route, IndexRoute, Router, browserHistory } from 'react-router';
 import NavBar from './components/NavBar';
 import WorkoutsIndexContainer from './containers/WorkoutsIndexContainer';
-import MultipleWeeksContainer from './containers/MultipleWeeksContainer';
 import TeamContainer from './containers/TeamContainer';
 
 const App = props => {
