@@ -97,7 +97,7 @@ class NewTeamFormContainer extends Component {
           <select onChange={this.handleChange}>
             {teams}
           </select>
-          <input type="submit" value="Join" />
+          <input id='new-team-cancel-button' type="submit" value="Join" />
         </form>
     } else {
       joinTeam = ''

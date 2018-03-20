@@ -30,26 +30,6 @@ class WorkoutEditContainer extends Component {
     this.setState({errors: []})
   }
 
-  handleDistanceChange(event) {
-    let newDistance = event.target.value
-    this.setState({workoutDistance: newDistance})
-  }
-
-  handleDateChange(event) {
-    let newDate = event.target.value
-    this.setState({workoutDate: newDate})
-  }
-
-  handleTimeChange(event) {
-    let newTime = event.target.value
-    this.setState({workoutTime: newTime})
-  }
-
-  handleNotesChange(event) {
-    let newNotes = event.target.value
-    this.setState({workoutNotes: newNotes})
-  }
-
   handleClear() {
     this.setState({
       workoutDistance: 0,
@@ -57,6 +37,21 @@ class WorkoutEditContainer extends Component {
       workoutTime: 0,
       workoutNotes: '',
     })
+  }
+
+  handleDateChange(event) {
+    let newDate = event.target.value
+    this.setState({workoutDate: newDate})
+  }
+
+  handleDistanceChange(event) {
+    let newDistance = event.target.value
+    this.setState({workoutDistance: newDistance})
+  }
+
+  handleNotesChange(event) {
+    let newNotes = event.target.value
+    this.setState({workoutNotes: newNotes})
   }
 
   handleSubmit(event) {
@@ -80,17 +75,22 @@ class WorkoutEditContainer extends Component {
     }
   }
 
-  validateDistance(){
-    if(this.state.workoutDistance === '') {
-      return['Please enter a distance']
-    } else {
-      return []
-    }
+  handleTimeChange(event) {
+    let newTime = event.target.value
+    this.setState({workoutTime: newTime})
   }
 
   validateDate(){
     if(this.state.workoutDate === '') {
       return['Please enter a date']
+    } else {
+      return []
+    }
+  }
+
+  validateDistance(){
+    if(this.state.workoutDistance === '') {
+      return['Please enter a distance']
     } else {
       return []
     }

@@ -1,518 +1,517 @@
-
-.workout-text {
-  background-color: #76c3d3;
-}
-
-
-#current-week-header{
-  color: white;
-}
-
-
-* {
-  box-sizing: border-box;
-}
-.container {
-  margin-bottom: 3%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-
-}
-@media all and (min-width: 768px) and (max-width: 959px){
-  .container {
-    flex-direction: row;
-  }
-}
-@media all and (min-width: 960px) {
-  .container {
-    flex-direction: row;
-  }
-}
-.run-card {
-  background: white;
-  flex: 0 0 14.28%;
-  outline: .02rem solid black;
-  position:relative;
-  cursor: pointer;
-}
-@media all and (min-width: 768px) and (max-width: 959px){
-  .run-card {
-    flex: 0 0 25%;
-  }
-}
-.run-card__header {
-  background-color: #F74747;
-  height: 2rem;
-  overflow: auto;
-  padding-bottom: 0;
-  color: #fff;
-  text-align: center;
-  border-bottom: .02rem solid black;
-}
-.run-card__body {
-  padding: .5rem;
-  text-align: center;
-}
-
-#selected {
-  background-color: #E5E3E3;
-    padding: 2px;
-    border: 1px solid black;
-    box-shadow:  1px 1px black,
-     2px 2px black,
-     3px 3px black,
-     4px 4px black,
-     5px 5px black;
-}
-
-//This is the top row of data
-
-#join-team{
-  background-color: #F8F8F8;
-  border-radius: .4rem;
-  margin-bottom: 4%;
-  padding-left: 5%;
-}
-#random-box{
-  height: 100%;
-  background-color: #F8F8F8;
-  border-radius: .4rem;
-  padding-left: 5%;
-}
-
-#current-week-statistics-header{
-  color: #9EA3A6;
-}
-
-#equal-sign{
-  font-size: 1.5em;
-  text-align: center;
-}
-
-#increasing-green{
-  color: green;
-  font-size: 1.5em;
-}
-
-#increasing-green-text{
-  color: green;
-}
-#decreasing-green{
-  color: green;
-  font-size: 1.5em;
-}
-
-#decreasing-green-text{
-  color: green;
-}
-
-#increasing-red{
-  color: red;
-  font-size: 1.5em;
-}
-
-#increasing-red-text{
-  color: red;
-}
-
-#decreasing-red{
-  color: red;
-  font-size: 1.5em;
-}
-
-#decreasing-red-text{
-  color: red;
-}
-
-table {
-  border: none;
-  background-color: #F8F8F8;
-  line-height: 0.5rem;
-}
-#total-miles{
-  font-size: 1.5rem;
-  font-weight: bolder;
-}
-
-#ytd-stats{
-  color:#9EA3A6;
-}
-
-#top-row-container{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  margin-top: 3%;
-}
-#team-list{
-  border-radius: .4rem;
-  margin-bottom: 4%;
-  margin-top: 4%;
-  width: 47.5%;
-  margin-left: 2.5%;
-  display: flex;
-  flex-direction: column;
-}
-
-.team-list-wrapper{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  width: 80%;
-  margin-left: 5%;
-}
-
-.current-goal{
-  text-align: right;
-  flex: auto;
-  color: #262E3A;
-}
-
-#teams-label{
-  color: #9EA3A6;
-}
-
-.team-names{
-  color: #9EA3A6;
-}
-
-#current-runner{
-  color: #9EA3A6;
-  margin-left: 5%;
-}
- #user-profile {
-   color: #9EA3A6;
-   background-color: #F8F8F8;
-   border-radius: .4rem;
-   margin-bottom: 4%;
-   margin-top: 4%;
-   width: 47.5%;
-   margin-right: 2.5%;
-   padding-bottom: 5%;
- }
-
- .current-runner__image{
-
-   height: 100%;
-   width: 100%;
- }
- .image-wrap{
-   margin: 0 3% 3% 3%;
-   padding: 2%;
-   background-color: #F1F1F1;
-   border-radius: .4rem;
-   max-height: 25rem;
-   overflow: hidden;
-   max-width: 15rem;
- }
-#bio-wrapper{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-.bio-info{
-  flex:inline;
-  margin-left: 5%;
-}
-
-.bio-header{
-  text-align: center;
-}
-.bio-text{
-  text-align: center;
-}
-
-#year-to-date{
-  text-align: center;
-}
-#stats-text {
-  margin-bottom: 5%;
-  padding-bottom: 5%;
-}
-
-#strava-text{
-  margin-top: 5%;
-}
-.indiv-stats-container{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  width: 80%;
-  margin-left: 5%;
-}
-
-.stat-number{
-  text-align: right;
-  flex: auto;
-  color: #262E3A;
-}
-
-.stat-header{
-  flex: auto;
-}
-// This is for the boxes containing the dates
-
-
-
-#current-week-dashboard-header {
-  color: #9ea3a6;
-  padding-top: 2%;
-}
-#current-month {
-  text-align: center;
-  background-color: #F74747;
-  // background-color: #D3503A;
-  outline: .02rem solid black;
-}
-
-#month-text{
-  padding: 0;
-  margin: 0;
-}
-#index-page-current-week{
-  background-color: #F8F8F8;
-  opacity: .88;
-  padding: 0 5% 0% 5%;
-  border-radius: .4rem;
-  margin-bottom: 4%;
-  margin-top: 3%;
-}
-
-#distance{
-  font-size: 5rem;
-}
-
-.date-header{
-  padding: 0;
-  margin: 0;
-}
-
-// workout details onclick info is below here
-
-#workout-description-breakout-container{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.description-container {
-  margin: 1% 0% 4% 0%;
-  width: 33%;
-  background-color: #F8F8F8;
-  border-radius: .4rem;
-  padding-left: 4%;
-  padding-right: 4%;
-  padding-top: 3%;
-  flex: 0 0 32%;
-}
-
-.selected-detail-card {
-  margin: 1% 2% 4% 2%;
-  width: 33%;
-  background-color: #F8F8F8;
-  border-radius: .4rem;
-  padding-left: 5%;
-  padding-top: 3%;
-  flex: 0 0 32%;
-
-  border: 1px solid black;
-  box-shadow:  1px 1px black,
-   2px 2px black,
-   3px 3px black,
-   4px 4px black,
-   5px 5px black;
-}
-.description-card__wrapper{
-  width: 100%;
-}
-
-.description-card__header {
-  text-align: left;
-}
-
-#workout-details-header{
-  color: #9EA3A6;
-  text-align: left;
-}
-
-.selected-detail-card h3{
-  text-align: left
-}
-
-
-
-// week comparison charts
-#week-compare-dashboard-tile{
-  background-color: #F8F8F8;
-  border-radius: .4rem;
-  margin-bottom: 5%;
-}
-
-#google-charts-wrapper{
-  margin: 0 auto;
-}
-#ComboChart1{
-  margin: 0 auto;
-}
-
-#chart-dashboard-header{
-  margin-left: 5%;
-  color: #9ea3a6;
-  padding-top: 2%;
-}
-
-//buttons
-#add-a-workout{
-  font-weight: bold;
-  background-color: #F74747;
-  color: #F8F8F8;
-  height: 2rem;
-  text-align: center;
-  padding: 0.3rem;
-  font-size: .8rem;
-  border-radius: .2rem;
-}
-
-#delete-workout-button{
-  font-weight: bold;
-  background-color: #F74747;
-  color: #F8F8F8;
-  height: 2rem;
-  width: 4rem;
-  text-align: center;
-  padding: 0.3rem;
-  font-size: .8rem;
-  border-radius: .2rem;
-}
-
-#add-new-workout-buttons{
-  margin-left: 4px;
-  font-weight: bold;
-  background-color: #F74747;
-  color: #F8F8F8;
-  height: 2rem;
-  width: 4rem;
-  text-align: center;
-  padding: 0.3rem;
-  font-size: .8rem;
-  border-radius: .2rem;
-}
-
-#add-new-workout-buttons-submit-form{
-  margin-left: 4px;
-  font-weight: bold;
-  background-color: #F74747;
-  color: #F8F8F8;
-  height: 2rem;
-  width: 4rem;
-  text-align: center;
-  padding: 0.3rem;
-  font-size: .8rem;
-  border-radius: .2rem;
-}
-
-#edit-workout-button{
-  font-weight: bold;
-  background-color: #347FB4;
-  color: #F8F8F8;
-  height: 2rem;
-  width: 4rem;
-  text-align: center;
-  padding: 0.3rem;
-  font-size: .8rem;
-  border-radius: .2rem;
-  margin-left: 4px;
-}
-
-
-#button-compare-week{
-  margin-left: 25%;
-}
-
-.unselected-week-comparsion-button{
-  font-weight: bold;
-  background-color: #E7E7E7;
-  color: #919290;
-  height: 3rem;
-  width: 6rem;
-  text-align: center;
-  padding: 0.3rem;
-  font-size: .8rem;
-  border-radius: .2rem;
-  margin: 1%;
-}
-
-.unselected-week-comparsion-button:hover{
-  background-color: #F74747;
-}
-
-.unselected-week-comparsion-button:focus{
-  background-color: #F74747;
-  outline: 0;
-}
-
-.new-team-button{
-  font-weight: bold;
-  background-color: #F74747;
-  color: #F8F8F8;
-  height: 2rem;
-  text-align: center;
-  padding: 0.3rem;
-  font-size: .8rem;
-  border-radius: .2rem;
-  margin-left: 2rem;
-}
-
-.new-team-button:hover{
-  background-color: #E7E7E7;
-}
-
-.new-team-button:focus{
-  background-color: #F74747;
-  outline: 0;
-}
-.choose-existing-team:hover{
-  background-color: #E7E7E7;
-}
-
-.choose-existing-team:focus{
-  background-color: #F74747;
-  outline: 0;
-}
-
-.choose-existing-team{
-  font-weight: bold;
-  background-color: #F74747;
-  color: #F8F8F8;
-  height: 2rem;
-  text-align: center;
-  padding: 0.3rem;
-  font-size: .8rem;
-  border-radius: .2rem;
-  margin-left: 4rem;
-}
-
-#new-team-cancel-button{
-  font-weight: bold;
-  background-color: #F74747;
-  color: #F8F8F8;
-  height: 2rem;
-  text-align: center;
-  padding: 0.3rem;
-  font-size: .8rem;
-  border-radius: .2rem;
-}
-
-#new-team-cancel:hover{
-  background-color: #E7E7E7;
-  outline: 0;
-}
-
-#new-team-cancel:focus{
-  background-color: #F74747;
-  outline: 0;
-}
-#join-team-button-collection{
-
-}
+// 
+// .workout-text {
+//   background-color: #76c3d3;
+// }
+//
+//
+// #current-week-header{
+//   color: white;
+// }
+//
+//
+// * {
+//   box-sizing: border-box;
+// }
+// .container {
+//   margin-bottom: 3%;
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: column;
+//
+// }
+// @media all and (min-width: 768px) and (max-width: 959px){
+//   .container {
+//     flex-direction: row;
+//   }
+// }
+// @media all and (min-width: 960px) {
+//   .container {
+//     flex-direction: row;
+//   }
+// }
+// .run-card {
+//   background: white;
+//   flex: 0 0 14.28%;
+//   outline: .02rem solid black;
+//   position:relative;
+//   cursor: pointer;
+// }
+// @media all and (min-width: 768px) and (max-width: 959px){
+//   .run-card {
+//     flex: 0 0 25%;
+//   }
+// }
+// .run-card__header {
+//   background-color: #F74747;
+//   height: 2rem;
+//   overflow: auto;
+//   padding-bottom: 0;
+//   color: #fff;
+//   text-align: center;
+//   border-bottom: .02rem solid black;
+// }
+// .run-card__body {
+//   padding: .5rem;
+//   text-align: center;
+// }
+//
+// #selected {
+//   background-color: #E5E3E3;
+//     padding: 2px;
+//     border: 1px solid black;
+//     box-shadow:  1px 1px black,
+//      2px 2px black,
+//      3px 3px black,
+//      4px 4px black,
+//      5px 5px black;
+// }
+//
+// //This is the top row of data
+//
+// #join-team{
+//   background-color: #F8F8F8;
+//   border-radius: .4rem;
+//   margin-bottom: 4%;
+//   padding-left: 5%;
+// }
+// #random-box{
+//   height: 100%;
+//   background-color: #F8F8F8;
+//   border-radius: .4rem;
+//   padding-left: 5%;
+// }
+//
+// #current-week-statistics-header{
+//   color: #9EA3A6;
+// }
+//
+// #equal-sign{
+//   font-size: 1.5em;
+//   text-align: center;
+// }
+//
+// #increasing-green{
+//   color: green;
+//   font-size: 1.5em;
+// }
+//
+// #increasing-green-text{
+//   color: green;
+// }
+// #decreasing-green{
+//   color: green;
+//   font-size: 1.5em;
+// }
+//
+// #decreasing-green-text{
+//   color: green;
+// }
+//
+// #increasing-red{
+//   color: red;
+//   font-size: 1.5em;
+// }
+//
+// #increasing-red-text{
+//   color: red;
+// }
+//
+// #decreasing-red{
+//   color: red;
+//   font-size: 1.5em;
+// }
+//
+// #decreasing-red-text{
+//   color: red;
+// }
+//
+// table {
+//   border: none;
+//   background-color: #F8F8F8;
+//   line-height: 0.5rem;
+// }
+// #total-miles{
+//   font-size: 1.5rem;
+//   font-weight: bolder;
+// }
+//
+// #ytd-stats{
+//   color:#9EA3A6;
+// }
+//
+// #top-row-container{
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   margin-top: 3%;
+// }
+// #team-list{
+//   border-radius: .4rem;
+//   margin-bottom: 4%;
+//   margin-top: 4%;
+//   width: 47.5%;
+//   margin-left: 2.5%;
+//   display: flex;
+//   flex-direction: column;
+// }
+//
+// .team-list-wrapper{
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   width: 80%;
+//   margin-left: 5%;
+// }
+//
+// .current-goal{
+//   text-align: right;
+//   flex: auto;
+//   color: #262E3A;
+// }
+//
+// #teams-label{
+//   color: #9EA3A6;
+// }
+//
+// .team-names{
+//   color: #9EA3A6;
+// }
+//
+// #current-runner{
+//   color: #9EA3A6;
+//   margin-left: 5%;
+// }
+//  #user-profile {
+//    color: #9EA3A6;
+//    background-color: #F8F8F8;
+//    border-radius: .4rem;
+//    margin-bottom: 4%;
+//    margin-top: 4%;
+//    width: 47.5%;
+//    margin-right: 2.5%;
+//    padding-bottom: 5%;
+//  }
+//
+//  .current-runner__image{
+//
+//    height: 100%;
+//    width: 100%;
+//  }
+//  .image-wrap{
+//    margin: 0 3% 3% 3%;
+//    padding: 2%;
+//    background-color: #F1F1F1;
+//    border-radius: .4rem;
+//    max-height: 25rem;
+//    overflow: hidden;
+//    max-width: 15rem;
+//  }
+// #bio-wrapper{
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+// }
+// .bio-info{
+//   flex:inline;
+//   margin-left: 5%;
+// }
+//
+// .bio-header{
+//   text-align: center;
+// }
+// .bio-text{
+//   text-align: center;
+// }
+//
+// #year-to-date{
+//   text-align: center;
+// }
+// #stats-text {
+//   margin-bottom: 5%;
+//   padding-bottom: 5%;
+// }
+//
+// #strava-text{
+//   margin-top: 5%;
+// }
+// .indiv-stats-container{
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   width: 80%;
+//   margin-left: 5%;
+// }
+//
+// .stat-number{
+//   text-align: right;
+//   flex: auto;
+//   color: #262E3A;
+// }
+//
+// .stat-header{
+//   flex: auto;
+// }
+// // This is for the boxes containing the dates
+//
+//
+//
+// #current-week-dashboard-header {
+//   color: #9ea3a6;
+//   padding-top: 2%;
+// }
+// #current-month {
+//   text-align: center;
+//   background-color: #F74747;
+//   outline: .02rem solid black;
+// }
+//
+// #month-text{
+//   padding: 0;
+//   margin: 0;
+// }
+// #index-page-current-week{
+//   background-color: #F8F8F8;
+//   opacity: .88;
+//   padding: 0 5% 0% 5%;
+//   border-radius: .4rem;
+//   margin-bottom: 4%;
+//   margin-top: 3%;
+// }
+//
+// #distance{
+//   font-size: 5rem;
+// }
+//
+// .date-header{
+//   padding: 0;
+//   margin: 0;
+// }
+//
+// // workout details onclick info is below here
+//
+// #workout-description-breakout-container{
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+// }
+//
+// .description-container {
+//   margin: 1% 0% 4% 0%;
+//   width: 33%;
+//   background-color: #F8F8F8;
+//   border-radius: .4rem;
+//   padding-left: 4%;
+//   padding-right: 4%;
+//   padding-top: 3%;
+//   flex: 0 0 32%;
+// }
+//
+// .selected-detail-card {
+//   margin: 1% 2% 4% 2%;
+//   width: 33%;
+//   background-color: #F8F8F8;
+//   border-radius: .4rem;
+//   padding-left: 5%;
+//   padding-top: 3%;
+//   flex: 0 0 32%;
+//
+//   border: 1px solid black;
+//   box-shadow:  1px 1px black,
+//    2px 2px black,
+//    3px 3px black,
+//    4px 4px black,
+//    5px 5px black;
+// }
+// .description-card__wrapper{
+//   width: 100%;
+// }
+//
+// .description-card__header {
+//   text-align: left;
+// }
+//
+// #workout-details-header{
+//   color: #9EA3A6;
+//   text-align: left;
+// }
+//
+// .selected-detail-card h3{
+//   text-align: left
+// }
+//
+//
+//
+// // week comparison charts
+// #week-compare-dashboard-tile{
+//   background-color: #F8F8F8;
+//   border-radius: .4rem;
+//   margin-bottom: 5%;
+// }
+//
+// #google-charts-wrapper{
+//   margin: 0 auto;
+// }
+// #ComboChart1{
+//   margin: 0 auto;
+// }
+//
+// #chart-dashboard-header{
+//   margin-left: 5%;
+//   color: #9ea3a6;
+//   padding-top: 2%;
+// }
+//
+// //buttons
+// #add-a-workout{
+//   font-weight: bold;
+//   background-color: #F74747;
+//   color: #F8F8F8;
+//   height: 2rem;
+//   text-align: center;
+//   padding: 0.3rem;
+//   font-size: .8rem;
+//   border-radius: .2rem;
+// }
+//
+// #delete-workout-button{
+//   font-weight: bold;
+//   background-color: #F74747;
+//   color: #F8F8F8;
+//   height: 2rem;
+//   width: 4rem;
+//   text-align: center;
+//   padding: 0.3rem;
+//   font-size: .8rem;
+//   border-radius: .2rem;
+// }
+//
+// #add-new-workout-buttons{
+//   margin-left: 4px;
+//   font-weight: bold;
+//   background-color: #F74747;
+//   color: #F8F8F8;
+//   height: 2rem;
+//   width: 4rem;
+//   text-align: center;
+//   padding: 0.3rem;
+//   font-size: .8rem;
+//   border-radius: .2rem;
+// }
+//
+// #add-new-workout-buttons-submit-form{
+//   margin-left: 4px;
+//   font-weight: bold;
+//   background-color: #F74747;
+//   color: #F8F8F8;
+//   height: 2rem;
+//   width: 4rem;
+//   text-align: center;
+//   padding: 0.3rem;
+//   font-size: .8rem;
+//   border-radius: .2rem;
+// }
+//
+// #edit-workout-button{
+//   font-weight: bold;
+//   background-color: #347FB4;
+//   color: #F8F8F8;
+//   height: 2rem;
+//   width: 4rem;
+//   text-align: center;
+//   padding: 0.3rem;
+//   font-size: .8rem;
+//   border-radius: .2rem;
+//   margin-left: 4px;
+// }
+//
+//
+// #button-compare-week{
+//   margin-left: 25%;
+// }
+//
+// .unselected-week-comparsion-button{
+//   font-weight: bold;
+//   background-color: #E7E7E7;
+//   color: #919290;
+//   height: 3rem;
+//   width: 6rem;
+//   text-align: center;
+//   padding: 0.3rem;
+//   font-size: .8rem;
+//   border-radius: .2rem;
+//   margin: 1%;
+// }
+//
+// .unselected-week-comparsion-button:hover{
+//   background-color: #F74747;
+// }
+//
+// .unselected-week-comparsion-button:focus{
+//   background-color: #F74747;
+//   outline: 0;
+// }
+//
+// .new-team-button{
+//   font-weight: bold;
+//   background-color: #F74747;
+//   color: #F8F8F8;
+//   height: 2rem;
+//   text-align: center;
+//   padding: 0.3rem;
+//   font-size: .8rem;
+//   border-radius: .2rem;
+//   margin-left: 2rem;
+// }
+//
+// .new-team-button:hover{
+//   background-color: #E7E7E7;
+// }
+//
+// .new-team-button:focus{
+//   background-color: #F74747;
+//   outline: 0;
+// }
+// .choose-existing-team:hover{
+//   background-color: #E7E7E7;
+// }
+//
+// .choose-existing-team:focus{
+//   background-color: #F74747;
+//   outline: 0;
+// }
+//
+// .choose-existing-team{
+//   font-weight: bold;
+//   background-color: #F74747;
+//   color: #F8F8F8;
+//   height: 2rem;
+//   text-align: center;
+//   padding: 0.3rem;
+//   font-size: .8rem;
+//   border-radius: .2rem;
+//   margin-left: 4rem;
+// }
+//
+// #new-team-cancel-button{
+//   font-weight: bold;
+//   background-color: #F74747;
+//   color: #F8F8F8;
+//   height: 2rem;
+//   text-align: center;
+//   padding: 0.3rem;
+//   font-size: .8rem;
+//   border-radius: .2rem;
+// }
+//
+// #new-team-cancel:hover{
+//   background-color: #E7E7E7;
+//   outline: 0;
+// }
+//
+// #new-team-cancel:focus{
+//   background-color: #F74747;
+//   outline: 0;
+// }
+// #join-team-button-collection{
+//
+// }

@@ -1,27 +1,6 @@
 import WorkoutFormContainer from '../../../app/javascript/containers/WorkoutFormContainer'
 import WorkoutsIndexContainer from '../../../app/javascript/containers/WorkoutsIndexContainer'
 
-// beforeEach(() => {
-//   tasks = [
-//     {id: 1, title: 'Check the weather'}
-//   ]
-//   fetchMock.get('/api/v1/tasks', {
-//     status: 200,
-//     body: tasks
-//   });
-//   wrapper = mount(
-//     <WorkoutFormContainer
-//       currentUser={1}
-//       addNewWorkout={addNewWorkout}
-//       toggleNewForm={toggleNewForm}
-//       showNewForm={true}
-//       weekDropdown={['Monday', 'Tuesday']}
-//     />
-//   )
-// })
-
-
-
 describe('WorkoutFormContainer', () => {
 
   let wrapper,

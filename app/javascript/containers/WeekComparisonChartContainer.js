@@ -48,6 +48,7 @@ class WeekComparisonChartContainer extends Component {
 
     })
 
+    // Data structure example for charts below
     // let data = {
     //   data: [
     //      ['Day of Week', 'Miles', 'Average Pace'],

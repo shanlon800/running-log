@@ -1,0 +1,183 @@
+#join-team{
+  background-color: #F8F8F8;
+  border-radius: .4rem;
+  margin-bottom: 4%;
+  padding-left: 5%;
+}
+#random-box{
+  height: 100%;
+  background-color: #F8F8F8;
+  border-radius: .4rem;
+  padding-left: 5%;
+}
+
+#current-week-statistics-header{
+  color: #9EA3A6;
+}
+
+#equal-sign{
+  font-size: 1.5em;
+  text-align: center;
+}
+
+#increasing-green{
+  color: green;
+  font-size: 1.5em;
+}
+
+#increasing-green-text{
+  color: green;
+}
+#decreasing-green{
+  color: green;
+  font-size: 1.5em;
+}
+
+#decreasing-green-text{
+  color: green;
+}
+
+#increasing-red{
+  color: red;
+  font-size: 1.5em;
+}
+
+#increasing-red-text{
+  color: red;
+}
+
+#decreasing-red{
+  color: red;
+  font-size: 1.5em;
+}
+
+#decreasing-red-text{
+  color: red;
+}
+
+table {
+  border: none;
+  background-color: #F8F8F8;
+  line-height: 0.5rem;
+}
+#total-miles{
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+#ytd-stats{
+  color:#9EA3A6;
+}
+
+#top-row-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-top: 3%;
+}
+#team-list{
+  border-radius: .4rem;
+  margin-bottom: 4%;
+  margin-top: 4%;
+  width: 47.5%;
+  margin-left: 2.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-list-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 80%;
+  margin-left: 5%;
+}
+
+.current-goal{
+  text-align: right;
+  flex: auto;
+  color: #262E3A;
+}
+
+#teams-label{
+  color: #9EA3A6;
+}
+
+.team-names{
+  color: #9EA3A6;
+}
+
+#current-runner{
+  color: #9EA3A6;
+  margin-left: 5%;
+}
+ #user-profile {
+   color: #9EA3A6;
+   background-color: #F8F8F8;
+   border-radius: .4rem;
+   margin-bottom: 4%;
+   margin-top: 4%;
+   width: 47.5%;
+   margin-right: 2.5%;
+   padding-bottom: 5%;
+ }
+
+ .current-runner__image{
+
+   height: 100%;
+   width: 100%;
+ }
+ .image-wrap{
+   margin: 0 3% 3% 3%;
+   padding: 2%;
+   background-color: #F1F1F1;
+   border-radius: .4rem;
+   max-height: 25rem;
+   overflow: hidden;
+   max-width: 15rem;
+ }
+#bio-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.bio-info{
+  flex:inline;
+  margin-left: 5%;
+}
+
+.bio-header{
+  text-align: center;
+}
+.bio-text{
+  text-align: center;
+}
+
+#year-to-date{
+  text-align: center;
+}
+#stats-text {
+  margin-bottom: 5%;
+  padding-bottom: 5%;
+}
+
+#strava-text{
+  margin-top: 5%;
+}
+.indiv-stats-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 80%;
+  margin-left: 5%;
+}
+
+.stat-number{
+  text-align: right;
+  flex: auto;
+  color: #262E3A;
+}
+
+.stat-header{
+  flex: auto;
+}

@@ -52,7 +52,6 @@ class WorkoutsIndexContainer extends Component {
     this.handleChartSelector = this.handleChartSelector.bind(this)
     this.handleMultipleDates = this.handleMultipleDates.bind(this)
     this.stravaPace = this.stravaPace.bind(this)
-    // this.handleStravaFetch = this.handleStravaFetch.bind(this)
   }
 
 
@@ -137,6 +136,65 @@ class WorkoutsIndexContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  calculatePace(miles, min) {
+    let secondsPerMile = (min * 60) / miles
+    let minPace = Math.floor(secondsPerMile / 60)
+    let secPace = Math.floor(secondsPerMile % 60)
+    if (secPace === 0){
+      return `${minPace}:00`
+    } else if (secPace < 10){
+      return `${minPace}:0${secPace}`
+    } else {
+      return `${minPace}:${secPace}`
+    }
+  }
+
+  closeEditForm(event) {
+    event.preventDefault()
+    let showForm = this.state.showEditForm
+    if (showForm === true) {
+      this.setState({
+        showEditForm: false,
+        selectedWorkout: null
+      })
+    }
+  }
+
+  componentWillMount() {
+    fetch('/api/v1/users', { credentials: 'same-origin' })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        currentUser: body.current_user,
+        workouts: body.workouts,
+        belongTeams: body.belong_to_teams,
+        currentWeek: body.current_week,
+        oneBack: body.past_weeks.one_week_back,
+        twoBack: body.past_weeks.two_week_back,
+        threeBack: body.past_weeks.three_week_back,
+        fourBack: body.past_weeks.four_week_back,
+        allTeams: body.all_teams,
+        chartData: body.current_week,
+        yearToDateStats: body.year_to_date_index_statistics,
+        currentWeekStats:body.current_week_index_statistics,
+        weekDropdown: body.week_dropdown,
+        weekStart: body.current_week_index_statistics.week_start,
+        weekEnd: body.current_week_index_statistics.week_end,
+        stravaData: body.year_to_date_index_statistics.year_to_date_strava
+      })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   deleteWorkout(id) {
     fetch(`/api/v1/workouts/${id}`, {
       credentials: 'same-origin',
@@ -183,10 +241,6 @@ class WorkoutsIndexContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      // let updatedWorkouts = this.state.currentWeek.filter(workout => {
-      //   return workout.id !== body.id
-      // })
-      // updatedWorkouts = updatedWorkouts.concat(body)
       this.setState({
         currentWeek: body.workouts,
         showEditForm: false,
@@ -199,98 +253,21 @@ class WorkoutsIndexContainer extends Component {
     .catch(error => console.error(`Error in fetch patch: ${error.message}`))
   }
 
-  componentWillMount() {
-    fetch('/api/v1/users', { credentials: 'same-origin' })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-              error = new Error(errorMessage);
-          throw(error);
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        this.setState({
-          currentUser: body.current_user,
-          workouts: body.workouts,
-          belongTeams: body.belong_to_teams,
-          currentWeek: body.current_week,
-          oneBack: body.past_weeks.one_week_back,
-          twoBack: body.past_weeks.two_week_back,
-          threeBack: body.past_weeks.three_week_back,
-          fourBack: body.past_weeks.four_week_back,
-          allTeams: body.all_teams,
-          chartData: body.current_week,
-          yearToDateStats: body.year_to_date_index_statistics,
-          currentWeekStats:body.current_week_index_statistics,
-          weekDropdown: body.week_dropdown,
-          weekStart: body.current_week_index_statistics.week_start,
-          weekEnd: body.current_week_index_statistics.week_end,
-          stravaData: body.year_to_date_index_statistics.year_to_date_strava
-        })
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-    }
-
-    calculatePace(miles, min) {
-      let secondsPerMile = (min * 60) / miles
-      let minPace = Math.floor(secondsPerMile / 60)
-      let secPace = Math.floor(secondsPerMile % 60)
-      if (secPace === 0){
-        return `${minPace}:00`
-      } else if (secPace < 10){
-        return `${minPace}:0${secPace}`
-      } else {
-        return `${minPace}:${secPace}`
-      }
-    }
-
-    stravaPace(meters, seconds) {
-      let miles = Math.round(meters * 0.000621, 1)
-      let secondsPerMile = (seconds) / miles
-      let minPace = Math.floor(secondsPerMile / 60)
-      let secPace = Math.floor(secondsPerMile % 60)
-      if (secPace === 0){
-        return `${minPace}:00`
-      } else if (secPace < 10){
-        return `${minPace}:0${secPace}`
-      }
-      else {
-        return `${minPace}:${secPace}`
-      }
-    }
-
-    toggleEditForm(workout, event) {
+    handleChartSelector(event) {
       event.preventDefault()
-      let showForm = this.state.showEditForm
-
-      if (showForm === true) {
-        this.setState({
-          showEditForm: false,
-          selectedWorkout: null
-         })
-      }
-      else {
-        this.setState({
-          showEditForm: true,
-          selectedWorkout: workout
-        })
+      if (event.target.value === '0') {
+        this.setState({chartData: this.state.currentWeek})
+      } else if (event.target.value === '1') {
+        this.setState({chartData: this.state.oneBack})
+      } else if (event.target.value == '2') {
+        this.setState({chartData: this.state.twoBack})
+      } else if (event.target.value == '3') {
+        this.setState({chartData: this.state.threeBack})
+      } else if (event.target.value == '4') {
+        this.setState({chartData: this.state.fourBack})
       }
     }
 
-
-    closeEditForm(event) {
-      event.preventDefault()
-      let showForm = this.state.showEditForm
-      if (showForm === true) {
-        this.setState({
-          showEditForm: false,
-          selectedWorkout: null
-         })
-      }
-    }
 
     handleMultipleDates(selectedWorkout, weeksWorkouts){
       let leftCard;
@@ -312,6 +289,33 @@ class WorkoutsIndexContainer extends Component {
         }
       })
       this.setState({displayCollection: displayCollection})
+    }
+
+    stravaPace(meters, seconds) {
+      let miles = Math.round(meters * 0.000621, 1)
+      let secondsPerMile = (seconds) / miles
+      let minPace = Math.floor(secondsPerMile / 60)
+      let secPace = Math.floor(secondsPerMile % 60)
+      if (secPace === 0){
+        return `${minPace}:00`
+      } else if (secPace < 10){
+        return `${minPace}:0${secPace}`
+      }
+      else {
+        return `${minPace}:${secPace}`
+      }
+    }
+
+    toggleChooseTeam(event) {
+      event.preventDefault()
+      let newChooseTeam = this.state.showChooseTeam
+
+      if (newChooseTeam === true) {
+        this.setState({ showChooseTeam: false })
+      }
+      else {
+        this.setState({ showChooseTeam: true })
+      }
     }
 
     toggleDetailPage(workout) {
@@ -344,6 +348,25 @@ class WorkoutsIndexContainer extends Component {
         })
       }
     }
+
+    toggleEditForm(workout, event) {
+      event.preventDefault()
+      let showForm = this.state.showEditForm
+
+      if (showForm === true) {
+        this.setState({
+          showEditForm: false,
+          selectedWorkout: null
+        })
+      }
+      else {
+        this.setState({
+          showEditForm: true,
+          selectedWorkout: workout
+        })
+      }
+    }
+
     toggleNewForm(event) {
       event.preventDefault()
       let newShowForm = this.state.showNewForm
@@ -356,17 +379,6 @@ class WorkoutsIndexContainer extends Component {
       }
     }
 
-    toggleChooseTeam(event) {
-      event.preventDefault()
-      let newChooseTeam = this.state.showChooseTeam
-
-      if (newChooseTeam === true) {
-        this.setState({ showChooseTeam: false })
-      }
-      else {
-        this.setState({ showChooseTeam: true })
-      }
-    }
 
     toggleNewTeamForm(event) {
       event.preventDefault()
@@ -380,22 +392,6 @@ class WorkoutsIndexContainer extends Component {
       }
     }
 
-    handleChartSelector(event) {
-      event.preventDefault()
-
-      if (event.target.value === '0') {
-        this.setState({chartData: this.state.currentWeek})
-      } else if (event.target.value === '1') {
-        this.setState({chartData: this.state.oneBack})
-      } else if (event.target.value == '2') {
-        this.setState({chartData: this.state.twoBack})
-      } else if (event.target.value == '3') {
-        this.setState({chartData: this.state.threeBack})
-      } else if (event.target.value == '4') {
-        this.setState({chartData: this.state.fourBack})
-      }
-
-    }
 
   render() {
     let detailsTile;
