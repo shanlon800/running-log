@@ -14,6 +14,32 @@ class TeamContainer extends Component {
     this.addNewGoal = this.addNewGoal.bind(this);
     this.toggleGoalForm = this.toggleGoalForm.bind(this);
   }
+  
+  addNewGoal(formPayload) {
+    fetch('/api/v1/goals', {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(formPayload),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({
+        teamGoal: body,
+        showGoalForm: false
+      })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
 
   componentWillMount() {
     fetch(`/api/v1/teams/${this.props.params.id}`, { credentials: 'same-origin' })
@@ -40,31 +66,6 @@ class TeamContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
 
-    addNewGoal(formPayload) {
-      fetch('/api/v1/goals', {
-        credentials: 'same-origin',
-        method: 'POST',
-        body: JSON.stringify(formPayload),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-              error = new Error(errorMessage);
-          throw(error);
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        this.setState({
-          teamGoal: body,
-          showGoalForm: false
-        })
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-    }
 
     toggleGoalForm(event) {
       event.preventDefault()

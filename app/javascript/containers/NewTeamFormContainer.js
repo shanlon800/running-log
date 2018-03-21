@@ -23,22 +23,6 @@ class NewTeamFormContainer extends Component {
     this.setState({errors: []})
   }
 
-  validateTeam(){
-    if(this.state.selectedTeam === '') {
-      return['Please select a team to join, or press cancel']
-    } else {
-      return []
-    }
-  }
-
-  validateNewTeam(){
-    if(this.state.selectedTeam === '') {
-      return['Please enter a team, or press cancel']
-    } else {
-      return []
-    }
-  }
-
   handleChange(event) {
     let newTeam = event.target.value
     this.setState({selectedTeam: newTeam})
@@ -47,6 +31,20 @@ class NewTeamFormContainer extends Component {
   handleNewTeamChange(event) {
     let newTeamAdded = event.target.value
     this.setState({newTeam: newTeamAdded})
+  }
+
+  handleNewTeamSubmit(event) {
+    event.preventDefault()
+    this.clearErrors()
+    let errors = this.validateNewTeam()
+    if (errors.length === 0) {
+      let formPayload = {
+        team_name: this.state.newTeam
+      }
+      this.props.addTeam(formPayload)
+    } else {
+      this.setState({errors: errors})
+    }
   }
 
   handleSubmit(event) {
@@ -64,17 +62,19 @@ class NewTeamFormContainer extends Component {
     }
   }
 
-  handleNewTeamSubmit(event) {
-    event.preventDefault()
-    this.clearErrors()
-    let errors = this.validateNewTeam()
-    if (errors.length === 0) {
-      let formPayload = {
-        team_name: this.state.newTeam
-      }
-      this.props.addTeam(formPayload)
+  validateTeam(){
+    if(this.state.selectedTeam === '') {
+      return['Please select a team to join, or press cancel']
     } else {
-      this.setState({errors: errors})
+      return []
+    }
+  }
+
+  validateNewTeam(){
+    if(this.state.selectedTeam === '') {
+      return['Please enter a team, or press cancel']
+    } else {
+      return []
     }
   }
 
@@ -97,7 +97,7 @@ class NewTeamFormContainer extends Component {
           <select onChange={this.handleChange}>
             {teams}
           </select>
-          <input type="submit" value="Join" />
+          <input id='new-team-cancel-button' type="submit" value="Join" />
         </form>
     } else {
       joinTeam = ''

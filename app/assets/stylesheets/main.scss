@@ -7,6 +7,10 @@
 @import 'containers/top_bar';
 @import 'containers/signup_form';
 @import 'containers/login_form';
+@import 'containers/buttons';
+@import 'containers/index/current_week';
+@import 'containers/index/index_top_row';
+@import 'containers/index/week_compare_charts';
 
 body {
   background-color: #DFDFDF;

@@ -34,21 +34,6 @@ class WorkoutFormContainer extends Component {
     this.setState({workoutDistance: newDistance})
   }
 
-  handleDateChange(event) {
-    let newDate = event.target.value
-    this.setState({workoutDate: newDate})
-  }
-
-  handleTimeChange(event) {
-    let newTime = event.target.value
-    this.setState({workoutTime: newTime})
-  }
-
-  handleNotesChange(event) {
-    let newNotes = event.target.value
-    this.setState({workoutNotes: newNotes})
-  }
-
   handleClear() {
     this.setState({
       workoutDistance: 0,
@@ -56,6 +41,16 @@ class WorkoutFormContainer extends Component {
       workoutTime: 0,
       workoutNotes: '',
     })
+  }
+
+  handleDateChange(event) {
+    let newDate = event.target.value
+    this.setState({workoutDate: newDate})
+  }
+
+  handleNotesChange(event) {
+    let newNotes = event.target.value
+    this.setState({workoutNotes: newNotes})
   }
 
   handleSubmit(event) {
@@ -78,12 +73,9 @@ class WorkoutFormContainer extends Component {
     }
   }
 
-  validateDistance(){
-    if(this.state.workoutDistance === '') {
-      return['Please enter a distance']
-    } else {
-      return []
-    }
+  handleTimeChange(event) {
+    let newTime = event.target.value
+    this.setState({workoutTime: newTime})
   }
 
   validateDate(){
@@ -93,6 +85,15 @@ class WorkoutFormContainer extends Component {
       return []
     }
   }
+
+  validateDistance(){
+    if(this.state.workoutDistance === '') {
+      return['Please enter a distance']
+    } else {
+      return []
+    }
+  }
+
 
   validateTime(){
     if(this.state.workoutTime === '') {

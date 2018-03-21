@@ -1,0 +1,150 @@
+#current-week-dashboard-header {
+  color: #9ea3a6;
+  padding-top: 2%;
+}
+#current-month {
+  text-align: center;
+  background-color: #F74747;
+  outline: .02rem solid black;
+}
+
+#month-text{
+  padding: 0;
+  margin: 0;
+}
+#index-page-current-week{
+  background-color: #F8F8F8;
+  opacity: .88;
+  padding: 0 5% 0% 5%;
+  border-radius: .4rem;
+  margin-bottom: 4%;
+  margin-top: 3%;
+}
+
+#distance{
+  font-size: 5rem;
+}
+
+.date-header{
+  padding: 0;
+  margin: 0;
+}
+
+.workout-text {
+  background-color: #76c3d3;
+}
+
+
+#current-week-header{
+  color: white;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+.container {
+  margin-bottom: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+}
+@media all and (min-width: 768px) and (max-width: 959px){
+  .container {
+    flex-direction: row;
+  }
+}
+@media all and (min-width: 960px) {
+  .container {
+    flex-direction: row;
+  }
+}
+.run-card {
+  background: white;
+  flex: 0 0 14.28%;
+  outline: .02rem solid black;
+  position:relative;
+  cursor: pointer;
+}
+@media all and (min-width: 768px) and (max-width: 959px){
+  .run-card {
+    flex: 0 0 25%;
+  }
+}
+.run-card__header {
+  background-color: #F74747;
+  height: 2rem;
+  overflow: auto;
+  padding-bottom: 0;
+  color: #fff;
+  text-align: center;
+  border-bottom: .02rem solid black;
+}
+.run-card__body {
+  padding: .5rem;
+  text-align: center;
+}
+
+#selected {
+  background-color: #E5E3E3;
+    padding: 2px;
+    border: 1px solid black;
+    box-shadow:  1px 1px black,
+     2px 2px black,
+     3px 3px black,
+     4px 4px black,
+     5px 5px black;
+}
+
+// workout details onclick info is below here
+
+#workout-description-breakout-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.description-container {
+  margin: 1% 0% 4% 0%;
+  width: 33%;
+  background-color: #F8F8F8;
+  border-radius: .4rem;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 3%;
+  flex: 0 0 32%;
+}
+
+.selected-detail-card {
+  margin: 1% 2% 4% 2%;
+  width: 33%;
+  background-color: #F8F8F8;
+  border-radius: .4rem;
+  padding-left: 5%;
+  padding-top: 3%;
+  flex: 0 0 32%;
+
+  border: 1px solid black;
+  box-shadow:  1px 1px black,
+   2px 2px black,
+   3px 3px black,
+   4px 4px black,
+   5px 5px black;
+}
+.description-card__wrapper{
+  width: 100%;
+}
+
+.description-card__header {
+  text-align: left;
+}
+
+#workout-details-header{
+  color: #9EA3A6;
+  text-align: left;
+}
+
+.selected-detail-card h3{
+  text-align: left
+}
