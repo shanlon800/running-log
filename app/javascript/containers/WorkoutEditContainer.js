@@ -131,6 +131,7 @@ class WorkoutEditContainer extends Component {
                 label='Workout Distance'
                 name='workout-distance'
                 handleChange={this.handleDistanceChange}
+                message='Please enter time in miles'
               />
             </div>
             <div className='field-edit-workout'>
@@ -139,6 +140,7 @@ class WorkoutEditContainer extends Component {
                 label='Workout Time'
                 name='workout-time'
                 handleChange={this.handleTimeChange}
+                message='Please enter time in minutes'
               />
             </div>
             <div className='field-edit-workout-notes'>
